@@ -94,7 +94,7 @@ fun MyPageEditProfileContent(
     var tistoryState by rememberSaveable(tistory) { mutableStateOf(tistory) }
 
     Column(
-        modifier = modifier.verticalScroll(rememberScrollState())
+        modifier = Modifier.fillMaxSize()
     ) {
         MashUpToolbar(
             modifier = Modifier.fillMaxWidth(),
@@ -109,7 +109,9 @@ fun MyPageEditProfileContent(
                 .padding(top = 12.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            ) {
                 Spacer(modifier = Modifier.height(15.dp))
                 MyPageEditWriteCell(
                     title = "생년월일",
