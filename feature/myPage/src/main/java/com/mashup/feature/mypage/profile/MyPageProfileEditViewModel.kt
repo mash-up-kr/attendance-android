@@ -6,7 +6,10 @@ import com.mashup.datastore.data.repository.UserPreferenceRepository
 import com.mashup.feature.mypage.profile.data.MyProfileRepository
 import com.mashup.feature.mypage.profile.model.ProfileData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
@@ -29,6 +32,9 @@ class MyPageProfileEditViewModel @Inject constructor(
 
     private val _loadState: MutableStateFlow<LoadState> = MutableStateFlow(LoadState.Initial)
     val loadState = _loadState.asStateFlow()
+
+    private val _invalidInputError = MutableSharedFlow<String>()
+    val invalidInputError: SharedFlow<String> = _invalidInputError.asSharedFlow()
 
     private fun getMemberProfileCard() = mashUpScope {
         // 진행중인 활동 카드라서 0번째꺼 뽑아씀
@@ -71,12 +77,21 @@ class MyPageProfileEditViewModel @Inject constructor(
             )
         } ?: ProfileData()
     }
+
     fun patchMyProfile(
         editedProfileData: ProfileData
     ) = mashUpScope {
-        _loadState.emit(LoadState.Loading)
-        myProfileRepository.postMyProfile(editedProfileData)
-        _loadState.emit(LoadState.Loaded)
+        if (checkBirthDay(editedProfileData.birthDay)) {
+            _loadState.emit(LoadState.Loading)
+            myProfileRepository.postMyProfile(editedProfileData)
+            _loadState.emit(LoadState.Loaded)
+        } else {
+            _invalidInputError.emit("생년월일 8자리를 입력해주세요")
+        }
+    }
+
+    private fun checkBirthDay(birthDay: String): Boolean {
+        return birthDay.matches(Regex("^[0-9]{8}")) || birthDay.matches(Regex("^[0-9]{4}-[0-9]{2}-[0-9]{2}"))
     }
 }
 

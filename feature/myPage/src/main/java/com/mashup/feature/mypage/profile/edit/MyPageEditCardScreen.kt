@@ -92,14 +92,14 @@ fun MyPageEditCardContent(
                     title = "프로젝트 팀",
                     value = teamState,
                     hint = "프로젝트 팀을 입력해주세요",
-                    onValueChanged = { teamState = it }
+                    onValueChanged = { if (it.length <= 15) teamState = it }
                 )
                 MyPageEditCellDivider()
                 MyPageEditWriteCell(
                     title = "스태프",
                     value = staffState,
                     hint = "스태프를 입력해주세요",
-                    onValueChanged = { staffState = it }
+                    onValueChanged = { if (it.length <= 15) staffState = it }
                 )
                 MyPageEditCellDivider()
             }

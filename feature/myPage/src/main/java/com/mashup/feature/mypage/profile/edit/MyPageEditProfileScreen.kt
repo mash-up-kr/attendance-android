@@ -131,14 +131,18 @@ fun MyPageEditProfileContent(
                     title = "직군",
                     value = workState,
                     hint = "현재 직군을 추가해주세요",
-                    onValueChanged = { workState = it }
+                    onValueChanged = {
+                        if (it.length <= 25) workState = it
+                    }
                 )
                 MyPageEditCellDivider()
                 MyPageEditWriteCell(
                     title = "회사",
                     value = companyState,
                     hint = "소속된 회사를 추가해주세요",
-                    onValueChanged = { companyState = it }
+                    onValueChanged = {
+                        if (it.length <= 25) companyState = it
+                    }
                 )
                 MyPageEditCellDivider()
                 MyPageEditWriteCell(
@@ -152,7 +156,9 @@ fun MyPageEditProfileContent(
                     title = "출몰지역",
                     value = locationState,
                     hint = "자주 돌아다니는 지역을 추가해주세요",
-                    onValueChanged = { locationState = it }
+                    onValueChanged = {
+                        if (it.length <= 25) locationState = it
+                    }
                 )
                 Spacer(modifier = Modifier.height(40.dp))
                 MyPageEditCellDivider()
