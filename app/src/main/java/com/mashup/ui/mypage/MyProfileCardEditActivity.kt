@@ -46,9 +46,16 @@ class MyProfileCardEditActivity : BaseActivity<ActivityMyProfileCardEditBinding>
     override fun initViews() {
         super.initViews()
 
-        val cardData = intent.extras ?: return
-        team = cardData.getString(EXTRA_CARD_TEAM).orEmpty()
-        staff = cardData.getString(EXTRA_CARD_STAFF).orEmpty()
+        val extra = intent.extras ?: return
+        val profileCardData = ProfileCardData(
+            id = extra.getInt(EXTRA_CARD_ID),
+            name = extra.getString(EXTRA_CARD_NAME) ?: return,
+            isRunning = extra.getBoolean(EXTRA_CARD_IS_RUNNING),
+            generationNumber = extra.getInt(EXTRA_CARD_GENERATION),
+            platform = Platform.getPlatform(extra.getString(EXTRA_CARD_PLATFORM) ?: return),
+            projectTeamName = extra.getString(EXTRA_CARD_TEAM) ?: return,
+            role = extra.getString(EXTRA_CARD_STAFF) ?: return,
+        )
 
         viewBinding.composeView.setContent {
             MashUpTheme {
@@ -56,13 +63,8 @@ class MyProfileCardEditActivity : BaseActivity<ActivityMyProfileCardEditBinding>
                     color = Gray50
                 ) {
                     ProfileCardDetailContent(
+                        cardData = profileCardData,
                         modifier = Modifier.fillMaxSize(),
-                        generationNumber = cardData.getInt(EXTRA_CARD_GENERATION),
-                        name = cardData.getString(EXTRA_CARD_NAME).orEmpty(),
-                        platform = Platform.getPlatform(cardData.getString(EXTRA_CARD_PLATFORM).orEmpty()),
-                        isRunning = cardData.getBoolean(EXTRA_CARD_IS_RUNNING),
-                        team = team,
-                        staff = staff,
                         onBackPressed = { finish() },
                         onDownLoadClicked = ::downloadProfileCardImage,
                         onEditClicked = ::startMyProfileCardActivity
@@ -107,6 +109,7 @@ class MyProfileCardEditActivity : BaseActivity<ActivityMyProfileCardEditBinding>
     }
 
     companion object {
+        private const val EXTRA_CARD_ID = "EXTRA_CARD_ID"
         private const val EXTRA_CARD_NAME = "EXTRA_CARD_NAME"
         private const val EXTRA_CARD_GENERATION = "EXTRA_CARD_GENERATION"
         private const val EXTRA_CARD_PLATFORM = "EXTRA_CARD_PLATFORM"
@@ -116,9 +119,10 @@ class MyProfileCardEditActivity : BaseActivity<ActivityMyProfileCardEditBinding>
 
         fun newIntent(context: Context, card: ProfileCardData): Intent {
             return Intent(context, MyProfileCardEditActivity::class.java).apply {
+                putExtra(EXTRA_CARD_ID, card.id)
                 putExtra(EXTRA_CARD_NAME, card.name)
                 putExtra(EXTRA_CARD_GENERATION, card.generationNumber)
-                putExtra(EXTRA_CARD_PLATFORM, card.platform)
+                putExtra(EXTRA_CARD_PLATFORM, card.platform.detailName)
                 putExtra(EXTRA_CARD_IS_RUNNING, card.isRunning)
                 putExtra(EXTRA_CARD_TEAM, card.projectTeamName)
                 putExtra(EXTRA_CARD_STAFF, card.role)

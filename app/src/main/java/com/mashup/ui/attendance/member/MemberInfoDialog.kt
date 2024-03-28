@@ -95,14 +95,11 @@ class MemberInfoDialog : BottomSheetDialogFragment() {
     }
 
     private fun addGlobalLayoutListener(view: View) {
-        view.viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    if (this@MemberInfoDialog.view?.height == 0) return
-                    behavior?.state = BottomSheetBehavior.STATE_EXPANDED
-                    behavior?.peekHeight = this@MemberInfoDialog.view?.height ?: 0
-                }
-            })
+        view.viewTreeObserver.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener {
+            if (this@MemberInfoDialog.view?.height == 0) return@OnGlobalLayoutListener
+            behavior?.state = BottomSheetBehavior.STATE_EXPANDED
+            behavior?.peekHeight = this@MemberInfoDialog.view?.height ?: 0
+        })
     }
 
     private fun initView() {
@@ -141,13 +138,8 @@ class MemberInfoDialog : BottomSheetDialogFragment() {
                     contentPadding = PaddingValues(horizontal = 15.dp)
                 ) { card ->
                     ProfileCard(
+                        cardData = cards[card],
                         modifier = Modifier.padding(horizontal = 5.dp),
-                        generationNumber = cards[card].generationNumber,
-                        name = cards[card].name,
-                        platform = Platform.getPlatform(cards[card].platform),
-                        isRunning = cards[card].isRunning,
-                        team = cards[card].projectTeamName,
-                        staff = cards[card].role,
                         onClick = { }
                     )
                 }

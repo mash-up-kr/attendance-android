@@ -20,16 +20,12 @@ import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.widget.ButtonStyle
 import com.mashup.core.ui.widget.MashUpButton
 import com.mashup.core.ui.widget.MashUpToolbar
+import com.mashup.feature.mypage.profile.model.ProfileCardData
 
 @Composable
 fun ProfileCardDetailContent(
-    generationNumber: Int,
-    name: String,
-    platform: Platform,
-    isRunning: Boolean,
+    cardData: ProfileCardData,
     modifier: Modifier = Modifier,
-    team: String = "",
-    staff: String = "",
     onBackPressed: () -> Unit = {},
     onDownLoadClicked: (Bitmap) -> Unit = {},
     onEditClicked: () -> Unit = {}
@@ -48,13 +44,10 @@ fun ProfileCardDetailContent(
 
         val snapshot = captureBitmap {
             ProfileCard(
-                modifier = Modifier.width(400.dp).padding(horizontal = 20.dp),
-                generationNumber = generationNumber,
-                name = name,
-                platform = platform,
-                isRunning = isRunning,
-                team = team,
-                staff = staff,
+                cardData = cardData,
+                modifier = Modifier
+                    .width(400.dp)
+                    .padding(horizontal = 20.dp),
                 onClick = {}
             )
         }
@@ -98,10 +91,15 @@ fun ProfileCardDetailContentPrev() {
         ) {
             ProfileCardDetailContent(
                 modifier = Modifier.fillMaxSize(),
-                generationNumber = 12,
-                name = "김매숑",
-                platform = Platform.DESIGN,
-                isRunning = false
+                cardData = ProfileCardData(
+                    id = 0,
+                    name = "김매숑",
+                    isRunning = false,
+                    generationNumber = 0,
+                    platform = Platform.DESIGN,
+                    projectTeamName = "",
+                    role = ""
+                )
             )
         }
     }
