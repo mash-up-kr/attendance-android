@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,29 +25,24 @@ import com.mashup.core.ui.widget.MashUpToolbar
 import com.mashup.feature.mypage.profile.MyPageEditCellDivider
 import com.mashup.feature.mypage.profile.MyPageEditReadOnlyCell
 import com.mashup.feature.mypage.profile.MyPageEditWriteCell
-import com.mashup.feature.mypage.profile.MyPageProfileEditViewModel
+import com.mashup.feature.mypage.profile.model.MyProfileCardEntity
 
 @Composable
 fun MyPageEditCardScreen(
-    viewModel: MyPageProfileEditViewModel,
-    onBackPressed: () -> Unit
+    profileCard: MyProfileCardEntity,
+    onBackPressed: () -> Unit,
+    patchMemberProfileCard: (id: Long, team: String, staff: String) -> Unit
 ) {
-    val editCardState by viewModel.myProfileCard.collectAsState()
-
     MyPageEditCardContent(
-        generationNumber = editCardState.generationNumber,
-        platform = editCardState.platform,
+        generationNumber = profileCard.generationNumber,
+        platform = profileCard.platform,
         onSaveButtonClicked = { id, team, staff ->
-            viewModel.patchMemberProfileCard(
-                id = id.toLong(),
-                projectTeamName = team,
-                staff = staff
-            )
+            patchMemberProfileCard(id.toLong(), team, staff)
         },
         onBackPressed = onBackPressed,
-        id = editCardState.id,
-        team = editCardState.team,
-        staff = editCardState.staff
+        id = profileCard.id,
+        team = profileCard.team,
+        staff = profileCard.staff
     )
 }
 

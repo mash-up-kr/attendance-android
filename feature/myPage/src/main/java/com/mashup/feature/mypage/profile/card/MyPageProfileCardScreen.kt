@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import com.mashup.core.model.Platform
 import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray200
 import com.mashup.core.ui.colors.Gray800

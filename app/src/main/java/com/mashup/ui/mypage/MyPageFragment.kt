@@ -39,12 +39,12 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
                 }
 
                 override fun onStartEditProfileActivity() {
-                    val intent = MyProfileEditActivity.newIntent(requireContext(), MyProfileEditActivity.TYPE_EDIT_PROFILE_INTRODUCE)
+                    val intent = MyProfileEditActivity.newIntent(requireContext())
                     myProfileEditLauncher.launch(intent)
                 }
 
                 override fun onStartEditProfileCardActivity(card: ProfileCardData) {
-                    val intent = MyProfileCardEditActivity.newIntent(requireContext(), card)
+                    val intent = MyProfileCardDetailActivity.newIntent(requireContext(), card)
                     myProfileEditLauncher.launch(intent)
                 }
 

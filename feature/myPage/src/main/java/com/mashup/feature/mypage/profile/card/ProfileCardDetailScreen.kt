@@ -25,6 +25,8 @@ import com.mashup.feature.mypage.profile.model.ProfileCardData
 @Composable
 fun ProfileCardDetailContent(
     cardData: ProfileCardData,
+    team: String,
+    staff: String,
     modifier: Modifier = Modifier,
     onBackPressed: () -> Unit = {},
     onDownLoadClicked: (Bitmap) -> Unit = {},
@@ -44,7 +46,10 @@ fun ProfileCardDetailContent(
 
         val snapshot = captureBitmap {
             ProfileCard(
-                cardData = cardData,
+                cardData = cardData.copy(
+                    projectTeamName = team,
+                    role = staff
+                ),
                 modifier = Modifier
                     .width(400.dp)
                     .padding(horizontal = 20.dp),
@@ -99,7 +104,9 @@ fun ProfileCardDetailContentPrev() {
                     platform = Platform.DESIGN,
                     projectTeamName = "",
                     role = ""
-                )
+                ),
+                team = "",
+                staff = ""
             )
         }
     }

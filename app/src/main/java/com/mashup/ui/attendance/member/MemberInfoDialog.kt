@@ -31,7 +31,6 @@ import com.google.android.material.chip.ChipGroup
 import com.mashup.core.common.R
 import com.mashup.core.common.extensions.dp
 import com.mashup.core.common.extensions.gone
-import com.mashup.core.model.Platform
 import com.mashup.databinding.DialogMemberInfoBinding
 import com.mashup.feature.mypage.profile.card.ProfileCard
 import com.mashup.feature.mypage.profile.model.ProfileCardData
@@ -95,11 +94,13 @@ class MemberInfoDialog : BottomSheetDialogFragment() {
     }
 
     private fun addGlobalLayoutListener(view: View) {
-        view.viewTreeObserver.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener {
-            if (this@MemberInfoDialog.view?.height == 0) return@OnGlobalLayoutListener
-            behavior?.state = BottomSheetBehavior.STATE_EXPANDED
-            behavior?.peekHeight = this@MemberInfoDialog.view?.height ?: 0
-        })
+        view.viewTreeObserver.addOnGlobalLayoutListener(
+            ViewTreeObserver.OnGlobalLayoutListener {
+                if (this@MemberInfoDialog.view?.height == 0) return@OnGlobalLayoutListener
+                behavior?.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior?.peekHeight = this@MemberInfoDialog.view?.height ?: 0
+            }
+        )
     }
 
     private fun initView() {
