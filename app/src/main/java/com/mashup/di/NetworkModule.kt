@@ -62,7 +62,7 @@ class NetworkModule {
             .addInterceptor(authInterceptor)
             .addInterceptor(baseInterceptor)
 
-        if (DEBUG_MODE) {
+//        if (DEBUG_MODE) {
             okHttpClient
                 .addNetworkInterceptor(flipperInterceptor)
                 .addInterceptor(
@@ -70,7 +70,7 @@ class NetworkModule {
                         setLevel(HttpLoggingInterceptor.Level.BODY)
                     }
                 )
-        }
+//        }
         return okHttpClient
             .readTimeout(10L, TimeUnit.SECONDS)
             .writeTimeout(10L, TimeUnit.SECONDS)
