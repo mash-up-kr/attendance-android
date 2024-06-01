@@ -32,13 +32,12 @@ fun MashUpTheme(content: @Composable () -> Unit) {
 
 @Composable
 fun WebViewTheme(content: @Composable () -> Unit) {
-    
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = Color.TRANSPARENT
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
     MaterialTheme(
