@@ -77,7 +77,7 @@ class ScheduleDetailViewModel @Inject constructor(
         val endedAt = eventList.last().endedAt.getTimeFormat()
         eventDetailList.add(mapToInfoModel(itemId++, title, date, "$startAt - $endedAt"))
 
-        if (location?.placeName != null) { // 위치 정보가 있는 경우(온라인이면 placeName이 Zoom으로 내려옴)
+        if (location?.detailAddress != null) { // 위치 정보가 있는 경우(온라인이면 placeName이 Zoom으로 내려옴)
             eventDetailList.add(mapToLocationModel(itemId++, location))
         }
 
@@ -126,8 +126,8 @@ class ScheduleDetailViewModel @Inject constructor(
             id = itemId,
             type = EventDetailType.LOCATION,
             location = Location(
-                placeName = location.placeName.orEmpty(),
-                address = location.address.orEmpty(),
+                detailAddress = location.detailAddress.orEmpty(),
+                roadAddress = location.roadAddress.orEmpty(),
                 latitude = location.latitude,
                 longitude = location.longitude
             )

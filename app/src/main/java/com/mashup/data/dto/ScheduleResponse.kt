@@ -33,10 +33,10 @@ data class ScheduleResponse(
         val latitude: Double?,
         @field:Json(name = "longitude")
         val longitude: Double?,
-        @field:Json(name = "address")
-        val address: String?,
-        @field:Json(name = "placeName")
-        val placeName: String?
+        @field:Json(name = "roadAddress")
+        val roadAddress: String?,
+        @field:Json(name = "detailAddress")
+        val detailAddress: String?
     )
 
     @SuppressLint("SimpleDateFormat")

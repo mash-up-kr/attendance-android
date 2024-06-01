@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -52,7 +51,6 @@ import com.mashup.ui.schedule.model.ScheduleCard
 import com.mashup.ui.schedule.util.onBindAttendanceImage
 import com.mashup.ui.schedule.util.onBindAttendanceStatus
 import com.mashup.ui.schedule.util.onBindAttendanceTime
-import java.util.*
 
 @Composable
 fun ScheduleViewPagerSuccessItem(
@@ -91,7 +89,7 @@ fun ScheduleViewPagerSuccessItem(
             title = data.scheduleResponse.name,
             calendar = data.scheduleResponse.getDate(),
             timeLine = data.scheduleResponse.getTimeLine(),
-            location = data.scheduleResponse.location?.placeName ?: ""
+            location = data.scheduleResponse.location?.detailAddress ?: ""
         )
         Spacer(modifier = Modifier.height(16.dp))
 
