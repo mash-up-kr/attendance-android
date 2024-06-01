@@ -1,8 +1,13 @@
 package com.mashup.core.ui.theme
 
+import android.app.Activity
+import android.graphics.Color
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import com.mashup.core.ui.colors.Brand100
 import com.mashup.core.ui.colors.Brand500
 import com.mashup.core.ui.colors.Brand600
@@ -17,6 +22,25 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun MashUpTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colors = LightColorPalette,
+        typography = MaterialTheme.typography,
+        shapes = MaterialTheme.shapes,
+        content = content
+    )
+}
+
+@Composable
+fun WebViewTheme(content: @Composable () -> Unit) {
+    
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = Color.TRANSPARENT
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+        }
+    }
     MaterialTheme(
         colors = LightColorPalette,
         typography = MaterialTheme.typography,
