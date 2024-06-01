@@ -139,6 +139,9 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity android:name=".ui.webview.tester.WebViewTesterActivity"
+            android:exported="false"/>
+
         <service
             android:name=".service.MashUpFirebaseMessagingService"
             android:exported="false">

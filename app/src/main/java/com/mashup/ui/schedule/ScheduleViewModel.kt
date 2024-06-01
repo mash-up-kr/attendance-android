@@ -7,27 +7,38 @@ import com.mashup.data.repository.AttendanceRepository
 import com.mashup.data.repository.ScheduleRepository
 import com.mashup.datastore.data.repository.AppPreferenceRepository
 import com.mashup.datastore.data.repository.UserPreferenceRepository
+import com.mashup.feature.danggn.data.ShakeDetector
 import com.mashup.ui.schedule.model.ScheduleCard
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val userPreferenceRepository: UserPreferenceRepository,
     private val appPreferenceRepository: AppPreferenceRepository,
     private val scheduleRepository: ScheduleRepository,
-    private val attendanceRepository: AttendanceRepository
+    private val attendanceRepository: AttendanceRepository,
+    private val shakeDetector: ShakeDetector
 ) : BaseViewModel() {
     private val _scheduleState = MutableStateFlow<ScheduleState>(ScheduleState.Empty)
     val scheduleState: StateFlow<ScheduleState> = _scheduleState
 
     private val _showCoachMark = MutableSharedFlow<Unit>()
     val showCoachMark: SharedFlow<Unit> = _showCoachMark
+
+    private val _shakeEvent = MutableSharedFlow<Unit>()
+    val shakeEvent: SharedFlow<Unit> = _shakeEvent
+
+    private var shakeScope: CoroutineScope? = null
 
     fun getScheduleList() {
         mashUpScope {
@@ -122,6 +133,33 @@ class ScheduleViewModel @Inject constructor(
                 _showCoachMark.emit(Unit)
             }
         }
+    }
+
+    fun start(
+        threshold: Float = DEFAULT_SHAKE_THRESHOLD,
+        interval: Long = DEFAULT_SHAKE_INTERVAL_TIME
+    ) {
+        shakeScope = CoroutineScope(Dispatchers.Default)
+        shakeDetector.startListening(
+            threshold = threshold,
+            interval = interval,
+            onShakeDevice = {
+                shakeScope?.launch {
+                    _shakeEvent.emit(Unit)
+                    stop()
+                }
+            }
+        )
+    }
+
+    private fun stop() {
+        shakeScope?.cancel()
+        shakeDetector.stopListening()
+    }
+
+    companion object {
+        private const val DEFAULT_SHAKE_INTERVAL_TIME = 100L
+        private const val DEFAULT_SHAKE_THRESHOLD = 3.0f
     }
 }
 

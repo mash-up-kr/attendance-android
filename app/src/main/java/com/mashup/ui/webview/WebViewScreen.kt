@@ -2,35 +2,27 @@ package com.mashup.ui.webview
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewNavigator
 import com.google.accompanist.web.rememberWebViewState
-import com.mashup.core.ui.widget.MashUpToolbar
 
 @Composable
 fun WebViewScreen(
     modifier: Modifier = Modifier,
     webViewUiState: WebViewUiState,
     isScrollTop: (Boolean) -> Unit = {},
+    additionalHttpHeaders: Map<String, String> = emptyMap(),
     onBackPressed: () -> Unit
 ) {
     Column(modifier = modifier) {
-        MashUpToolbar(
-            modifier = Modifier.fillMaxWidth(),
-            title = (webViewUiState as? WebViewUiState.Success)?.title.orEmpty(),
-            showBackButton = true,
-            showBottomDivider = (webViewUiState as? WebViewUiState.Success)?.showToolbarDivider
-                ?: false,
-            onClickBackButton = onBackPressed
-        )
         if (webViewUiState is WebViewUiState.Success) {
             MashUpWebView(
                 webViewUrl = webViewUiState.webViewUrl,
                 isScrollTop = isScrollTop,
-                onBackPressed = onBackPressed
+                onBackPressed = onBackPressed,
+                additionalHttpHeaders = additionalHttpHeaders
             )
         }
     }
@@ -40,9 +32,13 @@ fun WebViewScreen(
 private fun MashUpWebView(
     webViewUrl: String?,
     isScrollTop: (Boolean) -> Unit = {},
-    onBackPressed: () -> Unit
+    additionalHttpHeaders: Map<String, String> = emptyMap(),
+    onBackPressed: () -> Unit = {}
 ) {
-    val webViewState = rememberWebViewState(url = webViewUrl.orEmpty())
+    val webViewState = rememberWebViewState(
+        url = webViewUrl.orEmpty(),
+        additionalHttpHeaders = additionalHttpHeaders
+    )
     val webViewNavigator = rememberWebViewNavigator()
 
     WebView(
