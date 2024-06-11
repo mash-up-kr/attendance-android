@@ -12,14 +12,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.core.view.WindowCompat
+import com.mashup.core.common.extensions.setStatusBarDarkTextColor
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.core.ui.theme.WebViewTheme
 import com.mashup.ui.webview.WebViewScreen
 import com.mashup.ui.webview.WebViewUiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,11 +29,10 @@ class WebViewTesterActivity : ComponentActivity() {
 
     private val webViewTesterViewModel: WebViewTesterViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
+        enableEdgeToEdge()
         setContent {
-            WebViewTheme {
+            MashUpTheme {
                 val webViewTestUiModel by webViewTesterViewModel.webViewTestState.collectAsState()
 
                 val webViewUiState by remember(webViewTestUiModel.url) {
@@ -62,8 +61,9 @@ class WebViewTesterActivity : ComponentActivity() {
                         }
                     }
                     is PageState.Selector -> {
+                        setStatusBarDarkTextColor(true)
                         WebViewTestTypeScreen(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier.fillMaxSize().statusBarsPadding(),
                             url = webViewTestUiModel.url,
                             updateUrl = webViewTesterViewModel::updateUrl,
                             onClickButton = {
@@ -73,7 +73,26 @@ class WebViewTesterActivity : ComponentActivity() {
                         )
                     }
                 }
+                setFullScreen()
             }
+        }
+    }
+
+    private fun ComponentActivity.setFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.apply {
+                hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_IMMERSIVE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_FULLSCREEN
+                )
         }
     }
     companion object {
