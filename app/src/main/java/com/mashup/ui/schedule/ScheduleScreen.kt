@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -48,6 +49,7 @@ import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
 import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.main.model.MainPopupType
+import com.mashup.ui.schedule.component.ScheduleTabRow
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
 import com.mashup.ui.schedule.item.ScheduleViewPagerEmptyItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerInProgressItem
@@ -201,6 +203,8 @@ fun ScheduleScreen(
         mutableStateOf(scheduleState)
     }
 
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+
     LaunchedEffect(scheduleState) {
         if (scheduleState is ScheduleState.Success) {
             cacheScheduleState = scheduleState
@@ -219,6 +223,12 @@ fun ScheduleScreen(
                     horizontalPagerState.animateScrollToPage(castingState.schedulePosition)
                 }
             }
+
+            ScheduleTabRow(
+                modifier= Modifier.fillMaxWidth(),
+                selectedTabIndex = selectedTabIndex,
+                updateSelectedTabIndex = {selectedTabIndex = it}
+            )
 
             HorizontalPager(
                 modifier = modifier,
