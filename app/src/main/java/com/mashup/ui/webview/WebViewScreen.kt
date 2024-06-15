@@ -4,9 +4,11 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewNavigator
 import com.google.accompanist.web.rememberWebViewState
+import com.mashup.ui.webview.tester.MashupBridge
 
 @Composable
 fun WebViewScreen(
@@ -40,6 +42,7 @@ private fun MashUpWebView(
         additionalHttpHeaders = additionalHttpHeaders
     )
     val webViewNavigator = rememberWebViewNavigator()
+    val context = LocalContext.current
 
     WebView(
         state = webViewState,
@@ -50,6 +53,7 @@ private fun MashUpWebView(
                     domStorageEnabled = true
                     loadWithOverviewMode = true
                     defaultTextEncodingName = "UTF-8"
+                    addJavascriptInterface(MashupBridge(context), "MashupBridge")
                 }
                 setOnScrollChangeListener { view, _, _, _, _ ->
                     isScrollTop(!view.canScrollVertically(-1))

@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 @HiltViewModel
 class WebViewTesterViewModel @Inject constructor(
-    private val userPreferenceRepository: UserPreferenceRepository
+    userPreferenceRepository: UserPreferenceRepository
 ) : ViewModel() {
 
     private val testState: MutableStateFlow<PageState> = MutableStateFlow(PageState.Selector)
