@@ -1,7 +1,6 @@
 package com.mashup.ui.schedule
 
 import android.os.Bundle
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.activityViewModels

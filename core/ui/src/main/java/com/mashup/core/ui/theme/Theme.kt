@@ -7,7 +7,6 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 import com.mashup.core.ui.colors.Brand100
 import com.mashup.core.ui.colors.Brand500
 import com.mashup.core.ui.colors.Brand600
@@ -32,7 +31,6 @@ fun MashUpTheme(content: @Composable () -> Unit) {
 
 @Composable
 fun WebViewTheme(content: @Composable () -> Unit) {
-
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

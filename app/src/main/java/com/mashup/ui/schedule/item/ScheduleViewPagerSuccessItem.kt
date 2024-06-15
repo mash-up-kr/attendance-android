@@ -52,7 +52,6 @@ import com.mashup.ui.schedule.model.ScheduleCard
 import com.mashup.ui.schedule.util.onBindAttendanceImage
 import com.mashup.ui.schedule.util.onBindAttendanceStatus
 import com.mashup.ui.schedule.util.onBindAttendanceTime
-import java.util.*
 
 @Composable
 fun ScheduleViewPagerSuccessItem(
