@@ -9,6 +9,11 @@ android {
     namespace 'com.mashup.core.data'
     compileSdk compileVersion
 
+    defaultConfig {
+        minSdk minVersion
+        targetSdk targetVersion
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
