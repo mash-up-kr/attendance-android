@@ -49,7 +49,6 @@ import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
 import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.main.model.MainPopupType
-import com.mashup.ui.schedule.component.ScheduleTabRow
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
 import com.mashup.ui.schedule.item.ScheduleViewPagerEmptyItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerInProgressItem
@@ -223,12 +222,6 @@ fun ScheduleScreen(
                     horizontalPagerState.animateScrollToPage(castingState.schedulePosition)
                 }
             }
-
-            ScheduleTabRow(
-                modifier= Modifier.fillMaxWidth(),
-                selectedTabIndex = selectedTabIndex,
-                updateSelectedTabIndex = {selectedTabIndex = it}
-            )
 
             HorizontalPager(
                 modifier = modifier,
