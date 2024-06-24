@@ -50,6 +50,7 @@ private fun MashUpWebView(
         onCreated = { webView ->
             with(webView) {
                 settings.run {
+                    javaScriptEnabled = true
                     domStorageEnabled = true
                     loadWithOverviewMode = true
                     defaultTextEncodingName = "UTF-8"
