@@ -34,7 +34,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import com.mashup.R
-import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand100
 import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray50
@@ -181,8 +180,8 @@ private fun PreviewScheduleViewPagerEmptySchedule() {
                         location = ScheduleResponse.Location(
                             latitude = 0.0,
                             longitude = 0.0,
-                            address = null,
-                            placeName = null
+                            roadAddress = null,
+                            detailAddress = null
                         )
                     ),
                     attendanceInfo = null

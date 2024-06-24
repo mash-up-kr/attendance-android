@@ -111,8 +111,8 @@ class EventDetailAdapter(
                 composeView.setContent {
                     MashUpTheme {
                         ScheduleDetailLocationContent(
-                            placeName = location.placeName.orEmpty(),
-                            address = location.address.orEmpty(),
+                            detailAddress = location.detailAddress.orEmpty(),
+                            roadAddress = location.roadAddress.orEmpty(),
                             latitude = location.latitude,
                             longitude = location.longitude,
                             copyToClipboard = copyToClipboard
