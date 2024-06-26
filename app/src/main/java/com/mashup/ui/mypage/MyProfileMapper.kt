@@ -20,16 +20,16 @@ class MyProfileMapper @Inject constructor() {
     )
 
     fun mapToProfileData(response: MemberProfileResponse) = ProfileData(
-        birthDay = response.birthDate.orEmpty(),
-        work = response.job.orEmpty(),
-        company = response.company.orEmpty(),
-        introduceMySelf = response.introduction.orEmpty(),
-        location = response.residence.orEmpty(),
-        instagram = response.socialNetworkServiceLink.orEmpty(),
-        github = response.githubLink.orEmpty(),
-        behance = response.portfolioLink.orEmpty(),
-        linkedIn = response.linkedInLink.orEmpty(),
-        tistory = response.blogLink.orEmpty()
+        birthDay = response.birthDate.orEmpty().trim(),
+        work = response.job.orEmpty().trim(),
+        company = response.company.orEmpty().trim(),
+        introduceMySelf = response.introduction.orEmpty().trim(),
+        location = response.residence.orEmpty().trim(),
+        instagram = response.socialNetworkServiceLink.orEmpty().trim(),
+        github = response.githubLink.orEmpty().trim(),
+        behance = response.portfolioLink.orEmpty().trim(),
+        linkedIn = response.linkedInLink.orEmpty().trim(),
+        tistory = response.blogLink.orEmpty().trim()
     )
     fun mapToProfileCardData(
         name: String,

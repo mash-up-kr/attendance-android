@@ -72,6 +72,12 @@ class MyProfileEditActivity : BaseActivity<ActivityMyProfileEditBinding>() {
                 setResult(RESULT_OK, updatedIntent)
             }
         }
+
+        flowLifecycleScope {
+            editViewModel.invalidInputError.collectLatest { errorMessage ->
+                ToastUtil.showToast(this@MyProfileEditActivity, errorMessage)
+            }
+        }
     }
 
     companion object {
