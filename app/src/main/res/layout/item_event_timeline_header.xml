@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.mashup.ui.schedule.model.EventDetail" />
+            type="com.mashup.ui.schedule.model.EventDetail.Header" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@{model.header.getHeader()}"
+                android:text="@{model.title}"
                 android:textAppearance="@style/TextAppearance.Mashup.Header1_24_B"
                 android:textColor="@color/brand500"
                 tool:text="1기" />
@@ -43,12 +43,12 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/icon_circle"
                 android:backgroundTint="@color/brand100"
-                android:drawableLeft="@drawable/ic_clock"
+                android:drawableStart="@drawable/ic_clock"
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="@{model.header.getTimeStampStr()}"
+                android:text="@{model.formattedTime}"
                 android:textAppearance="@style/TextAppearance.Mashup.Caption1_13_M"
                 android:textColor="@color/brand500"
                 tool:text="AM 11:00 - PM 2:00" />

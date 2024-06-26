@@ -76,8 +76,10 @@ class EventDetailAdapter(
         private val binding: ItemEventTimelineHeaderBinding? = DataBindingUtil.bind(itemView)
 
         fun bind(item: EventDetail) {
+            if (item !is EventDetail.Header) return
+
             binding?.model = item
-            if (item.header?.eventId == 1) {
+            if (item.eventId == 1) {
                 binding?.line?.visibility = View.GONE
             }
         }
@@ -94,6 +96,7 @@ class EventDetailAdapter(
             DataBindingUtil.bind(itemView)
 
         fun bind(item: EventDetail) {
+            if (item !is EventDetail.Content) return
             binding?.model = item
         }
     }
@@ -107,17 +110,17 @@ class EventDetailAdapter(
         }
 
         fun bind(item: EventDetail, copyToClipboard: (String) -> Unit) {
-            item.location?.let { location ->
-                composeView.setContent {
-                    MashUpTheme {
-                        ScheduleDetailLocationContent(
-                            detailAddress = location.detailAddress.orEmpty(),
-                            roadAddress = location.roadAddress.orEmpty(),
-                            latitude = location.latitude,
-                            longitude = location.longitude,
-                            copyToClipboard = copyToClipboard
-                        )
-                    }
+            if (item !is EventDetail.Location) return
+
+            composeView.setContent {
+                MashUpTheme {
+                    ScheduleDetailLocationContent(
+                        detailAddress = item.detailAddress.orEmpty(),
+                        roadAddress = item.roadAddress.orEmpty(),
+                        latitude = item.latitude,
+                        longitude = item.longitude,
+                        copyToClipboard = copyToClipboard
+                    )
                 }
             }
         }
@@ -132,16 +135,16 @@ class EventDetailAdapter(
         }
 
         fun bind(item: EventDetail) {
-            item.info?.let { info ->
-                composeView.setContent {
-                    MashUpTheme {
-                        ScheduleDetailInfoContent(
-                            title = info.title,
-                            date = info.date,
-                            time = info.time,
-                            modifier = Modifier.padding(top = 24.dp)
-                        )
-                    }
+            if (item !is EventDetail.Info) return
+
+            composeView.setContent {
+                MashUpTheme {
+                    ScheduleDetailInfoContent(
+                        title = item.title,
+                        date = item.date,
+                        time = item.formattedTime,
+                        modifier = Modifier.padding(top = 24.dp)
+                    )
                 }
             }
         }
@@ -157,7 +160,7 @@ object EventComparator : DiffUtil.ItemCallback<EventDetail>() {
         oldItem: EventDetail,
         newItem: EventDetail
     ): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.index == newItem.index
     }
 
     override fun areContentsTheSame(

@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.mashup.ui.schedule.model.EventDetail" />
+            type="com.mashup.ui.schedule.model.EventDetail.Content" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:background="@drawable/icon_circle"
             android:backgroundTint="@color/brand100"
             android:gravity="center"
-            android:text="@{model.body.contentId}"
+            android:text="@{model.contentId}"
             android:textAppearance="@style/TextAppearance.Mashup.Caption1_12_SB"
             android:textColor="@color/gray600"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{model.body.title}"
+            android:text="@{model.title}"
             android:textAppearance="@style/TextAppearance.Mashup.Subtitle2_16_SB"
             android:textColor="@color/gray700"
             app:layout_constraintEnd_toStartOf="@+id/tv_time"
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{model.body.content}"
+            android:text="@{model.content}"
             android:textAppearance="@style/TextAppearance.Mashup.Body3_14_R"
             android:textColor="@color/gray600"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
@@ -60,7 +60,7 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.body.getTimeStampStr()}"
+            android:text="@{model.formattedTime}"
             android:textAppearance="@style/TextAppearance.Mashup.Caption1_13_M"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
