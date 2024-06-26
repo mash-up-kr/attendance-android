@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.databinding.ItemEventTimelineHeaderBinding
 import com.mashup.ui.schedule.detail.composable.ScheduleDetailContentItem
+import com.mashup.ui.schedule.detail.composable.ScheduleDetailHeaderItem
 import com.mashup.ui.schedule.detail.composable.ScheduleDetailInfoItem
 import com.mashup.ui.schedule.detail.composable.ScheduleDetailLocationItem
 import com.mashup.ui.schedule.model.EventDetail
@@ -32,7 +32,7 @@ class EventDetailAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             EventDetailType.HEADER.num -> {
-                HeaderViewHolder(parent)
+                HeaderViewHolder(ComposeView(parent.context))
             }
             EventDetailType.CONTENT.num -> {
                 ContentViewHolder(ComposeView(parent.context))
@@ -66,21 +66,19 @@ class EventDetailAdapter(
         }
     }
 
-    class HeaderViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        ItemEventTimelineHeaderBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        ).root
-    ) {
-        private val binding: ItemEventTimelineHeaderBinding? = DataBindingUtil.bind(itemView)
+    class HeaderViewHolder(private val composeView: ComposeView) : RecyclerView.ViewHolder(composeView) {
 
         fun bind(item: EventDetail) {
             if (item !is EventDetail.Header) return
 
-            binding?.model = item
-            if (item.eventId == 1) {
-                binding?.line?.visibility = View.GONE
+            composeView.setContent {
+                MashUpTheme {
+                    ScheduleDetailHeaderItem(
+                        isFirstEvent = item.eventId == 1,
+                        title = item.title,
+                        time = item.formattedTime,
+                    )
+                }
             }
         }
     }
