@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.databinding.ItemEventTimelineContentBinding
 import com.mashup.databinding.ItemEventTimelineHeaderBinding
-import com.mashup.ui.schedule.detail.composable.ScheduleDetailInfoContent
-import com.mashup.ui.schedule.detail.composable.ScheduleDetailLocationContent
+import com.mashup.ui.schedule.detail.composable.ScheduleDetailContentItem
+import com.mashup.ui.schedule.detail.composable.ScheduleDetailInfoItem
+import com.mashup.ui.schedule.detail.composable.ScheduleDetailLocationItem
 import com.mashup.ui.schedule.model.EventDetail
 import com.mashup.ui.schedule.model.EventDetailType
 
@@ -35,7 +35,7 @@ class EventDetailAdapter(
                 HeaderViewHolder(parent)
             }
             EventDetailType.CONTENT.num -> {
-                ContentViewHolder(parent)
+                ContentViewHolder(ComposeView(parent.context))
             }
             EventDetailType.LOCATION.num -> {
                 LocationViewHolder(ComposeView(parent.context))
@@ -85,19 +85,22 @@ class EventDetailAdapter(
         }
     }
 
-    class ContentViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        ItemEventTimelineContentBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        ).root
-    ) {
-        private val binding: ItemEventTimelineContentBinding? =
-            DataBindingUtil.bind(itemView)
+    class ContentViewHolder(private val composeView: ComposeView) :
+        RecyclerView.ViewHolder(composeView) {
 
         fun bind(item: EventDetail) {
             if (item !is EventDetail.Content) return
-            binding?.model = item
+
+            composeView.setContent {
+                MashUpTheme {
+                    ScheduleDetailContentItem(
+                        contentId = item.contentId,
+                        title = item.title,
+                        content = item.content,
+                        time = item.formattedTime,
+                    )
+                }
+            }
         }
     }
 
@@ -114,7 +117,7 @@ class EventDetailAdapter(
 
             composeView.setContent {
                 MashUpTheme {
-                    ScheduleDetailLocationContent(
+                    ScheduleDetailLocationItem(
                         detailAddress = item.detailAddress.orEmpty(),
                         roadAddress = item.roadAddress.orEmpty(),
                         latitude = item.latitude,
@@ -139,7 +142,7 @@ class EventDetailAdapter(
 
             composeView.setContent {
                 MashUpTheme {
-                    ScheduleDetailInfoContent(
+                    ScheduleDetailInfoItem(
                         title = item.title,
                         date = item.date,
                         time = item.formattedTime,
