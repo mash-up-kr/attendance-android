@@ -10,7 +10,9 @@ import androidx.compose.runtime.getValue
 import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_SCHEDULE_ID
+import com.mashup.core.common.R as CR
 import com.mashup.core.common.constant.SCHEDULE_NOT_FOUND
+import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.databinding.ActivityScheduleDetailBinding
 import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
@@ -26,6 +28,7 @@ class ScheduleDetailActivity : BaseActivity<ActivityScheduleDetailBinding>() {
     override fun initViews() {
         super.initViews()
 
+        setStatusBarColorRes(CR.color.white)
         viewBinding.composeView.setContent {
             val state by viewModel.scheduleState.collectAsState()
 
