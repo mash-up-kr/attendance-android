@@ -17,10 +17,7 @@ class ScheduleDetailViewModel @Inject constructor(
     private val eventMapper: EventDetailMapper,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-    private val scheduleId =
-        checkNotNull(
-            savedStateHandle.get<Int>(EXTRA_SCHEDULE_ID)
-        )
+    val scheduleId = checkNotNull(savedStateHandle.get<Int>(EXTRA_SCHEDULE_ID))
 
     private val _scheduleState = MutableStateFlow<ScheduleState>(ScheduleState.Empty)
     val scheduleState: StateFlow<ScheduleState> = _scheduleState

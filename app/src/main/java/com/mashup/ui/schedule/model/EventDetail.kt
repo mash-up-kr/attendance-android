@@ -29,8 +29,8 @@ sealed class EventDetail(
 
     data class Location(
         override val index: Int,
-        val detailAddress: String?,
-        val roadAddress: String?,
+        val detailAddress: String,
+        val roadAddress: String,
         val latitude: Double?,
         val longitude: Double?
     ) : EventDetail(index, EventDetailType.LOCATION)
