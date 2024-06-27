@@ -5,7 +5,7 @@ import java.util.Date
 
 sealed class EventDetail(
     open val index: Int,
-    val type: EventDetailType,
+    val type: EventDetailType
 ) {
     data class Header(
         override val index: Int,
@@ -40,7 +40,7 @@ sealed class EventDetail(
         val title: String,
         val date: String,
         val startedAt: Date,
-        val endedAt: Date,
+        val endedAt: Date
     ) : EventDetail(index, EventDetailType.INFO) {
         val formattedTime = "${startedAt.getTimeFormat()} - ${endedAt.getTimeFormat()}"
     }

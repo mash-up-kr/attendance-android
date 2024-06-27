@@ -35,7 +35,7 @@ class ScheduleDetailViewModel @Inject constructor(
                         title = response.name,
                         date = response.getDate(),
                         eventList = response.eventList,
-                        location = response.location,
+                        location = response.location
                     )
 
                     _scheduleState.emit(ScheduleState.Success(eventList))

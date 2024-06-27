@@ -34,7 +34,7 @@ fun ScheduleDetailScreen(
     state: ScheduleState,
     copyToClipboard: (String) -> Unit,
     moveToPlatformAttendance: () -> Unit,
-    onBackPressed: () -> Unit,
+    onBackPressed: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column {
@@ -73,7 +73,7 @@ fun ScheduleDetailScreen(
                 .fillMaxWidth()
                 .padding(start = 20.dp, bottom = 28.dp, end = 20.dp)
                 .align(Alignment.BottomCenter),
-            buttonStyle = ButtonStyle.INVERSE,
+            buttonStyle = ButtonStyle.INVERSE
         )
     }
 }
@@ -93,7 +93,7 @@ fun EventDetailList(eventDetailList: List<EventDetail>, copyToClipboard: (String
                         ScheduleDetailInfoItem(
                             title = item.title,
                             date = item.date,
-                            time = item.title,
+                            time = item.title
                         )
                     }
 
@@ -103,7 +103,7 @@ fun EventDetailList(eventDetailList: List<EventDetail>, copyToClipboard: (String
                             roadAddress = item.roadAddress,
                             latitude = item.latitude,
                             longitude = item.longitude,
-                            copyToClipboard = copyToClipboard,
+                            copyToClipboard = copyToClipboard
                         )
                     }
 
@@ -111,7 +111,7 @@ fun EventDetailList(eventDetailList: List<EventDetail>, copyToClipboard: (String
                         ScheduleDetailHeaderItem(
                             isFirstEvent = item.eventId == 1,
                             title = item.title,
-                            time = item.formattedTime,
+                            time = item.formattedTime
                         )
                     }
 
@@ -120,7 +120,7 @@ fun EventDetailList(eventDetailList: List<EventDetail>, copyToClipboard: (String
                             contentId = item.contentId,
                             title = item.title,
                             content = item.content,
-                            time = item.formattedTime,
+                            time = item.formattedTime
                         )
                     }
                 }

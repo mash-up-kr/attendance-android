@@ -30,7 +30,7 @@ fun ScheduleDetailContentItem(
     contentId: String,
     title: String,
     content: String,
-    time: String,
+    time: String
 ) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -39,12 +39,12 @@ fun ScheduleDetailContentItem(
                     .size(20.dp)
                     .clip(CircleShape)
                     .background(Gray100),
-                contentAlignment = Alignment.Center,
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = contentId,
                     style = Caption2,
-                    color = Gray600,
+                    color = Gray600
                 )
             }
 
@@ -59,7 +59,7 @@ fun ScheduleDetailContentItem(
             Text(
                 text = time,
                 style = Caption1,
-                color = Gray400,
+                color = Gray400
             )
         }
 

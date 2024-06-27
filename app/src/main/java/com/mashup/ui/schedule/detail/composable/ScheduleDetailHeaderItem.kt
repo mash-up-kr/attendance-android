@@ -33,7 +33,7 @@ import com.mashup.core.ui.typography.Header2
 fun ScheduleDetailHeaderItem(
     isFirstEvent: Boolean,
     title: String,
-    time: String,
+    time: String
 ) {
     Column {
         if (isFirstEvent.not()) {
@@ -54,7 +54,7 @@ fun ScheduleDetailHeaderItem(
                     .clip(CircleShape)
                     .background(Brand100)
                     .padding(horizontal = 8.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_clock),
@@ -67,7 +67,7 @@ fun ScheduleDetailHeaderItem(
                 Text(
                     text = time,
                     style = Caption1,
-                    color = Brand500,
+                    color = Brand500
                 )
             }
         }
@@ -81,7 +81,7 @@ fun PreviewScheduleDetailHeaderItem() {
         ScheduleDetailHeaderItem(
             isFirstEvent = false,
             title = "1부",
-            time = "10:00 - 11:00",
+            time = "10:00 - 11:00"
         )
     }
 }

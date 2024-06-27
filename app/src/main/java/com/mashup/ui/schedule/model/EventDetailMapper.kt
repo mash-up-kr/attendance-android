@@ -42,7 +42,7 @@ class EventDetailMapper @Inject constructor() {
             index = index,
             eventId = eventIndex + 1,
             startedAt = event.startedAt,
-            endedAt = event.endedAt,
+            endedAt = event.endedAt
         )
     }
 
@@ -56,7 +56,7 @@ class EventDetailMapper @Inject constructor() {
             contentId = "${contentIndex + 1}",
             title = content.title,
             content = content.content.orEmpty(),
-            startedAt = content.startedAt,
+            startedAt = content.startedAt
         )
     }
 
@@ -75,14 +75,14 @@ class EventDetailMapper @Inject constructor() {
         title: String,
         date: String,
         startedAt: Date,
-        endedAt: Date,
+        endedAt: Date
     ): EventDetail {
         return EventDetail.Info(
             index = index,
             title = title,
             date = date,
             startedAt = startedAt,
-            endedAt = endedAt,
+            endedAt = endedAt
         )
     }
 }

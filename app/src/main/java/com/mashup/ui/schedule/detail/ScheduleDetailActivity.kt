@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_SCHEDULE_ID
-import com.mashup.core.common.R as CR
 import com.mashup.core.common.constant.SCHEDULE_NOT_FOUND
 import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
@@ -18,6 +17,7 @@ import com.mashup.databinding.ActivityScheduleDetailBinding
 import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import com.mashup.core.common.R as CR
 
 @AndroidEntryPoint
 class ScheduleDetailActivity : BaseActivity<ActivityScheduleDetailBinding>() {
@@ -37,7 +37,7 @@ class ScheduleDetailActivity : BaseActivity<ActivityScheduleDetailBinding>() {
                     state = state,
                     copyToClipboard = ::copyToClipboard,
                     moveToPlatformAttendance = ::moveToPlatformAttendance,
-                    onBackPressed = { finish() },
+                    onBackPressed = { finish() }
                 )
             }
         }
