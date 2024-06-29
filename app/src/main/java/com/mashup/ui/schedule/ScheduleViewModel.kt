@@ -1,6 +1,7 @@
 package com.mashup.ui.schedule
 
 import com.mashup.core.common.base.BaseViewModel
+import com.mashup.core.ui.widget.PlatformType
 import com.mashup.data.dto.ScheduleResponse
 import com.mashup.data.dto.SchedulesProgress
 import com.mashup.data.repository.AttendanceRepository
@@ -8,6 +9,7 @@ import com.mashup.data.repository.ScheduleRepository
 import com.mashup.datastore.data.repository.AppPreferenceRepository
 import com.mashup.datastore.data.repository.UserPreferenceRepository
 import com.mashup.ui.schedule.model.ScheduleCard
+import com.mashup.ui.schedule.util.convertCamelCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -89,7 +91,7 @@ class ScheduleViewModel @Inject constructor(
 
         attendanceRepository.getScheduleAttendanceInfo(scheduleResponse.scheduleId)
             .onSuccess { response ->
-                return if (response.attendanceInfos.isEmpty()) {
+                return if (response.attendanceInfos.isEmpty() && scheduleResponse.scheduleType.convertCamelCase() == PlatformType.Seminar) {
                     ScheduleCard.InProgressSchedule(
                         scheduleResponse = scheduleResponse,
                         attendanceInfo = response

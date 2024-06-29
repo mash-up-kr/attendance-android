@@ -46,7 +46,7 @@
 
     <string name="empty_schedule"><![CDATA[일정 준비 중이에요.<br/>조금만 기다려주세요!]]></string>
     <string name="end_schedule"><![CDATA[%d기 모든 활동이<br/>종료되었어요.]]></string>
-    <string name="description_standby_schedule"><![CDATA[<font fgcolor="#4D535E"><b>%s</b></font>님의\n출석을 기다리고 있어요!]]></string>
+    <string name="description_standby_schedule"><![CDATA[<font fgcolor="#4D535E"><b>%s</b></font><font fgcolor="#ABB2C1">님의\n출석을 기다리고 있어요!</font>]]></string>
     <string name="description_empty_schedule"><![CDATA[열심히 일정을 준비하고 있어요\n조금만 기다려 주세요!]]></string>
     <string name="unknown_content_d_day">D-?</string>
     <string name="title_content_empty_schedule">등록된 일정이 없어요</string>

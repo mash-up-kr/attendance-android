@@ -67,7 +67,7 @@ fun CardInfoItem(
 
                 Text(
                     style = Body4,
-                    text = calendar,
+                    text = calendar.ifEmpty { "-" },
                     color = Gray800
                 )
             }
@@ -84,32 +84,30 @@ fun CardInfoItem(
                     colorFilter = ColorFilter.tint(color = Gray300)
                 )
                 Text(
-                    text = timeLine,
+                    text = timeLine.ifEmpty { "-" },
                     style = Body4,
                     color = Gray800
 
                 )
             }
 
-            if (location.isNotEmpty()) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        modifier = Modifier.size(20.dp),
-                        painter = painterResource(id = R.drawable.ic_location),
-                        contentDescription = null,
-                        contentScale = ContentScale.Fit,
-                        colorFilter = ColorFilter.tint(color = Gray300)
-                    )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(id = R.drawable.ic_location),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    colorFilter = ColorFilter.tint(color = Gray300)
+                )
 
-                    Text(
-                        style = Body4,
-                        text = location,
-                        color = Gray800
-                    )
-                }
+                Text(
+                    style = Body4,
+                    text = location.ifEmpty { "-" },
+                    color = Gray800
+                )
             }
         }
     }
