@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,7 +34,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mashup.core.ui.colors.Gray950
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.core.ui.typography.Body3
 import com.mashup.core.ui.typography.SubTitle1
 
 /**
@@ -98,7 +96,7 @@ fun ScheduleTabRow(
                         }
                     ) {
                         Spacer(
-                            modifier= Modifier.height(2.5.dp)
+                            modifier = Modifier.height(2.5.dp)
                         )
                         Text(
                             text = a,
