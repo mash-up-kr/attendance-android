@@ -23,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +34,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import com.mashup.R
 import com.mashup.core.ui.colors.Brand100
-import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray50
 import com.mashup.core.ui.colors.Gray700
 import com.mashup.core.ui.theme.MashUpTheme
@@ -43,6 +41,8 @@ import com.mashup.core.ui.typography.Body1
 import com.mashup.data.dto.ScheduleResponse
 import com.mashup.databinding.LayoutAttendanceCoachMarkBindingImpl
 import com.mashup.ui.schedule.model.ScheduleCard
+import com.mashup.ui.schedule.util.getBackgroundColor
+import com.mashup.ui.schedule.util.getBorderColor
 import java.util.Date
 
 @Composable
@@ -53,22 +53,30 @@ fun ScheduleViewPagerInProgressItem(
     onClickAttendance: (Int) -> Unit = {}
 ) {
     Column(
-        modifier = modifier.fillMaxWidth().wrapContentHeight().background(
-            color = Color.White,
-            shape = RoundedCornerShape(20.dp)
-        ).border(
-            width = 1.dp,
-            color = Gray100,
-            shape = RoundedCornerShape(20.dp)
-        ).clip(RoundedCornerShape(20.dp))
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .background(
+                color = data.scheduleResponse.scheduleType.getBackgroundColor(),
+                shape = RoundedCornerShape(20.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = data.scheduleResponse.scheduleType.getBorderColor(),
+                shape = RoundedCornerShape(20.dp)
+            )
+            .clip(RoundedCornerShape(20.dp))
             .clickable {
                 onClickScheduleInformation(data.scheduleResponse.scheduleId)
-            }.padding(20.dp),
+            }
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CardInfoItem(
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            dDay = data.scheduleResponse.getDDay(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            platform = data.scheduleResponse.scheduleType,
             title = data.scheduleResponse.name,
             calendar = data.scheduleResponse.getDate(),
             timeLine = data.scheduleResponse.getTimeLine(),
@@ -80,8 +88,11 @@ fun ScheduleViewPagerInProgressItem(
             val (coachMark, button, schedule) = createRefs()
 
             Column(
-                modifier = Modifier.background(color = Gray50, shape = RoundedCornerShape(16.dp))
-                    .height(220.dp).padding(top = 16.dp, bottom = 20.dp, start = 20.dp, end = 20.dp).fillMaxWidth()
+                modifier = Modifier
+                    .background(color = Gray50, shape = RoundedCornerShape(16.dp))
+                    .height(220.dp)
+                    .padding(top = 16.dp, bottom = 20.dp, start = 20.dp, end = 20.dp)
+                    .fillMaxWidth()
                     .constrainAs(schedule) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
@@ -126,15 +137,19 @@ fun ScheduleViewPagerInProgressItem(
                 }
             )
             AndroidView(
-                modifier = Modifier.fillMaxWidth().height(48.dp).background(
-                    color = Brand100,
-                    shape = RoundedCornerShape(16.dp)
-                ).constrainAs(button) {
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(schedule.bottom, 12.dp)
-                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .background(
+                        color = Brand100,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .constrainAs(button) {
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(schedule.bottom, 12.dp)
+                    },
                 factory = { context ->
                     AppCompatTextView(context).apply {
                         text = context.getString(R.string.click_attendance_list)
@@ -165,7 +180,9 @@ fun ScheduleViewPagerInProgressItem(
 private fun PreviewScheduleViewPagerEmptySchedule() {
     MashUpTheme {
         Box(
-            modifier = Modifier.width(294.dp).height(479.dp)
+            modifier = Modifier
+                .width(294.dp)
+                .height(479.dp)
         ) {
             ScheduleViewPagerInProgressItem(
                 data = ScheduleCard.InProgressSchedule(
@@ -182,7 +199,8 @@ private fun PreviewScheduleViewPagerEmptySchedule() {
                             longitude = 0.0,
                             roadAddress = null,
                             detailAddress = null
-                        )
+                        ),
+                        scheduleType = ""
                     ),
                     attendanceInfo = null
                 )

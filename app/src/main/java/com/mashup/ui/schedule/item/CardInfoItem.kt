@@ -3,14 +3,11 @@ package com.mashup.ui.schedule.item
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,19 +19,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mashup.core.common.R
-import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray300
 import com.mashup.core.ui.colors.Gray400
-import com.mashup.core.ui.colors.Gray600
-import com.mashup.core.ui.colors.Gray700
+import com.mashup.core.ui.colors.Gray800
 import com.mashup.core.ui.colors.Gray900
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.core.ui.typography.Body3
+import com.mashup.core.ui.typography.Body4
 import com.mashup.core.ui.typography.Header1
+import com.mashup.core.ui.widget.MashupPlatformBadge
 
 @Composable
 fun CardInfoItem(
-    dDay: String,
+    platform: String,
     title: String,
     calendar: String,
     timeLine: String,
@@ -42,19 +38,7 @@ fun CardInfoItem(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        Box(
-            modifier = Modifier.background(
-                color = Gray100,
-                shape = RoundedCornerShape(100.dp)
-            ).padding(horizontal = 10.dp, vertical = 3.5.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                style = Body3,
-                text = dDay,
-                color = Gray600
-            )
-        }
+        MashupPlatformBadge(platform = platform)
         Spacer(
             modifier = Modifier.height(10.dp)
         )
@@ -82,9 +66,9 @@ fun CardInfoItem(
                 )
 
                 Text(
-                    style = Body3,
+                    style = Body4,
                     text = calendar,
-                    color = Gray700
+                    color = Gray800
                 )
             }
 
@@ -101,8 +85,8 @@ fun CardInfoItem(
                 )
                 Text(
                     text = timeLine,
-                    style = Body3,
-                    color = Gray700
+                    style = Body4,
+                    color = Gray800
 
                 )
             }
@@ -121,9 +105,9 @@ fun CardInfoItem(
                     )
 
                     Text(
-                        style = Body3,
+                        style = Body4,
                         text = location,
-                        color = Gray700
+                        color = Gray800
                     )
                 }
             }
@@ -137,7 +121,7 @@ private fun PreviewCardInfoItem() {
     MashUpTheme {
         CardInfoItem(
             modifier = Modifier.background(color = Color.White),
-            dDay = "D+13",
+            platform = "ALL",
             title = "스케쥴 테스트",
             calendar = "02월 05일",
             timeLine = "오후 01:00 - 오후 01:10",

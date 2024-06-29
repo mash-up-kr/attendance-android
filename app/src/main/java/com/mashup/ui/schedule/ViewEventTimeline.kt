@@ -3,10 +3,13 @@ package com.mashup.ui.schedule
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,6 +24,7 @@ import com.mashup.core.ui.colors.Gray500
 import com.mashup.core.ui.colors.Gray600
 import com.mashup.core.ui.colors.Gray800
 import com.mashup.core.ui.theme.MashUpTheme
+import com.mashup.core.ui.typography.Body5
 import com.mashup.core.ui.typography.Caption2
 import com.mashup.core.ui.typography.SubTitle3
 
@@ -39,29 +43,33 @@ fun ViewEventTimeline(
         val (divider, attendanceImage, attendanceCaption, attendanceTime, attendanceStatus) = createRefs()
 
         Image(
-            modifier = Modifier.size(20.dp).constrainAs(attendanceImage) {
-                start.linkTo(parent.start)
-                top.linkTo(parent.top)
-                bottom.linkTo(attendanceStatus.bottom)
-            },
+            modifier = Modifier
+                .size(20.dp)
+                .constrainAs(attendanceImage) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(attendanceStatus.bottom)
+                },
             painter = painterResource(id = image),
             contentDescription = null
         )
 
         Text(
             modifier = Modifier.constrainAs(attendanceCaption) {
-                top.linkTo(parent.top)
+                top.linkTo(attendanceImage.top)
+                bottom.linkTo(attendanceImage.bottom, margin = 3.dp)
                 start.linkTo(attendanceImage.end, 8.dp)
             },
             text = caption,
-            style = Caption2,
+            style = Body5,
             color = Gray600
         )
 
         Text(
             modifier = Modifier.constrainAs(attendanceStatus) {
-                top.linkTo(attendanceCaption.bottom, 2.dp)
-                start.linkTo(attendanceCaption.start)
+                top.linkTo(attendanceCaption.top)
+                bottom.linkTo(attendanceCaption.bottom)
+                start.linkTo(attendanceCaption.end, 7.dp)
             },
             text = stringResource(status),
             style = SubTitle3.copy(
@@ -79,18 +87,22 @@ fun ViewEventTimeline(
             color = Gray500
         )
         if (isFinal.not()) {
-            Divider(
+            Row(
                 modifier = Modifier.constrainAs(divider) {
                     start.linkTo(attendanceImage.start)
                     end.linkTo(attendanceImage.end)
-                    top.linkTo(attendanceStatus.bottom, 2.dp)
+                    top.linkTo(attendanceStatus.bottom, 6.dp)
                     height = Dimension.value(16.dp)
                     width = Dimension.value(1.dp)
                 },
-                thickness = 1.dp,
-                color = Gray200
-
-            )
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Divider(
+                    modifier = Modifier.height(12.dp),
+                    thickness = 1.dp,
+                    color = Gray200
+                )
+            }
         }
     }
 }
