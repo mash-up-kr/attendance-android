@@ -35,7 +35,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import com.mashup.R
 import com.mashup.core.ui.colors.Brand100
-import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray50
 import com.mashup.core.ui.colors.Gray700
 import com.mashup.core.ui.theme.MashUpTheme
@@ -43,6 +42,8 @@ import com.mashup.core.ui.typography.Body1
 import com.mashup.data.dto.ScheduleResponse
 import com.mashup.databinding.LayoutAttendanceCoachMarkBindingImpl
 import com.mashup.ui.schedule.model.ScheduleCard
+import com.mashup.ui.schedule.util.getBackgroundColor
+import com.mashup.ui.schedule.util.getBorderColor
 import java.util.Date
 
 @Composable
@@ -53,14 +54,15 @@ fun ScheduleViewPagerInProgressItem(
     onClickAttendance: (Int) -> Unit = {}
 ) {
     Column(
-        modifier = modifier.fillMaxWidth().wrapContentHeight().background(
-            color = Color.White,
+        modifier = modifier.fillMaxWidth().wrapContentHeight() .background(
+            color = data.scheduleResponse.scheduleType.getBackgroundColor(),
             shape = RoundedCornerShape(20.dp)
-        ).border(
-            width = 1.dp,
-            color = Gray100,
-            shape = RoundedCornerShape(20.dp)
-        ).clip(RoundedCornerShape(20.dp))
+        )
+            .border(
+                width = 1.dp,
+                color = data.scheduleResponse.scheduleType.getBorderColor(),
+                shape = RoundedCornerShape(20.dp)
+            ).clip(RoundedCornerShape(20.dp))
             .clickable {
                 onClickScheduleInformation(data.scheduleResponse.scheduleId)
             }.padding(20.dp),
@@ -68,7 +70,7 @@ fun ScheduleViewPagerInProgressItem(
     ) {
         CardInfoItem(
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            dDay = data.scheduleResponse.getDDay(),
+            platform = data.scheduleResponse.scheduleType,
             title = data.scheduleResponse.name,
             calendar = data.scheduleResponse.getDate(),
             timeLine = data.scheduleResponse.getTimeLine(),
@@ -182,7 +184,8 @@ private fun PreviewScheduleViewPagerEmptySchedule() {
                             longitude = 0.0,
                             roadAddress = null,
                             detailAddress = null
-                        )
+                        ),
+                        scheduleType = ""
                     ),
                     attendanceInfo = null
                 )

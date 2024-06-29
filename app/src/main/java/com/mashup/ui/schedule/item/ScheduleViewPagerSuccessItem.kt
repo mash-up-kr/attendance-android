@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,12 +22,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -34,20 +40,32 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import com.mashup.R
-import com.mashup.core.ui.colors.Brand100
-import com.mashup.core.ui.colors.Gray100
-import com.mashup.core.ui.colors.Gray50
+import com.mashup.core.ui.colors.Brand200
 import com.mashup.core.ui.colors.Gray700
+import com.mashup.core.ui.colors.Gray900
 import com.mashup.core.ui.typography.Body1
+import com.mashup.core.ui.typography.Body5
+import com.mashup.core.ui.typography.SubTitle2
+import com.mashup.core.ui.widget.PlatformType
 import com.mashup.data.dto.EventResponse
 import com.mashup.ui.schedule.ViewEventTimeline
 import com.mashup.ui.schedule.model.ScheduleCard
+import com.mashup.ui.schedule.util.convertCamelCase
+import com.mashup.ui.schedule.util.getBackgroundColor
+import com.mashup.ui.schedule.util.getBorderColor
+import com.mashup.ui.schedule.util.getButtonBackgroundColor
+import com.mashup.ui.schedule.util.getButtonTextColor
+import com.mashup.ui.schedule.util.getEventTimelineBackgroundColor
 import com.mashup.ui.schedule.util.onBindAttendanceImage
 import com.mashup.ui.schedule.util.onBindAttendanceStatus
 import com.mashup.ui.schedule.util.onBindAttendanceTime
@@ -61,20 +79,22 @@ fun ScheduleViewPagerSuccessItem(
 ) {
     val context = LocalContext.current
     val listState = rememberLazyListState()
+    val textColor by remember { mutableStateOf(data.scheduleResponse.scheduleType.getButtonTextColor()) }
 
     Column(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .background(
-                color = Color.White,
+                color = data.scheduleResponse.scheduleType.getBackgroundColor(),
                 shape = RoundedCornerShape(20.dp)
             )
             .border(
                 width = 1.dp,
-                color = Gray100,
+                color = data.scheduleResponse.scheduleType.getBorderColor(),
                 shape = RoundedCornerShape(20.dp)
-            ).clip(RoundedCornerShape(20.dp))
+            )
+            .clip(RoundedCornerShape(20.dp))
             .clickable {
                 onClickScheduleInformation(data.scheduleResponse.scheduleId)
             }
@@ -85,86 +105,129 @@ fun ScheduleViewPagerSuccessItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            dDay = data.scheduleResponse.getDDay(),
+            platform = data.scheduleResponse.scheduleType,
             title = data.scheduleResponse.name,
             calendar = data.scheduleResponse.getDate(),
             timeLine = data.scheduleResponse.getTimeLine(),
             location = data.scheduleResponse.location?.detailAddress ?: ""
         )
-        Spacer(modifier = Modifier.height(16.dp))
 
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .background(color = Gray50, shape = RoundedCornerShape(16.dp))
-                .height(220.dp)
-                .padding(top = 16.dp, start = 20.dp, end = 20.dp)
-        ) {
-            itemsIndexed(data.scheduleResponse.eventList, key = { _: Int, item: EventResponse ->
-                item.eventId
-            }) { index: Int, _: EventResponse ->
-                Column {
-                    if (index == 0) {
-                        val spannableString = SpannableStringBuilder(
-                            String.format(
-                                context.resources.getString(
-                                    R.string.event_list_card_title
-                                ),
-                                data.attendanceInfo.memberName
+
+        if (data.scheduleResponse.scheduleType.convertCamelCase() == PlatformType.Semina) {
+            Spacer(modifier = Modifier.height(12.dp))
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .background(
+                        color = data.scheduleResponse.scheduleType.getEventTimelineBackgroundColor(),
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .height(176.dp)
+                    .padding(top = 16.dp, start = 20.dp, end = 20.dp),
+            ) {
+                itemsIndexed(data.scheduleResponse.eventList, key = { _: Int, item: EventResponse ->
+                    item.eventId
+                }) { index: Int, _: EventResponse ->
+                    Column {
+                        if (index == 0) {
+                            val spannableString = SpannableStringBuilder(
+                                String.format(
+                                    context.resources.getString(
+                                        R.string.event_list_card_title
+                                    ),
+                                    data.attendanceInfo.memberName
+                                )
+                            ).toString()
+
+                            Text(
+                                text = HtmlCompat.fromHtml(
+                                    spannableString,
+                                    HtmlCompat.FROM_HTML_MODE_COMPACT
+                                ).toAnnotatedString(),
+                                color = Gray700,
+                                style = Body1
                             )
-                        ).toString()
 
-                        Text(
-                            text = HtmlCompat.fromHtml(
-                                spannableString,
-                                HtmlCompat.FROM_HTML_MODE_COMPACT
-                            ).toAnnotatedString(),
-                            color = Gray700,
-                            style = Body1
-                        )
-
-                        Spacer(
-                            modifier = Modifier.height(16.dp)
+                            Spacer(
+                                modifier = Modifier.height(16.dp)
+                            )
+                        }
+                        ViewEventTimeline(
+                            modifier = Modifier.fillMaxWidth(),
+                            caption = stringResource(id = R.string.attendance_caption, index + 1),
+                            time = onBindAttendanceTime(data.attendanceInfo.getAttendanceAt(index)),
+                            status = onBindAttendanceStatus(
+                                data.attendanceInfo.getAttendanceStatus(index)
+                            ),
+                            image = onBindAttendanceImage(
+                                data.attendanceInfo.getAttendanceStatus(index)
+                            )
                         )
                     }
-                    ViewEventTimeline(
-                        modifier = Modifier.fillMaxWidth(),
-                        caption = stringResource(id = R.string.attendance_caption, index + 1),
-                        time = onBindAttendanceTime(data.attendanceInfo.getAttendanceAt(index)),
-                        status = onBindAttendanceStatus(
-                            data.attendanceInfo.getAttendanceStatus(index)
-                        ),
-                        image = onBindAttendanceImage(
-                            data.attendanceInfo.getAttendanceStatus(index)
-                        )
+                    Spacer(
+                        modifier= Modifier.height(6.dp)
                     )
                 }
-            }
-            item {
-                val status = data.attendanceInfo.getFinalAttendance()
-                ViewEventTimeline(
-                    modifier = Modifier.fillMaxWidth(),
-                    caption = stringResource(id = R.string.attendance_final),
-                    status = onBindAttendanceStatus(status, isFinal = true),
-                    image = onBindAttendanceImage(status, isFinal = true),
-                    isFinal = true
-                )
-            }
+                item {
+                    val status = data.attendanceInfo.getFinalAttendance()
+                    ViewEventTimeline(
+                        modifier = Modifier.fillMaxWidth(),
+                        caption = stringResource(id = R.string.attendance_final),
+                        status = onBindAttendanceStatus(status, isFinal = true),
+                        image = onBindAttendanceImage(status, isFinal = true),
+                        isFinal = true
+                    )
+                }
 
-            item {
-                Spacer(modifier = Modifier.height(20.dp))
+                item {
+                    Spacer(modifier = Modifier.height(20.dp))
+                }
             }
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+        } else {
+            Spacer(modifier = Modifier.height(18.dp))
+            Divider(
+                modifier = Modifier.fillMaxWidth(),
+                color = Brand200,
+            )
+            Spacer(
+                modifier = Modifier.height(18.dp)
+            )
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "공지",
+                textAlign = TextAlign.Left,
+                style = SubTitle2.copy(
+                    lineHeight = 19.09.sp
+                ),
+                color = Gray900
+            )
+            Spacer(
+                modifier = Modifier.height(6.dp)
+            )
+            Text(
+                text = "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카",
+                maxLines = 5,
+                style = Body5.copy(
+                    lineHeight = 20.sp
+                ),
+                color = Gray700,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(
+                modifier = Modifier.height(40.dp)
+            )
         }
 
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
+
         AndroidView(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
                 .background(
-                    color = Brand100,
+                    color = data.scheduleResponse.scheduleType.getButtonBackgroundColor(),
                     shape = RoundedCornerShape(16.dp)
                 ),
             factory = { context ->
@@ -175,11 +238,7 @@ fun ScheduleViewPagerSuccessItem(
                     )
                     gravity = Gravity.CENTER
                     setTextColor(
-                        ResourcesCompat.getColor(
-                            resources,
-                            com.mashup.core.common.R.color.brand500,
-                            null
-                        )
+                        textColor.toArgb()
                     )
                     setPadding(12, 0, 0, 0)
                     setOnClickListener {
@@ -190,6 +249,7 @@ fun ScheduleViewPagerSuccessItem(
         )
     }
 }
+
 fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
     val spanned = this@toAnnotatedString
     append(spanned.toString())
@@ -206,11 +266,13 @@ fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
                     end
                 )
             }
+
             is UnderlineSpan -> addStyle(
                 SpanStyle(textDecoration = TextDecoration.Underline),
                 start,
                 end
             )
+
             is ForegroundColorSpan -> addStyle(
                 SpanStyle(color = Color(span.foregroundColor)),
                 start,
@@ -219,3 +281,4 @@ fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
         }
     }
 }
+

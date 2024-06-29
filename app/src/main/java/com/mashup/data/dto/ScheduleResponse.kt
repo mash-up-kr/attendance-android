@@ -9,6 +9,8 @@ import java.util.Locale
 
 @JsonClass(generateAdapter = true)
 data class ScheduleResponse(
+    @field:Json(name="scheduleType")
+    val scheduleType: String,
     @field:Json(name = "scheduleId")
     val scheduleId: Int,
     @field:Json(name = "dateCount")

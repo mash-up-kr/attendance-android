@@ -47,7 +47,7 @@ fun ScheduleViewPagerEmptyItem(
     ) {
         CardInfoItem(
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            dDay = data.scheduleResponse?.getDDay() ?: "?",
+            platform = data.scheduleResponse?.scheduleType ?: "",
             title = data.scheduleResponse?.name ?: "",
             calendar = data.scheduleResponse?.getDate() ?: "-",
             timeLine = data.scheduleResponse?.getTimeLine() ?: "-",

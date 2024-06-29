@@ -30,7 +30,7 @@
     <string name="attendance">출석</string>
     <string name="absent">결석</string>
     <string name="late">지각</string>
-    <string name="click_attendance_list">플랫폼별 출석현황 보러가기</string>
+    <string name="click_attendance_list">상세 스케줄 보러가기</string>
     <string name="logout">로그아웃</string>
     <string name="delete_account">회원탈퇴</string>
     <string name="sign_out_msg">매시업을 잊지말아죠...</string>
