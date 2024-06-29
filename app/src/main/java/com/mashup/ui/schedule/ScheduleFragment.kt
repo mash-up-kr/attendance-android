@@ -7,12 +7,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.mashup.R
 import com.mashup.base.BaseFragment
-import com.mashup.core.common.R as CR
 import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.databinding.FragmentScheduleBinding
 import com.mashup.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import com.mashup.core.common.R as CR
 
 @AndroidEntryPoint
 class ScheduleFragment : BaseFragment<FragmentScheduleBinding>() {

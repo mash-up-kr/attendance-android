@@ -35,6 +35,6 @@ fun MashUpHtmlText(
         modifier = modifier,
         update = { view ->
             view.text = content
-        },
+        }
     )
 }

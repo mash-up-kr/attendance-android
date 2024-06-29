@@ -9,13 +9,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.mashup.R
 import com.mashup.base.BaseFragment
-import com.mashup.core.common.R as CR
 import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.databinding.FragmentMyPageBinding
 import com.mashup.feature.mypage.profile.model.ProfileCardData
 import com.mashup.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import com.mashup.core.common.R as CR
 
 @AndroidEntryPoint
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {

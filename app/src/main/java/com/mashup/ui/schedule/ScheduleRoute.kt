@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -41,7 +40,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.mashup.R
 import com.mashup.constant.log.LOG_SCHEDULE_EVENT_DETAIL
 import com.mashup.constant.log.LOG_SCHEDULE_STATUS_CONFIRM
-import com.mashup.core.common.R as CR
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
 import com.mashup.core.ui.colors.Gray50
@@ -53,6 +51,7 @@ import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.schedule.component.ScheduleTabRow
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
 import com.mashup.util.AnalyticsManager
+import com.mashup.core.common.R as CR
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -123,7 +122,7 @@ fun ScheduleRoute(
                         is ScheduleState.Empty -> {}
                         else -> {
                             ScheduleScreen(
-                                modifier = Modifier.fillMaxSize().background(Gray50).padding(bottom = 300.dp),
+                                modifier = Modifier.fillMaxSize().background(Gray50),
                                 scheduleState = scheduleState,
                                 onClickScheduleInformation = { scheduleId: Int ->
                                     AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
@@ -180,12 +179,12 @@ fun ScheduleTopbar(title: String) {
             .padding(horizontal = 20.dp)
             .padding(top = 24.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         MashUpHtmlText(
             content = title.fromHtml(),
             modifier = Modifier.weight(1f, false),
-            textAppearance = CR.style.TextAppearance_Mashup_Header1_24_B,
+            textAppearance = CR.style.TextAppearance_Mashup_Header1_24_B
         )
         Spacer(modifier = Modifier.width(8.dp))
         Image(
@@ -195,7 +194,7 @@ fun ScheduleTopbar(title: String) {
                 .size(20.dp)
                 .clickable {
                     // TODO: 메뉴 화면으로 이동, 당근 Popup Disable 처리
-                },
+                }
         )
     }
 }
