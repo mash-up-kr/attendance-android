@@ -31,8 +31,7 @@ fun MashUpGradientButton(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .background(
-                brush =
-                Brush.linearGradient(
+                brush = Brush.linearGradient(
                     colors = gradientColors
                 )
             )
