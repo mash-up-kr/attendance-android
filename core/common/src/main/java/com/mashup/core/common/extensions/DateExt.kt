@@ -42,7 +42,7 @@ fun Date.day(): Int {
 fun Date.week(): String {
     val calendar = Calendar.getInstance()
     calendar.time = this
-    return when(calendar.get(Calendar.DAY_OF_WEEK)) {
+    return when (calendar.get(Calendar.DAY_OF_WEEK)) {
         Calendar.MONDAY -> "월"
         Calendar.TUESDAY -> "화"
         Calendar.WEDNESDAY -> "수"

@@ -44,12 +44,14 @@ import com.mashup.constant.log.LOG_SCHEDULE_EVENT_DETAIL
 import com.mashup.constant.log.LOG_SCHEDULE_STATUS_CONFIRM
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
+import com.mashup.core.ui.colors.Gray50
 import com.mashup.core.ui.colors.White
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.widget.MashUpHtmlText
 import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
 import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.schedule.component.ScheduleTabRow
+import com.mashup.ui.schedule.daily.composable.DailyScheduleByMonth
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
 import com.mashup.util.AnalyticsManager
 import com.mashup.core.common.R as CR
@@ -139,11 +141,26 @@ fun ScheduleRoute(
                             }
 
                             1 -> {
+                                item {
+                                    Spacer(
+                                        modifier = Modifier
+                                            .height(22.dp)
+                                            .fillMaxWidth()
+                                            .background(Gray50)
+                                    )
+                                }
+
                                 items(
                                     items = state.monthlyScheduleList,
                                     key = { it.first }
-                                ) { (month, scheduleList) ->
-                                    // TODO
+                                ) { (title, scheduleList) ->
+                                    DailyScheduleByMonth(
+                                        title = title,
+                                        scheduleList = scheduleList,
+                                        modifier = Modifier
+                                            .background(Gray50)
+                                            .padding(horizontal = 20.dp)
+                                    )
                                 }
                             }
                         }
