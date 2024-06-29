@@ -5,7 +5,7 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
         maven {
-            url 'https://naver.jfrog.io/artifactory/maven/'
+            url 'https://repository.map.naver.com/archive/maven'
         }
     }
 }
