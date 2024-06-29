@@ -1,7 +1,9 @@
 package com.mashup.ui.schedule.item
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -15,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.typography.Header2
-import com.mashup.core.ui.widget.MashUpButton
+import com.mashup.core.ui.widget.MashUpGradientButton
 import com.mashup.core.common.R as CommonR
 
 @Composable
@@ -42,7 +44,15 @@ fun EmptyScheduleItem(
             style = Header2,
             color = Color(0xFF412491),
         )
-        MashUpButton(text = "매숑이 밥주러 가기", buttonHeight = 48.dp, onClick = onClickMashongButton)
+        MashUpGradientButton(
+            modifier = Modifier.width(256.dp).height(48.dp),
+            text = "매숑이 밥주러 가기",
+            onClick = onClickMashongButton,
+            gradientColors = listOf(
+                Color(0xFFB398FE),
+                Color(0xFF47BBF1),
+            ),
+        )
     }
 }
 
@@ -50,6 +60,10 @@ fun EmptyScheduleItem(
 @Composable
 private fun PreviewEmptyScheduleItem() {
     MashUpTheme {
-        EmptyScheduleItem()
+        Box(
+            modifier =Modifier.background(color= Color.White)
+        ){
+            EmptyScheduleItem()
+        }
     }
 }
