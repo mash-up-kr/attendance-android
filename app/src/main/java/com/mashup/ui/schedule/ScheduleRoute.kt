@@ -25,6 +25,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,6 +51,7 @@ import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
 import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.schedule.component.ScheduleTabRow
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
+import com.mashup.ui.schedule.model.ScheduleType
 import com.mashup.util.AnalyticsManager
 import com.mashup.core.common.R as CR
 
@@ -86,20 +88,30 @@ fun ScheduleRoute(
     LaunchedEffect(scheduleState) {
         when (val state = scheduleState) {
             is ScheduleState.Loading -> {}
-            is ScheduleState.Empty -> { isRefreshing = false }
+            is ScheduleState.Init -> {
+                isRefreshing = false
+            }
+
             is ScheduleState.Success -> {
                 isRefreshing = false
                 title = context.setUiOfScheduleTitle(state.scheduleTitleState)
             }
-            is ScheduleState.Error -> { isRefreshing = false }
+
+            is ScheduleState.Error -> {
+                isRefreshing = false
+            }
         }
     }
 
-    var selectedTabIndex by remember { mutableStateOf(0) }
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
     CompositionLocalProvider(
         LocalOverscrollConfiguration provides null
     ) {
-        Box(modifier = modifier.pullRefresh(pullRefreshState).background(White)) {
+        Box(
+            modifier = modifier
+                .pullRefresh(pullRefreshState)
+                .background(White)
+        ) {
             LazyColumn(modifier = modifier) {
                 item {
                     ScheduleTopbar(title)
@@ -119,10 +131,12 @@ fun ScheduleRoute(
                 item {
                     when (scheduleState) {
                         is ScheduleState.Error -> {}
-                        is ScheduleState.Empty -> {}
+                        is ScheduleState.Init -> {}
                         else -> {
                             ScheduleScreen(
-                                modifier = Modifier.fillMaxSize().background(color = Color.White),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(color = Color.White),
                                 scheduleState = scheduleState,
                                 onClickScheduleInformation = { scheduleId: Int ->
                                     AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
@@ -136,8 +150,8 @@ fun ScheduleRoute(
                                         PlatformAttendanceActivity.newIntent(context, scheduleId)
                                     )
                                 },
-                                refreshState = isRefreshing
-
+                                refreshState = isRefreshing,
+                                scheduleType = ScheduleType.values()[selectedTabIndex]
                             )
                         }
                     }
@@ -160,12 +174,15 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
         ScheduleTitleState.Empty -> {
             getString(R.string.empty_schedule)
         }
+
         is ScheduleTitleState.End -> {
             getString(R.string.end_schedule, scheduleTitleState.generatedNumber)
         }
+
         is ScheduleTitleState.DateCount -> {
             getString(R.string.event_list_title, scheduleTitleState.dataCount)
         }
+
         is ScheduleTitleState.SchedulePreparing -> {
             getString(R.string.preparing_attendance)
         }
