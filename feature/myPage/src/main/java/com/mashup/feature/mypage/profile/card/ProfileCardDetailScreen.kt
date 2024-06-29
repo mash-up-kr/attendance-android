@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,20 +20,14 @@ import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.widget.ButtonStyle
 import com.mashup.core.ui.widget.MashUpButton
 import com.mashup.core.ui.widget.MashUpToolbar
-
-@Composable
-fun ProfileCardDetailScreen() {
-}
+import com.mashup.feature.mypage.profile.model.ProfileCardData
 
 @Composable
 fun ProfileCardDetailContent(
-    generationNumber: Int,
-    name: String,
-    platform: Platform,
-    isRunning: Boolean,
+    cardData: ProfileCardData,
+    team: String,
+    staff: String,
     modifier: Modifier = Modifier,
-    team: String = "",
-    staff: String = "",
     onBackPressed: () -> Unit = {},
     onDownLoadClicked: (Bitmap) -> Unit = {},
     onEditClicked: () -> Unit = {}
@@ -52,13 +46,13 @@ fun ProfileCardDetailContent(
 
         val snapshot = captureBitmap {
             ProfileCard(
-                modifier = Modifier.size(320.dp, 220.dp).padding(horizontal = 20.dp),
-                generationNumber = generationNumber,
-                name = name,
-                platform = platform,
-                isRunning = isRunning,
-                team = team,
-                staff = staff,
+                cardData = cardData.copy(
+                    projectTeamName = team,
+                    role = staff
+                ),
+                modifier = Modifier
+                    .width(400.dp)
+                    .padding(horizontal = 20.dp),
                 onClick = {}
             )
         }
@@ -102,10 +96,17 @@ fun ProfileCardDetailContentPrev() {
         ) {
             ProfileCardDetailContent(
                 modifier = Modifier.fillMaxSize(),
-                generationNumber = 12,
-                name = "김매숑",
-                platform = Platform.DESIGN,
-                isRunning = false
+                cardData = ProfileCardData(
+                    id = 0,
+                    name = "김매숑",
+                    isRunning = false,
+                    generationNumber = 0,
+                    platform = Platform.DESIGN,
+                    projectTeamName = "",
+                    role = ""
+                ),
+                team = "",
+                staff = ""
             )
         }
     }

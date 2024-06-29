@@ -31,17 +31,13 @@ import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.typography.Body3
 import com.mashup.core.ui.typography.Caption1
 import com.mashup.core.ui.typography.SubTitle1
+import com.mashup.feature.mypage.profile.model.ProfileCardData
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ProfileCard(
-    generationNumber: Int,
-    name: String,
-    platform: Platform,
-    isRunning: Boolean,
+    cardData: ProfileCardData,
     modifier: Modifier = Modifier,
-    team: String = "",
-    staff: String = "",
     onClick: () -> Unit
 ) {
     Column(
@@ -50,7 +46,7 @@ fun ProfileCard(
             .wrapContentHeight()
             .clickable { onClick() }
             .background(
-                color = colorResource(getPlatformBackgroundColor(platform)),
+                color = colorResource(getPlatformBackgroundColor(cardData.platform)),
                 RoundedCornerShape(12.dp)
             )
     ) {
@@ -60,7 +56,7 @@ fun ProfileCard(
         ) {
             Text(
                 modifier = Modifier.padding(top = 12.dp, start = 12.dp),
-                text = "${generationNumber}기",
+                text = "${cardData.generationNumber}기",
                 style = Body3,
                 color = Color.White.copy(alpha = 0.5f)
             )
@@ -72,13 +68,13 @@ fun ProfileCard(
                     modifier = Modifier
                         .padding(top = 22.dp)
                         .size(140.dp, 114.dp),
-                    painter = painterResource(getPlatformImage(platform)),
+                    painter = painterResource(getPlatformImage(cardData.platform)),
                     contentDescription = null
                 )
 
                 Text(
                     modifier = Modifier.padding(top = 5.dp),
-                    text = name,
+                    text = cardData.name,
                     style = SubTitle1,
                     color = Color.White
                 )
@@ -87,7 +83,7 @@ fun ProfileCard(
 
             Text(
                 modifier = Modifier.padding(top = 12.dp, end = 12.dp),
-                text = if (isRunning) "활동 중" else "완료",
+                text = if (cardData.isRunning) "활동 중" else "완료",
                 style = Body3,
                 color = Color.White.copy(alpha = 0.5f)
             )
@@ -101,22 +97,22 @@ fun ProfileCard(
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             ProfileCardTag(
-                text = platform.detailName,
-                backgroundColor = colorResource(getPlatformTagBackgroundColor(platform)),
-                textColor = colorResource(getPlatformTagTextColor(platform))
+                text = cardData.platform.detailName,
+                backgroundColor = colorResource(getPlatformTagBackgroundColor(cardData.platform)),
+                textColor = colorResource(getPlatformTagTextColor(cardData.platform))
             )
-            if (team.isNotBlank()) {
+            if (cardData.projectTeamName.isNotBlank()) {
                 ProfileCardTag(
-                    text = team,
-                    backgroundColor = colorResource(getPlatformTagBackgroundColor(platform)),
-                    textColor = colorResource(getPlatformTagTextColor(platform))
+                    text = cardData.projectTeamName,
+                    backgroundColor = colorResource(getPlatformTagBackgroundColor(cardData.platform)),
+                    textColor = colorResource(getPlatformTagTextColor(cardData.platform))
                 )
             }
-            if (staff.isNotBlank()) {
+            if (cardData.role.isNotBlank()) {
                 ProfileCardTag(
-                    text = staff,
-                    backgroundColor = colorResource(getPlatformTagBackgroundColor(platform)),
-                    textColor = colorResource(getPlatformTagTextColor(platform))
+                    text = cardData.role,
+                    backgroundColor = colorResource(getPlatformTagBackgroundColor(cardData.platform)),
+                    textColor = colorResource(getPlatformTagTextColor(cardData.platform))
                 )
             }
         }
@@ -147,11 +143,15 @@ fun ProfileCardTag(
 fun ProfileCardPrev() {
     MashUpTheme {
         ProfileCard(
-            generationNumber = 12,
-            name = "김매숑",
-            platform = Platform.ANDROID,
-            isRunning = true,
-            team = "Branding Team",
+            cardData = ProfileCardData(
+                id = 0,
+                generationNumber = 12,
+                name = "김매숑",
+                platform = Platform.ANDROID,
+                isRunning = true,
+                projectTeamName = "",
+                role = ""
+            ),
             onClick = {}
         )
     }

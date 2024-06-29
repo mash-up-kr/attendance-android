@@ -1,5 +1,6 @@
 package com.mashup.ui.mypage
 
+import com.mashup.core.model.Platform
 import com.mashup.data.model.ScoreDetails
 import com.mashup.feature.mypage.profile.data.dto.MemberGenerationsResponse
 import com.mashup.feature.mypage.profile.data.dto.MemberProfileResponse
@@ -39,7 +40,7 @@ class MyProfileMapper @Inject constructor() {
         name = name,
         isRunning = response.status != "DONE",
         generationNumber = response.number,
-        platform = response.platform,
+        platform = Platform.getPlatform(response.platform),
         projectTeamName = response.projectTeamName.orEmpty(),
         role = response.role.orEmpty()
     )
