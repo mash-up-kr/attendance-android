@@ -191,7 +191,6 @@ fun Context.moveToAttendance(scheduleId: Int) {
     startActivity(
         PlatformAttendanceActivity.newIntent(this, scheduleId)
     )
-
 }
 
 @Composable
