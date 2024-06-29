@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import com.mashup.ui.schedule.item.ScheduleViewPagerEmptyItem
+import com.mashup.ui.schedule.item.EmptyScheduleItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerInProgressItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerSuccessItem
 import com.mashup.ui.schedule.model.ScheduleCard
@@ -67,51 +67,43 @@ fun ScheduleScreen(
                         Box(
                             modifier = Modifier.fillMaxSize()
                         ) {
-                            ScheduleViewPagerEmptyItem(
-                                modifier = Modifier
-                                    .graphicsLayer {
-                                        val pageOffset = (
-                                            (horizontalPagerState.currentPage - index) + horizontalPagerState
-                                                .currentPageOffsetFraction
-                                            ).absoluteValue
-                                        scaleY = 1 - 0.1f * abs(pageOffset)
-                                    },
-                                data = data
+                            EmptyScheduleItem(
+                                modifier = Modifier.fillMaxSize().graphicsLayer {
+                                    val pageOffset =
+                                        ((horizontalPagerState.currentPage - index) + horizontalPagerState.currentPageOffsetFraction).absoluteValue
+                                    scaleY = 1 - 0.1f * abs(pageOffset)
+                                }
                             )
                         }
                     }
+
                     is ScheduleCard.EndSchedule -> {
                         Box(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             ScheduleViewPagerSuccessItem(
-                                modifier = Modifier
-                                    .graphicsLayer {
-                                        val pageOffset = (
-                                            (horizontalPagerState.currentPage - index) + horizontalPagerState
-                                                .currentPageOffsetFraction
-                                            ).absoluteValue
-                                        scaleY = 1 - 0.1f * abs(pageOffset)
-                                    },
+                                modifier = Modifier.graphicsLayer {
+                                    val pageOffset =
+                                        ((horizontalPagerState.currentPage - index) + horizontalPagerState.currentPageOffsetFraction).absoluteValue
+                                    scaleY = 1 - 0.1f * abs(pageOffset)
+                                },
                                 data = data,
                                 onClickScheduleInformation = onClickScheduleInformation,
                                 onClickAttendance = onClickAttendance
                             )
                         }
                     }
+
                     is ScheduleCard.InProgressSchedule -> {
                         Box(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             ScheduleViewPagerInProgressItem(
-                                modifier = Modifier
-                                    .graphicsLayer {
-                                        val pageOffset = (
-                                            (horizontalPagerState.currentPage - index) + horizontalPagerState
-                                                .currentPageOffsetFraction
-                                            ).absoluteValue
-                                        scaleY = 1 - 0.1f * abs(pageOffset)
-                                    },
+                                modifier = Modifier.graphicsLayer {
+                                    val pageOffset =
+                                        ((horizontalPagerState.currentPage - index) + horizontalPagerState.currentPageOffsetFraction).absoluteValue
+                                    scaleY = 1 - 0.1f * abs(pageOffset)
+                                },
                                 data = data,
                                 onClickScheduleInformation = onClickScheduleInformation,
                                 onClickAttendance = onClickAttendance
@@ -121,6 +113,7 @@ fun ScheduleScreen(
                 }
             }
         }
+
         else -> {}
     }
 }

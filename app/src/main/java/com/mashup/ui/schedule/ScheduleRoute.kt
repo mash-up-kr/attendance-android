@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -42,7 +43,6 @@ import com.mashup.constant.log.LOG_SCHEDULE_EVENT_DETAIL
 import com.mashup.constant.log.LOG_SCHEDULE_STATUS_CONFIRM
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
-import com.mashup.core.ui.colors.Gray50
 import com.mashup.core.ui.colors.White
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.widget.MashUpHtmlText
@@ -122,7 +122,7 @@ fun ScheduleRoute(
                         is ScheduleState.Empty -> {}
                         else -> {
                             ScheduleScreen(
-                                modifier = Modifier.fillMaxSize().background(Gray50),
+                                modifier = Modifier.fillMaxSize().background(color = Color.White),
                                 scheduleState = scheduleState,
                                 onClickScheduleInformation = { scheduleId: Int ->
                                     AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
