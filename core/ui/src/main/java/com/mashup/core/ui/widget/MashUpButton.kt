@@ -58,15 +58,17 @@ enum class ButtonStyle(val backgroundColor: Color, val textColor: Color) {
 fun MashUpButton(
     modifier: Modifier = Modifier,
     buttonStyle: ButtonStyle = ButtonStyle.PRIMARY,
+    buttonHeight : Dp = 52.dp,
+    buttonWidth : Dp = 256.dp,
     text: String,
     onClick: () -> Unit,
     isEnabled: Boolean = true,
-    showLoading: Boolean = false
+    showLoading: Boolean = false,
 ) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
-            .height(52.dp)
+            .height(buttonHeight)
             .background(if (isEnabled) buttonStyle.backgroundColor else ButtonStyle.DISABLE.backgroundColor)
             .padding(horizontal = 20.dp)
             .clickable(
