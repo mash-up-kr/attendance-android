@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://repository.map.naver.com/archive/maven/' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$androidBuildToolsVersion"
