@@ -26,10 +26,10 @@ import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.widget.ButtonStyle
 import com.mashup.core.ui.widget.MashUpButton
 import com.mashup.core.ui.widget.MashUpToolbar
-import com.mashup.feature.mypage.profile.LoadState
 import com.mashup.feature.mypage.profile.MyPageEditCellDivider
 import com.mashup.feature.mypage.profile.MyPageEditWriteCell
 import com.mashup.feature.mypage.profile.MyPageProfileEditViewModel
+import com.mashup.feature.mypage.profile.model.LoadState
 import com.mashup.feature.mypage.profile.model.ProfileData
 
 @Composable
@@ -37,8 +37,8 @@ fun MyPageEditProfileScreen(
     viewModel: MyPageProfileEditViewModel,
     onBackPressed: () -> Unit
 ) {
-    val myProfile by viewModel.myPageCardEntity.collectAsState()
-    val isLoading by viewModel.loadState.collectAsState()
+    val myProfile by viewModel.myProfileState.collectAsState()
+    val isLoading by viewModel.profileCardState.collectAsState()
     MyPageEditProfileContent(
         onSaveButtonClicked = { editedProfile ->
             viewModel.patchMyProfile(

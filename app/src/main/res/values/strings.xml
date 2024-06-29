@@ -1,78 +1,78 @@
 <resources>
-	<string name="app_name">MashUp</string>
-	<string name="app_name_debug">DMashUp</string>
+    <string name="app_name">MashUp</string>
+    <string name="app_name_debug">DMashUp</string>
 
 
-	<string name="denied_camera_permission">출석 체크를 위해 카메라 권한이 필요합니다</string>
+    <string name="denied_camera_permission">출석 체크를 위해 카메라 권한이 필요합니다</string>
 
-	<string name="what_attendance_title">매시업 출석 점수 제도</string>
+    <string name="what_attendance_title">매시업 출석 점수 제도</string>
 
-	<string name="what_attendance_out_count">Outcount란?</string>
-	<string name="what_attendance_out_count_content">원활하고 재밌는 Mash-Up 활동을 위해 만들어진 출석제도입니다.\n\n출석점수는 <font fgcolor="#2B8AF9">전체모임(기본 3점), 플랫폼 모임(기본 3점) 두가지가 별도로 관리</font>되며 MashUp 앱에서는 전체모임 점수만 책정됩니다.\n\n<font fgcolor="#686F7E">플랫폼 모임 점수는 각 플랫폼 스태프가 관리하고 있으므로 해당 스태프에게 문의주시기 바랍니다.</font>\n\n<font fgcolor="#DD4863">하나의 모임에서라도 0점으로 기수가 끝날 시 해당 기수 수료와 다음 기수 참여가 불가</font>해집니다.</string>
+    <string name="what_attendance_out_count">Outcount란?</string>
+    <string name="what_attendance_out_count_content">원활하고 재밌는 Mash-Up 활동을 위해 만들어진 출석제도입니다.\n\n출석점수는 <font fgcolor="#2B8AF9">전체모임(기본 3점), 플랫폼 모임(기본 3점) 두가지가 별도로 관리</font>되며 MashUp 앱에서는 전체모임 점수만 책정됩니다.\n\n<font fgcolor="#686F7E">플랫폼 모임 점수는 각 플랫폼 스태프가 관리하고 있으므로 해당 스태프에게 문의주시기 바랍니다.</font>\n\n<font fgcolor="#DD4863">하나의 모임에서라도 0점으로 기수가 끝날 시 해당 기수 수료와 다음 기수 참여가 불가</font>해집니다.</string>
 
-	<string name="what_attendance_minus">점수 차감 케이스</string>
-	<string name="what_attendance_minus_content1">결석 : -1</string>
-	<string name="what_attendance_minus_content2">지각 : -0.5</string>
-	<string name="what_attendance_minus_content3">프로젝트 배포 실패 : -0.5</string>
+    <string name="what_attendance_minus">점수 차감 케이스</string>
+    <string name="what_attendance_minus_content1">결석 : -1</string>
+    <string name="what_attendance_minus_content2">지각 : -0.5</string>
+    <string name="what_attendance_minus_content3">프로젝트 배포 실패 : -0.5</string>
 
-	<string name="what_attendance_plus">점수 획득 케이스</string>
-	<string name="what_attendance_plus_content1">전체 세미나 발표 : +1</string>
-	<string name="what_attendance_plus_content2">블로그 콘텐츠 작성 : +1</string>
-	<string name="what_attendance_plus_content4">프로젝트 배포 성공 : +1</string>
-	<string name="what_attendance_plus_content5">프로젝트팀 팀장/부팀장 : +2</string>
-	<string name="what_attendance_plus_content6">해커톤 준비 위원회 : +1</string>
-	<string name="what_attendance_plus_content7">스태프 : +99</string>
-	<string name="what_attendance_plus_content8">회장/부회장 : +100</string>
+    <string name="what_attendance_plus">점수 획득 케이스</string>
+    <string name="what_attendance_plus_content1">전체 세미나 발표 : +1</string>
+    <string name="what_attendance_plus_content2">블로그 콘텐츠 작성 : +1</string>
+    <string name="what_attendance_plus_content4">프로젝트 배포 성공 : +1</string>
+    <string name="what_attendance_plus_content5">프로젝트팀 팀장/부팀장 : +2</string>
+    <string name="what_attendance_plus_content6">해커톤 준비 위원회 : +1</string>
+    <string name="what_attendance_plus_content7">스태프 : +99</string>
+    <string name="what_attendance_plus_content8">회장/부회장 : +100</string>
 
-	<string name="total_activity_count">활동 점수</string>
-	<string name="event_list_title"><![CDATA[다음 세미나 일정까지<br><font color="#6A36FF">%d</font>일 남았습니다!]]></string>
-	<string name="event_list_card_title"><![CDATA[<font color="#383E4C"><b>%s</b></font>님의 현재 출석현황이에요]]></string>
-	<string name="attendance">출석</string>
-	<string name="absent">결석</string>
-	<string name="late">지각</string>
-	<string name="click_attendance_list">플랫폼별 출석현황 보러가기</string>
-	<string name="logout">로그아웃</string>
+    <string name="total_activity_count">활동 점수</string>
+    <string name="event_list_title"><![CDATA[다음 세미나 일정까지<br><font color="#6A36FF">%d</font>일 남았습니다!]]></string>
+    <string name="event_list_card_title"><![CDATA[<font color="#383E4C"><b>%s</b></font>님의 현재 출석현황이에요]]></string>
+    <string name="attendance">출석</string>
+    <string name="absent">결석</string>
+    <string name="late">지각</string>
+    <string name="click_attendance_list">플랫폼별 출석현황 보러가기</string>
+    <string name="logout">로그아웃</string>
     <string name="delete_account">회원탈퇴</string>
     <string name="sign_out_msg">매시업을 잊지말아죠...</string>
     <string name="sign_out_msg_detail">탈퇴하시면 Admin에 저장된 모든 관련정보는 탈퇴일자 기준으로 3년간 보관된 후 삭제됩니다. 삭제된 정보는 복구할 수 없으니 신중하게 결정해주세요.</string>
     <string name="activity_history">활동 히스토리</string>
-	<string name="preparing_attendance">다음 세미나 준비 중이에요.\n조금만 기다려주세요.</string>
+    <string name="preparing_attendance">다음 세미나 준비 중이에요.\n조금만 기다려주세요.</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="total_attendance_score">총 출석점수</string>
     <string name="content_disconnect_network">인터넷\n연결이..</string>
-	<string name="text_button_retry">다시시도</string>
-	<string name="text_button_return">돌아가기</string>
+    <string name="text_button_retry">다시시도</string>
+    <string name="text_button_return">돌아가기</string>
 
-	<string name="empty_schedule">일정 준비 중이에요.\n조금만 기다려주세요!</string>
-	<string name="end_schedule">%d기 모든 활동이\n종료되었어요.</string>
-	<string name="description_standby_schedule"><![CDATA[<font fgcolor="#4D535E"><b>%s</b></font>님의\n출석을 기다리고 있어요!]]></string>
-	<string name="description_empty_schedule">열심히 일정을 준비하고 있어요\n조금만 기다려 주세요!</string>
-	<string name="unknown_content_d_day">D-?</string>
-	<string name="title_content_empty_schedule">등록된 일정이 없어요</string>
-	<string name="coach_mark">매시업 크루들의 출석현황이 궁금하다면?</string>
+    <string name="empty_schedule">일정 준비 중이에요.\n조금만 기다려주세요!</string>
+    <string name="end_schedule">%d기 모든 활동이\n종료되었어요.</string>
+    <string name="description_standby_schedule"><![CDATA[<font fgcolor="#4D535E"><b>%s</b></font>님의\n출석을 기다리고 있어요!]]></string>
+    <string name="description_empty_schedule">열심히 일정을 준비하고 있어요\n조금만 기다려 주세요!</string>
+    <string name="unknown_content_d_day">D-?</string>
+    <string name="title_content_empty_schedule">등록된 일정이 없어요</string>
+    <string name="coach_mark">매시업 크루들의 출석현황이 궁금하다면?</string>
 
-	<string name="desc_sign_up_id">영문과 숫자를 조합하여 5자에서 15자 이내로 입력해주세요.</string>
-	<string name="id_hint">아이디를 입력해주세요</string>
-	<string name="id_already_used">이미 사용 중인 아이디예요.</string>
-	<string name="change_password_hint">변경할 비밀번호를 입력해주세요</string>
+    <string name="desc_sign_up_id">영문과 숫자를 조합하여 5자에서 15자 이내로 입력해주세요.</string>
+    <string name="id_hint">아이디를 입력해주세요</string>
+    <string name="id_already_used">이미 사용 중인 아이디예요.</string>
+    <string name="change_password_hint">변경할 비밀번호를 입력해주세요</string>
 
-	<string name="mash_up_alarm_title">매시업 소식 알림</string>
-	<string name="mash_up_alarm_description">출석 시간과 세미나 일정, 그리고 활동 점수\n업데이트 소식을 받을 수 있어요</string>
+    <string name="mash_up_alarm_title">매시업 소식 알림</string>
+    <string name="mash_up_alarm_description">출석 시간과 세미나 일정, 그리고 활동 점수\n업데이트 소식을 받을 수 있어요</string>
 
-	<string name="title_introduce_my_self">내 소개</string>
-	<string name="empty_introduce_my_self">아직 소개글이 없어요</string>
-	<string name="txt_edit">편집</string>
+    <string name="title_introduce_my_self">내 소개</string>
+    <string name="empty_introduce_my_self">아직 소개글이 없어요</string>
+    <string name="txt_edit">편집</string>
 
-	<!-- attendance -->
-	<string name="attendance_status_absent">결석</string>
-	<string name="attendance_status_absent_final">슬프지만 결석이에요...</string>
-	<string name="attendance_status_attendance">출석</string>
-	<string name="attendance_status_attendance_final">출석을 완료했어요!</string>
-	<string name="attendance_status_late">지각</string>
-	<string name="attendance_status_late_final">아쉽지만 지각이에요...</string>
-	<string name="attendance_caption">%d부</string>
-	<string name="attendance_final">최종</string>
-	<string name="attendance_nothing">-</string>
+    <!-- attendance -->
+    <string name="attendance_status_absent">결석</string>
+    <string name="attendance_status_absent_final">슬프지만 결석이에요...</string>
+    <string name="attendance_status_attendance">출석</string>
+    <string name="attendance_status_attendance_final">출석을 완료했어요!</string>
+    <string name="attendance_status_late">지각</string>
+    <string name="attendance_status_late_final">아쉽지만 지각이에요...</string>
+    <string name="attendance_caption">%d부</string>
+    <string name="attendance_final">최종</string>
+    <string name="attendance_nothing">-</string>
 
 </resources>

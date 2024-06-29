@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import com.mashup.core.model.Platform
 import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray200
 import com.mashup.core.ui.colors.Gray800
@@ -42,13 +41,8 @@ fun MyPageProfileCardScreen(
             contentPadding = PaddingValues(horizontal = 15.dp)
         ) { card ->
             ProfileCard(
+                cardData = cards[card],
                 modifier = Modifier.padding(horizontal = 5.dp),
-                generationNumber = cards[card].generationNumber,
-                name = cards[card].name,
-                platform = Platform.getPlatform(cards[card].platform),
-                isRunning = cards[card].isRunning,
-                team = cards[card].projectTeamName,
-                staff = cards[card].role,
                 onClick = { onClick(cards[card]) }
             )
         }
