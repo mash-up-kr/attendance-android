@@ -126,6 +126,7 @@ fun WeeklySchedule(
                 }
             }
         }
+
         else -> {}
     }
 }
