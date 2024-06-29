@@ -7,6 +7,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.mashup.R
 import com.mashup.base.BaseFragment
+import com.mashup.core.common.R as CR
+import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.databinding.FragmentScheduleBinding
 import com.mashup.ui.main.MainViewModel
@@ -27,6 +29,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>() {
 
     override fun initViews() {
         super.initViews()
+        requireActivity().setStatusBarColorRes(CR.color.white)
         viewBinding.cvSchedule.setContent {
             MashUpTheme {
                 ScheduleRoute(

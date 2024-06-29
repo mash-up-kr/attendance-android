@@ -69,9 +69,6 @@ fun ScheduleTabRow(
     Column(
         modifier = modifier
     ) {
-        Spacer(
-            modifier = Modifier.height(26.dp)
-        )
         TabRow(
             modifier = Modifier.fillMaxWidth(),
             selectedTabIndex = selectedTabIndex,

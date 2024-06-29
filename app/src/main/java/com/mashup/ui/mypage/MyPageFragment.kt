@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.mashup.R
 import com.mashup.base.BaseFragment
+import com.mashup.core.common.R as CR
+import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.databinding.FragmentMyPageBinding
 import com.mashup.feature.mypage.profile.model.ProfileCardData
 import com.mashup.ui.setting.SettingActivity
@@ -62,8 +64,13 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
 
     override fun initViews() {
         super.initViews()
+        initStatusBar()
         initSwipeRefresh()
         initRecyclerView()
+    }
+
+    private fun initStatusBar() {
+        requireActivity().setStatusBarColorRes(CR.color.gray50)
     }
 
     private fun initSwipeRefresh() {
