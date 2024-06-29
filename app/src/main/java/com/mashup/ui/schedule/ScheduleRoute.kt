@@ -116,10 +116,12 @@ fun ScheduleRoute(
             LazyColumn(modifier = modifier) {
                 item {
                     ScheduleTopbar(title)
-                    Spacer(modifier = Modifier
-                        .height(26.dp)
-                        .fillMaxWidth()
-                        .background(Color.White))
+                    Spacer(
+                        modifier = Modifier
+                            .height(26.dp)
+                            .fillMaxWidth()
+                            .background(Color.White)
+                    )
                 }
 
                 stickyHeader {

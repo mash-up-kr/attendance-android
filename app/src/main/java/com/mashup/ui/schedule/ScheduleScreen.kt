@@ -2,6 +2,7 @@ package com.mashup.ui.schedule
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.mashup.ui.schedule.component.DailySchedule
 import com.mashup.ui.schedule.component.WeeklySchedule
 import com.mashup.ui.schedule.model.ScheduleType
 
@@ -26,6 +27,11 @@ fun ScheduleScreen(
         }
 
         ScheduleType.TOTAL -> {
+            DailySchedule(
+                scheduleState = scheduleState,
+                modifier = modifier,
+                onClickScheduleInformation = onClickScheduleInformation
+            )
         }
     }
 }
