@@ -76,12 +76,14 @@ fun ScheduleTabRow(
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     color = Gray950,
-                    modifier = Modifier.customTabIndicatorOffset(
-                        tabPositions[selectedTabIndex],
-                        tabWidth = 150.dp
-                    ).clip(
-                        RoundedCornerShape(20.dp)
-                    )
+                    modifier = Modifier
+                        .customTabIndicatorOffset(
+                            tabPositions[selectedTabIndex],
+                            tabWidth = 150.dp
+                        )
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
                 )
             },
             tabs = {
@@ -151,7 +153,9 @@ private fun PreviewTabRow() {
         var selectedTabIndex by remember { mutableIntStateOf(0) }
 
         ScheduleTabRow(
-            modifier = Modifier.fillMaxWidth().background(color = Color.White),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.White),
             selectedTabIndex = selectedTabIndex,
             updateSelectedTabIndex = {
                 selectedTabIndex = it
