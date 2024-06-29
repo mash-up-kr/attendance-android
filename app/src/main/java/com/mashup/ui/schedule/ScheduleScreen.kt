@@ -1,7 +1,6 @@
 package com.mashup.ui.schedule
 
 import android.content.Context
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,9 +8,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -27,7 +29,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,26 +36,26 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.mashup.R
 import com.mashup.constant.log.LOG_SCHEDULE_EVENT_DETAIL
 import com.mashup.constant.log.LOG_SCHEDULE_STATUS_CONFIRM
+import com.mashup.core.common.R as CR
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
+import com.mashup.core.ui.theme.MashUpTheme
+import com.mashup.core.ui.widget.MashUpHtmlText
 import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
-import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.main.MainViewModel
-import com.mashup.ui.main.model.MainPopupType
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
 import com.mashup.ui.schedule.item.ScheduleViewPagerEmptyItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerInProgressItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerSuccessItem
 import com.mashup.ui.schedule.model.ScheduleCard
 import com.mashup.util.AnalyticsManager
-import com.mashup.util.debounce
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 
@@ -113,52 +114,15 @@ fun ScheduleRoute(
         Column(
             modifier = modifier
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 20.dp)
-                    .padding(top = 24.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                AndroidView(
-                    factory = { context ->
-                        AppCompatTextView(
-                            context
-                        ).apply {
-                            setTextAppearance(
-                                com.mashup.core.common.R.style.TextAppearance_Mashup_Header1_24_B
-                            )
-                            text = title
-                        }
-                    },
-                    update = { view ->
-                        view.text = title
-                    }
-                )
-                if (title.isNotEmpty()) {
-                    val coroutineScope = rememberCoroutineScope()
-                    Image(
-                        modifier = Modifier.clickable {
-                            debounce<Unit>(500L, scope = coroutineScope, destinationFunction = {
-                                mainViewModel.disablePopup(MainPopupType.DANGGN)
-                            })
-                            context.startActivity(
-                                ShakeDanggnActivity.newIntent(context)
-                            )
-                        },
-                        painter = painterResource(
-                            id = com.mashup.core.common.R.drawable.img_carrot_button
-                        ),
-                        contentDescription = null
-                    )
-                }
-            }
+            ScheduleTopbar(title)
             when (state) {
                 is ScheduleState.Error -> {}
                 is ScheduleState.Empty -> {}
                 else -> {
                     ScheduleScreen(
-                        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(scrollState),
                         scheduleState = state,
                         onClickScheduleInformation = { scheduleId: Int ->
                             AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
@@ -290,6 +254,7 @@ fun ScheduleScreen(
         else -> {}
     }
 }
+
 fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String {
     return when (scheduleTitleState) {
         ScheduleTitleState.Empty -> {
@@ -299,10 +264,45 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
             getString(R.string.end_schedule, scheduleTitleState.generatedNumber)
         }
         is ScheduleTitleState.DateCount -> {
-            getString(R.string.event_list_title, scheduleTitleState.dataCount).fromHtml().toString()
+            getString(R.string.event_list_title, scheduleTitleState.dataCount)
         }
         is ScheduleTitleState.SchedulePreparing -> {
             getString(R.string.preparing_attendance)
         }
+    }
+}
+
+@Composable
+fun ScheduleTopbar(title: String) {
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .padding(top = 24.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        MashUpHtmlText(
+            content = title.fromHtml(),
+            modifier = Modifier.weight(1f, false),
+            textAppearance = CR.style.TextAppearance_Mashup_Header1_24_B,
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Image(
+            painter = painterResource(id = CR.drawable.ic_more),
+            contentDescription = null,
+            modifier = Modifier
+                .size(20.dp)
+                .clickable {
+                    // TODO: 메뉴 화면으로 이동, 당근 Popup Disable 처리
+                },
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewScheduleTopbar() {
+    MashUpTheme {
+        ScheduleTopbar(title = "다음 세미나 준비 중이에요.\n조금만 기다려주세요.")
     }
 }
