@@ -48,13 +48,13 @@ import com.mashup.core.ui.typography.Body1
 
 enum class ButtonStyle(
     val backgroundColor: Color,
-    val textColor: Color,
+    val textColor: Color
 ) {
     PRIMARY(backgroundColor = Brand500, textColor = White),
     INVERSE(backgroundColor = Brand100, textColor = Brand500),
     DISABLE(backgroundColor = Brand300, textColor = White),
     DARK(backgroundColor = Gray800, textColor = White),
-    DEFAULT(backgroundColor = Gray100, textColor = Gray600),
+    DEFAULT(backgroundColor = Gray100, textColor = Gray600)
 }
 
 @Composable
@@ -64,46 +64,43 @@ fun MashUpButton(
     text: String,
     onClick: () -> Unit,
     isEnabled: Boolean = true,
-    showLoading: Boolean = false,
+    showLoading: Boolean = false
 ) {
     Box(
-        modifier =
-            modifier
-                .clip(RoundedCornerShape(12.dp))
-                .height(52.dp)
-                .background(if (isEnabled) buttonStyle.backgroundColor else ButtonStyle.DISABLE.backgroundColor)
-                .padding(horizontal = 20.dp)
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() },
-                    enabled = isEnabled || showLoading,
-                    onClick = onClick,
-                ),
-        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .height(52.dp)
+            .background(if (isEnabled) buttonStyle.backgroundColor else ButtonStyle.DISABLE.backgroundColor)
+            .padding(horizontal = 20.dp)
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() },
+                enabled = isEnabled || showLoading,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             AnimatedVisibility(
                 visible = showLoading,
                 enter = fadeIn(),
-                exit = fadeOut(),
+                exit = fadeOut()
             ) {
                 ButtonCircularProgressbar(
-                    modifier =
-                        Modifier
-                            .padding(end = 8.dp)
-                            .size(20.dp),
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .size(20.dp)
                 )
             }
 
             Text(
                 text = text,
-                style =
-                    Body1.copy(
-                        color = buttonStyle.textColor,
-                    ),
+                style = Body1.copy(
+                    color = buttonStyle.textColor
+                )
             )
         }
     }
@@ -115,19 +112,18 @@ fun ButtonCircularProgressbar(
     progressBarWidth: Dp = 3.dp,
     progressBarColor: Color = Color(0xFFFFFFFF),
     backgroundProgressBarColor: Color = Color(0x80FFFFFF),
-    progressDuration: Int = 500,
+    progressDuration: Int = 500
 ) {
     val infiniteTransition = rememberInfiniteTransition()
     val angle by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
-        animationSpec =
-            infiniteRepeatable(
-                animation =
-                    keyframes {
-                        durationMillis = progressDuration
-                    },
-            ),
+        animationSpec = infiniteRepeatable(
+            animation =
+            keyframes {
+                durationMillis = progressDuration
+            }
+        )
     )
 
     Canvas(modifier = modifier.fillMaxSize()) {
@@ -138,7 +134,7 @@ fun ButtonCircularProgressbar(
         drawCircle(
             color = backgroundProgressBarColor,
             radius = radius,
-            style = Stroke(width = progressBarWidth.toPx()),
+            style = Stroke(width = progressBarWidth.toPx())
         )
 
         // ProgressBar(Arc)
@@ -149,11 +145,10 @@ fun ButtonCircularProgressbar(
             useCenter = false,
             topLeft = size.center - Offset(radius, radius),
             size = Size(radius * 2, radius * 2),
-            style =
-                Stroke(
-                    width = progressBarWidth.toPx(),
-                    cap = StrokeCap.Round,
-                ),
+            style = Stroke(
+                width = progressBarWidth.toPx(),
+                cap = StrokeCap.Round
+            )
         )
     }
 }
@@ -164,7 +159,7 @@ fun PrevButtonCircularProgressbar() {
     MashUpTheme {
         Box {
             ButtonCircularProgressbar(
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(20.dp)
             )
         }
     }
@@ -180,21 +175,21 @@ fun PrevMashUpButton() {
                 buttonStyle = ButtonStyle.PRIMARY,
                 text = "다음",
                 onClick = {},
-                showLoading = true,
+                showLoading = true
             )
 
             MashUpButton(
                 modifier = Modifier.padding(16.dp),
                 buttonStyle = ButtonStyle.PRIMARY,
                 text = "다음",
-                onClick = {},
+                onClick = {}
             )
 
             MashUpButton(
                 modifier = Modifier.padding(16.dp),
                 buttonStyle = ButtonStyle.DEFAULT,
                 text = "다음",
-                onClick = {},
+                onClick = {}
             )
 
             MashUpButton(
@@ -202,7 +197,7 @@ fun PrevMashUpButton() {
                 buttonStyle = ButtonStyle.PRIMARY,
                 text = "다음",
                 onClick = {},
-                isEnabled = false,
+                isEnabled = false
             )
         }
     }

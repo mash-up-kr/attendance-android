@@ -23,35 +23,36 @@ import com.mashup.core.common.R as CommonR
 @Composable
 fun EmptyScheduleItem(
     modifier: Modifier = Modifier,
-    onClickMashongButton: () -> Unit = {},
+    onClickMashongButton: () -> Unit = {}
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(17.dp),
+        verticalArrangement = Arrangement.spacedBy(17.dp)
     ) {
         Image(
             painter = painterResource(id = CommonR.drawable.img_empty_schdule),
             contentDescription = null,
-            modifier =
-                Modifier
-                    .width(284.dp)
-                    .height(256.dp),
+            modifier = Modifier
+                .width(284.dp)
+                .height(256.dp)
         )
 
         Text(
             text = "이번주는 자유다..!",
             style = Header2,
-            color = Color(0xFF412491),
+            color = Color(0xFF412491)
         )
         MashUpGradientButton(
-            modifier = Modifier.width(256.dp).height(48.dp),
+            modifier = Modifier
+                .width(256.dp)
+                .height(48.dp),
             text = "매숑이 밥주러 가기",
             onClick = onClickMashongButton,
             gradientColors = listOf(
                 Color(0xFFB398FE),
-                Color(0xFF47BBF1),
-            ),
+                Color(0xFF47BBF1)
+            )
         )
     }
 }
@@ -61,8 +62,8 @@ fun EmptyScheduleItem(
 private fun PreviewEmptyScheduleItem() {
     MashUpTheme {
         Box(
-            modifier =Modifier.background(color= Color.White)
-        ){
+            modifier = Modifier.background(color = Color.White)
+        ) {
             EmptyScheduleItem()
         }
     }

@@ -25,36 +25,35 @@ fun MashUpGradientButton(
     text: String = "",
     onClick: () -> Unit = {},
     isEnabled: Boolean = true,
-    gradientColors: List<Color> = listOf(),
+    gradientColors: List<Color> = listOf()
 ) {
     Box(
-        modifier =
-            modifier
-                .clip(RoundedCornerShape(12.dp))
-                .background(
-                    brush =
-                        Brush.linearGradient(
-                            colors = gradientColors,
-                        ),
-                ).padding(horizontal = 20.dp)
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() },
-                    enabled = isEnabled,
-                    onClick = onClick,
-                ),
-        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .background(
+                brush =
+                Brush.linearGradient(
+                    colors = gradientColors
+                )
+            )
+            .padding(horizontal = 20.dp)
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() },
+                enabled = isEnabled,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = text,
-                style =
-                    Body3.copy(
-                        color = Color.White,
-                    ),
+                style = Body3.copy(
+                    color = Color.White
+                )
             )
         }
     }
