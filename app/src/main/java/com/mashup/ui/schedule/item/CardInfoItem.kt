@@ -3,14 +3,11 @@ package com.mashup.ui.schedule.item
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,17 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mashup.core.common.R
-import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray300
 import com.mashup.core.ui.colors.Gray400
-import com.mashup.core.ui.colors.Gray600
-import com.mashup.core.ui.colors.Gray700
 import com.mashup.core.ui.colors.Gray800
 import com.mashup.core.ui.colors.Gray900
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.core.ui.typography.Body3
 import com.mashup.core.ui.typography.Body4
-import com.mashup.core.ui.typography.Body5
 import com.mashup.core.ui.typography.Header1
 import com.mashup.core.ui.widget.MashupPlatformBadge
 
@@ -122,7 +114,6 @@ fun CardInfoItem(
         }
     }
 }
-
 
 @Preview
 @Composable

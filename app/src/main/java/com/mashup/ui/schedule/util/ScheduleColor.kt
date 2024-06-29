@@ -3,7 +3,6 @@ package com.mashup.ui.schedule.util
 import androidx.compose.ui.graphics.Color
 import com.mashup.core.ui.widget.PlatformType
 
-
 fun String.getEventTimelineBackgroundColor(): Color {
     return when (this) {
         "ALL" -> Color(0xFFE1F2FA)
@@ -39,20 +38,17 @@ fun String.getButtonTextColor(): Color {
         "ALL" -> Color(0xFF358CB6)
         else -> Color(0xFF6A36FF)
     }
-
 }
-
 
 fun String.convertCamelCase(): PlatformType {
     return when (this) {
-        "ALL" -> PlatformType.Semina
+        "ALL" -> PlatformType.Seminar
         "DESIGN" -> PlatformType.Design
         "SPRING" -> PlatformType.Spring
         "IOS" -> PlatformType.Ios
         "ANDROID" -> PlatformType.Android
         "WEB" -> PlatformType.Web
         "NODE" -> PlatformType.Node
-        else -> PlatformType.Semina
+        else -> PlatformType.Seminar
     }
 }
-

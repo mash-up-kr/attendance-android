@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,10 +43,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import com.mashup.R
 import com.mashup.core.ui.colors.Brand200
@@ -112,8 +109,7 @@ fun ScheduleViewPagerSuccessItem(
             location = data.scheduleResponse.location?.detailAddress ?: ""
         )
 
-
-        if (data.scheduleResponse.scheduleType.convertCamelCase() == PlatformType.Semina) {
+        if (data.scheduleResponse.scheduleType.convertCamelCase() == PlatformType.Seminar) {
             Spacer(modifier = Modifier.height(12.dp))
             LazyColumn(
                 state = listState,
@@ -123,7 +119,7 @@ fun ScheduleViewPagerSuccessItem(
                         shape = RoundedCornerShape(16.dp)
                     )
                     .height(176.dp)
-                    .padding(top = 16.dp, start = 20.dp, end = 20.dp),
+                    .padding(top = 16.dp, start = 20.dp, end = 20.dp)
             ) {
                 itemsIndexed(data.scheduleResponse.eventList, key = { _: Int, item: EventResponse ->
                     item.eventId
@@ -165,7 +161,7 @@ fun ScheduleViewPagerSuccessItem(
                         )
                     }
                     Spacer(
-                        modifier= Modifier.height(6.dp)
+                        modifier = Modifier.height(6.dp)
                     )
                 }
                 item {
@@ -190,7 +186,7 @@ fun ScheduleViewPagerSuccessItem(
             Spacer(modifier = Modifier.height(18.dp))
             Divider(
                 modifier = Modifier.fillMaxWidth(),
-                color = Brand200,
+                color = Brand200
             )
             Spacer(
                 modifier = Modifier.height(18.dp)
@@ -220,7 +216,6 @@ fun ScheduleViewPagerSuccessItem(
                 modifier = Modifier.height(40.dp)
             )
         }
-
 
         AndroidView(
             modifier = Modifier
@@ -281,4 +276,3 @@ fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
         }
     }
 }
-

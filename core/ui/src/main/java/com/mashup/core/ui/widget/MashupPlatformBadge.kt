@@ -1,10 +1,8 @@
 package com.mashup.core.ui.widget
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -17,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mashup.core.ui.R
 import com.mashup.core.ui.typography.Body3
@@ -25,11 +22,8 @@ import com.mashup.core.ui.typography.Body3
 @Composable
 fun MashupPlatformBadge(
     platform: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
-    val convertedPlatform = platform.convertCamelCase()
-
-
     Row(
         modifier = modifier
             .background(
@@ -43,7 +37,7 @@ fun MashupPlatformBadge(
         Image(
             modifier = Modifier.size(12.dp),
             painter = painterResource(id = platform.getIcon()),
-            contentDescription = null,
+            contentDescription = null
         )
         Spacer(
             modifier = Modifier.width(4.dp)
@@ -56,19 +50,16 @@ fun MashupPlatformBadge(
     }
 }
 
-
 private fun String.getIcon(): Int {
     return when (this) {
         "ALL" -> R.drawable.ic_semina
         else -> R.drawable.ic_platform
     }
-
 }
 
 enum class PlatformType {
-    Semina, Design, Spring, Ios, Android, Web, Node
+    Seminar, Design, Spring, Ios, Android, Web, Node
 }
-
 
 private fun String.getColor(): Color {
     return when (this) {
@@ -79,44 +70,13 @@ private fun String.getColor(): Color {
 
 private fun String.convertCamelCase(): PlatformType {
     return when (this) {
-        "ALL" -> PlatformType.Semina
+        "ALL" -> PlatformType.Seminar
         "DESIGN" -> PlatformType.Design
         "SPRING" -> PlatformType.Spring
         "IOS" -> PlatformType.Ios
         "ANDROID" -> PlatformType.Android
         "WEB" -> PlatformType.Web
         "NODE" -> PlatformType.Node
-        else -> PlatformType.Semina
+        else -> PlatformType.Seminar
     }
-}
-
-
-@Preview
-@Composable
-private fun PreviewMashUpPlatformBadge() {
-    Column {
-        MashupPlatformBadge(
-            platform = "ALL"
-        )
-        MashupPlatformBadge(
-            platform = "DESIGN"
-        )
-        MashupPlatformBadge(
-            platform = "SPRING"
-        )
-        MashupPlatformBadge(
-            platform = "IOS"
-        )
-        MashupPlatformBadge(
-            platform = "ANDROID"
-        )
-        MashupPlatformBadge(
-            platform = "WEB"
-        )
-        MashupPlatformBadge(
-            platform = "NODE"
-        )
-
-    }
-
 }
