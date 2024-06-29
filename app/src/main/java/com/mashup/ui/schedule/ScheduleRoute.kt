@@ -99,7 +99,11 @@ fun ScheduleRoute(
     CompositionLocalProvider(
         LocalOverscrollConfiguration provides null
     ) {
-        Box(modifier = modifier.pullRefresh(pullRefreshState).background(White)) {
+        Box(
+            modifier = modifier
+                .pullRefresh(pullRefreshState)
+                .background(White)
+        ) {
             LazyColumn(modifier = modifier) {
                 item {
                     ScheduleTopbar(title)
@@ -117,29 +121,20 @@ fun ScheduleRoute(
                 }
 
                 item {
-                    when (scheduleState) {
-                        is ScheduleState.Error -> {}
-                        is ScheduleState.Empty -> {}
-                        else -> {
+                    when (val state = scheduleState) {
+                        is ScheduleState.Success -> {
                             ScheduleScreen(
-                                modifier = Modifier.fillMaxSize().background(color = Color.White),
-                                scheduleState = scheduleState,
-                                onClickScheduleInformation = { scheduleId: Int ->
-                                    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
-                                    context.startActivity(
-                                        ScheduleDetailActivity.newIntent(context, scheduleId)
-                                    )
-                                },
-                                onClickAttendance = { scheduleId: Int ->
-                                    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_STATUS_CONFIRM)
-                                    context.startActivity(
-                                        PlatformAttendanceActivity.newIntent(context, scheduleId)
-                                    )
-                                },
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(color = Color.White),
+                                scheduleState = state,
+                                onClickScheduleInformation = { context.onClickScheduleInformation(it) },
+                                onClickAttendance = { context.onClickAttendance(it) },
                                 refreshState = isRefreshing
-
                             )
                         }
+
+                        else -> {}
                     }
                 }
             }
@@ -170,6 +165,16 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
             getString(R.string.preparing_attendance)
         }
     }
+}
+
+fun Context.onClickScheduleInformation(scheduleId: Int) {
+    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
+    startActivity(ScheduleDetailActivity.newIntent(this, scheduleId))
+}
+
+fun Context.onClickAttendance(scheduleId: Int) {
+    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_STATUS_CONFIRM)
+    startActivity(PlatformAttendanceActivity.newIntent(this, scheduleId))
 }
 
 @Composable
