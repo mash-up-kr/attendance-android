@@ -138,18 +138,8 @@ fun ScheduleRoute(
                                     .fillMaxSize()
                                     .background(color = Color.White),
                                 scheduleState = scheduleState,
-                                onClickScheduleInformation = { scheduleId: Int ->
-                                    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
-                                    context.startActivity(
-                                        ScheduleDetailActivity.newIntent(context, scheduleId)
-                                    )
-                                },
-                                onClickAttendance = { scheduleId: Int ->
-                                    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_STATUS_CONFIRM)
-                                    context.startActivity(
-                                        PlatformAttendanceActivity.newIntent(context, scheduleId)
-                                    )
-                                },
+                                onClickScheduleInformation = { context.moveToScheduleInformation(it) },
+                                onClickAttendance = { context.moveToAttendance(it) },
                                 refreshState = isRefreshing,
                                 scheduleType = ScheduleType.values()[selectedTabIndex]
                             )
@@ -187,6 +177,21 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
             getString(R.string.preparing_attendance)
         }
     }
+}
+
+fun Context.moveToScheduleInformation(scheduleId: Int) {
+    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
+    startActivity(
+        ScheduleDetailActivity.newIntent(this, scheduleId)
+    )
+}
+
+fun Context.moveToAttendance(scheduleId: Int) {
+    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_STATUS_CONFIRM)
+    startActivity(
+        PlatformAttendanceActivity.newIntent(this, scheduleId)
+    )
+
 }
 
 @Composable
