@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
@@ -28,8 +29,11 @@ fun EmptyScheduleItem(
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(17.dp)
+        verticalArrangement = Arrangement.Center
     ) {
+        Spacer(
+            modifier = Modifier.height(34.dp)
+        )
         Image(
             painter = painterResource(id = CommonR.drawable.img_empty_schdule),
             contentDescription = null,
@@ -37,11 +41,16 @@ fun EmptyScheduleItem(
                 .width(284.dp)
                 .height(256.dp)
         )
-
+        Spacer(
+            modifier = Modifier.height(17.dp)
+        )
         Text(
             text = "이번주는 자유다..!",
             style = Header2,
             color = Color(0xFF412491)
+        )
+        Spacer(
+            modifier = Modifier.height(17.dp)
         )
         MashUpGradientButton(
             modifier = Modifier
