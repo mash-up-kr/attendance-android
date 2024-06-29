@@ -1,6 +1,8 @@
 package com.mashup.ui.schedule
 
 import com.mashup.core.common.base.BaseViewModel
+import com.mashup.core.common.extensions.month
+import com.mashup.core.common.extensions.year
 import com.mashup.data.dto.ScheduleResponse
 import com.mashup.data.dto.SchedulesProgress
 import com.mashup.data.repository.AttendanceRepository
@@ -59,6 +61,7 @@ class ScheduleViewModel @Inject constructor(
                             } else {
                                 response.scheduleList.map { mapperToScheduleCard(it) }
                             },
+                            monthlyScheduleList = getMonthlyScheduleList(response.scheduleList),
                             schedulePosition = getSchedulePosition(response.scheduleList)
                         )
                     )
@@ -69,6 +72,7 @@ class ScheduleViewModel @Inject constructor(
                         ScheduleState.Success(
                             scheduleTitleState = ScheduleTitleState.Empty,
                             scheduleList = listOf(ScheduleCard.EmptySchedule()),
+                            monthlyScheduleList = emptyList(),
                             schedulePosition = 0
                         )
                     )
@@ -108,6 +112,14 @@ class ScheduleViewModel @Inject constructor(
         return ScheduleCard.EmptySchedule(scheduleResponse)
     }
 
+    private fun getMonthlyScheduleList(scheduleList: List<ScheduleResponse>): List<Pair<String, List<ScheduleResponse>>> {
+        return scheduleList.groupBy {
+            val year = it.startedAt.year()
+            val month = it.startedAt.month()
+            "${year}년 ${month}월"
+        }.toList()
+    }
+
     private fun getSchedulePosition(schedules: List<ScheduleResponse>): Int {
         return schedules.size - schedules.filter { it.dateCount >= 0 }.size
     }
@@ -138,6 +150,7 @@ sealed interface ScheduleState {
     data class Success(
         val scheduleTitleState: ScheduleTitleState,
         val scheduleList: List<ScheduleCard>,
+        val monthlyScheduleList: List<Pair<String, List<ScheduleResponse>>>,
         val schedulePosition: Int
     ) : ScheduleState
 

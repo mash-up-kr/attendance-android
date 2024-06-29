@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -120,22 +121,35 @@ fun ScheduleRoute(
                     )
                 }
 
-                item {
-                    when (val state = scheduleState) {
-                        is ScheduleState.Success -> {
-                            ScheduleScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(color = Color.White),
-                                scheduleState = state,
-                                onClickScheduleInformation = { context.onClickScheduleInformation(it) },
-                                onClickAttendance = { context.onClickAttendance(it) },
-                                refreshState = isRefreshing
-                            )
-                        }
+                when (val state = scheduleState) {
+                    is ScheduleState.Success -> {
+                        when (selectedTabIndex) {
+                            0 -> {
+                                item {
+                                    ScheduleScreen(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(color = Color.White),
+                                        scheduleState = state,
+                                        onClickScheduleInformation = { context.onClickScheduleInformation(it) },
+                                        onClickAttendance = { context.onClickAttendance(it) },
+                                        refreshState = isRefreshing
+                                    )
+                                }
+                            }
 
-                        else -> {}
+                            1 -> {
+                                items(
+                                    items = state.monthlyScheduleList,
+                                    key = { it.first }
+                                ) { (month, scheduleList) ->
+                                    // TODO
+                                }
+                            }
+                        }
                     }
+
+                    else -> {}
                 }
             }
 
