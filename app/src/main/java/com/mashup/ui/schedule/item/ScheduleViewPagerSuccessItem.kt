@@ -8,14 +8,20 @@ import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -33,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -48,10 +55,12 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import com.mashup.R
 import com.mashup.core.ui.colors.Brand200
+import com.mashup.core.ui.colors.Gray600
 import com.mashup.core.ui.colors.Gray700
 import com.mashup.core.ui.colors.Gray900
 import com.mashup.core.ui.typography.Body1
 import com.mashup.core.ui.typography.Body5
+import com.mashup.core.ui.typography.Caption1
 import com.mashup.core.ui.typography.SubTitle2
 import com.mashup.core.ui.widget.PlatformType
 import com.mashup.data.dto.EventResponse
@@ -182,6 +191,31 @@ fun ScheduleViewPagerSuccessItem(
             Spacer(
                 modifier = Modifier.height(12.dp)
             )
+            AndroidView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .background(
+                        color = data.scheduleResponse.scheduleType.getButtonBackgroundColor(),
+                        shape = RoundedCornerShape(16.dp)
+                    ),
+                factory = { context ->
+                    AppCompatTextView(context).apply {
+                        text = context.getString(R.string.click_attendance_list)
+                        setTextAppearance(
+                            com.mashup.core.common.R.style.TextAppearance_Mashup_Body3_14_M
+                        )
+                        gravity = Gravity.CENTER
+                        setTextColor(
+                            textColor.toArgb()
+                        )
+                        setPadding(12, 0, 0, 0)
+                        setOnClickListener {
+                            onClickAttendance(data.scheduleResponse.scheduleId)
+                        }
+                    }
+                }
+            )
         } else {
             Spacer(modifier = Modifier.height(18.dp))
             Divider(
@@ -203,45 +237,85 @@ fun ScheduleViewPagerSuccessItem(
             Spacer(
                 modifier = Modifier.height(6.dp)
             )
-            Text(
-                text = "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카",
-                maxLines = 5,
-                style = Body5.copy(
-                    lineHeight = 20.sp
-                ),
-                color = Gray700,
-                overflow = TextOverflow.Ellipsis
-            )
+
+            if (data.scheduleResponse.notice == null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = Color(0xFFEFE9F8),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .padding(
+                            vertical = 22.dp,
+                            horizontal = 20.dp
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            modifier = Modifier.size(88.dp),
+                            painter = painterResource(id = com.mashup.core.common.R.drawable.img_placeholder_sleeping),
+                            contentDescription = null
+                        )
+                        Text(
+                            text = "공지가 없어요!",
+                            style = Caption1,
+                            color = Gray600,
+                        )
+
+                    }
+                }
+            } else {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Text(
+                        text = data.scheduleResponse.notice,
+                        maxLines = 5,
+                        style = Body5.copy(
+                            lineHeight = 20.sp
+                        ),
+                        color = Gray700,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Left
+                    )
+                }
+                AndroidView(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .background(
+                            color = data.scheduleResponse.scheduleType.getButtonBackgroundColor(),
+                            shape = RoundedCornerShape(16.dp)
+                        ),
+                    factory = { context ->
+                        AppCompatTextView(context).apply {
+                            text = context.getString(R.string.click_attendance_list)
+                            setTextAppearance(
+                                com.mashup.core.common.R.style.TextAppearance_Mashup_Body3_14_M
+                            )
+                            gravity = Gravity.CENTER
+                            setTextColor(
+                                textColor.toArgb()
+                            )
+                            setPadding(12, 0, 0, 0)
+                            setOnClickListener {
+                                onClickAttendance(data.scheduleResponse.scheduleId)
+                            }
+                        }
+                    }
+                )
+            }
             Spacer(
                 modifier = Modifier.height(40.dp)
             )
         }
-
-        AndroidView(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
-                .background(
-                    color = data.scheduleResponse.scheduleType.getButtonBackgroundColor(),
-                    shape = RoundedCornerShape(16.dp)
-                ),
-            factory = { context ->
-                AppCompatTextView(context).apply {
-                    text = context.getString(R.string.click_attendance_list)
-                    setTextAppearance(
-                        com.mashup.core.common.R.style.TextAppearance_Mashup_Body3_14_M
-                    )
-                    gravity = Gravity.CENTER
-                    setTextColor(
-                        textColor.toArgb()
-                    )
-                    setPadding(12, 0, 0, 0)
-                    setOnClickListener {
-                        onClickAttendance(data.scheduleResponse.scheduleId)
-                    }
-                }
-            }
-        )
     }
 }
 
