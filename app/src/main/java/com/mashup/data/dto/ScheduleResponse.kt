@@ -11,6 +11,8 @@ import java.util.Locale
 data class ScheduleResponse(
     @field:Json(name = "scheduleType")
     val scheduleType: String,
+    @field:Json(name = "notice")
+    val notice: String?,
     @field:Json(name = "scheduleId")
     val scheduleId: Int,
     @field:Json(name = "dateCount")

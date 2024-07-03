@@ -203,7 +203,8 @@ private fun PreviewScheduleViewPagerEmptySchedule() {
                             roadAddress = null,
                             detailAddress = null
                         ),
-                        scheduleType = "ALL"
+                        scheduleType = "ALL",
+                        notice = null
                     ),
                     attendanceInfo = null
                 )
