@@ -265,7 +265,7 @@ fun ScheduleViewPagerSuccessItem(
                         Text(
                             text = "공지가 없어요!",
                             style = Caption1,
-                            color = Gray600,
+                            color = Gray600
                         )
                     }
                 }
@@ -273,7 +273,7 @@ fun ScheduleViewPagerSuccessItem(
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Text(
                         text = data.scheduleResponse.notice,
                         maxLines = 5,
@@ -314,7 +314,6 @@ fun ScheduleViewPagerSuccessItem(
                     modifier = Modifier.height(40.dp)
                 )
             }
-
         }
     }
 }
