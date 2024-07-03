@@ -44,6 +44,7 @@ import com.mashup.constant.log.LOG_SCHEDULE_EVENT_DETAIL
 import com.mashup.constant.log.LOG_SCHEDULE_STATUS_CONFIRM
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
+import com.mashup.core.ui.colors.Gray50
 import com.mashup.core.ui.colors.White
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.widget.MashUpHtmlText
@@ -110,12 +111,17 @@ fun ScheduleRoute(
         Box(
             modifier = modifier
                 .pullRefresh(pullRefreshState)
-                .background(White)
+                .background(color = if (ScheduleType.values()[selectedTabIndex] == ScheduleType.WEEK) Color.White else Gray50)
         ) {
             LazyColumn(modifier = modifier) {
                 item {
                     ScheduleTopbar(title)
-                    Spacer(modifier = Modifier.height(26.dp))
+                    Spacer(
+                        modifier = Modifier
+                            .height(26.dp)
+                            .fillMaxWidth()
+                            .background(Color.White)
+                    )
                 }
 
                 stickyHeader {
@@ -134,9 +140,7 @@ fun ScheduleRoute(
                         is ScheduleState.Init -> {}
                         else -> {
                             ScheduleScreen(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(color = Color.White),
+                                modifier = Modifier.fillMaxSize(),
                                 scheduleState = scheduleState,
                                 onClickScheduleInformation = { context.moveToScheduleInformation(it) },
                                 onClickAttendance = { context.moveToAttendance(it) },
@@ -197,6 +201,7 @@ fun Context.moveToAttendance(scheduleId: Int) {
 fun ScheduleTopbar(title: String) {
     Row(
         modifier = Modifier
+            .background(White)
             .padding(horizontal = 20.dp)
             .padding(top = 24.dp)
             .fillMaxWidth(),
