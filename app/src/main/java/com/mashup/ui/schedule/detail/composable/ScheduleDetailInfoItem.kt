@@ -13,7 +13,7 @@ import com.mashup.core.ui.typography.Header1
 import com.mashup.core.common.R as CR
 
 @Composable
-fun ScheduleDetailInfoContent(
+fun ScheduleDetailInfoItem(
     title: String,
     date: String,
     time: String,
@@ -33,9 +33,9 @@ fun ScheduleDetailInfoContent(
 
 @Preview
 @Composable
-fun PreviewScheduleDetailInfoContent() {
+fun PreviewScheduleDetailInfoItem() {
     MashUpTheme {
-        ScheduleDetailInfoContent(
+        ScheduleDetailInfoItem(
             title = "1차 정기 세미나",
             date = "3월 27일",
             time = "오후 3:00 - 오전 7:00"

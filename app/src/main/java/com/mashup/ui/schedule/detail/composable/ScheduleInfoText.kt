@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.mashup.core.ui.colors.Gray300
 import com.mashup.core.ui.colors.Gray700
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.core.ui.typography.Body3
+import com.mashup.core.ui.typography.Body4
 import com.mashup.core.common.R as CR
 
 @Composable
@@ -39,7 +39,7 @@ fun ScheduleInfoText(
 
         Spacer(modifier = Modifier.width(4.dp))
 
-        Text(text = info, style = Body3, color = Gray700)
+        Text(text = info, style = Body4, color = Gray700)
     }
 }
 

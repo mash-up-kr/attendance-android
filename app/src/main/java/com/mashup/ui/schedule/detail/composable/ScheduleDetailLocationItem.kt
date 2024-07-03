@@ -41,7 +41,7 @@ import com.mashup.core.common.R as CR
 
 @OptIn(ExperimentalNaverMapApi::class)
 @Composable
-fun ScheduleDetailLocationContent(
+fun ScheduleDetailLocationItem(
     detailAddress: String,
     roadAddress: String,
     latitude: Double?,
@@ -140,9 +140,9 @@ fun ScheduleDetailLocationContent(
 
 @Preview
 @Composable
-fun PreviewScheduleDetailLocationContent() {
+fun PreviewScheduleDetailLocationItem() {
     MashUpTheme {
-        ScheduleDetailLocationContent(
+        ScheduleDetailLocationItem(
             detailAddress = "알파돔타워",
             roadAddress = "경기도 성남시 분당구 판교역로 152",
             latitude = 37.532600,

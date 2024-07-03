@@ -1,59 +1,47 @@
 package com.mashup.ui.schedule.model
 
-import java.text.SimpleDateFormat
+import com.mashup.core.common.extensions.getTimeFormat
 import java.util.Date
-import java.util.Locale
 
-data class EventDetail(
-    val id: Int,
-    val type: EventDetailType,
-    val header: Header? = null,
-    val body: Body? = null,
-    val location: Location? = null,
-    val info: Info? = null
-)
-
-data class Header(
-    val eventId: Int,
-    val startedAt: Date,
-    val endedAt: Date
+sealed class EventDetail(
+    open val index: Int,
+    val type: EventDetailType
 ) {
-    fun getHeader() = "${eventId}부"
-    fun getTimeStampStr(): String {
-        return try {
-            val timeLineFormat = SimpleDateFormat("a hh:mm", Locale.ENGLISH)
-            "${timeLineFormat.format(startedAt)} - ${timeLineFormat.format(endedAt)}"
-        } catch (ignore: Exception) {
-            "??:?? - ??:??"
-        }
+    data class Header(
+        override val index: Int,
+        val eventId: Int,
+        val startedAt: Date,
+        val endedAt: Date
+    ) : EventDetail(index, EventDetailType.HEADER) {
+        val title = "${eventId}부"
+        val formattedTime = "${startedAt.getTimeFormat()} - ${endedAt.getTimeFormat()}"
+    }
+
+    data class Content(
+        override val index: Int,
+        val contentId: String,
+        val title: String,
+        val content: String,
+        val startedAt: Date
+    ) : EventDetail(index, EventDetailType.CONTENT) {
+        val formattedTime = startedAt.getTimeFormat()
+    }
+
+    data class Location(
+        override val index: Int,
+        val detailAddress: String,
+        val roadAddress: String,
+        val latitude: Double?,
+        val longitude: Double?
+    ) : EventDetail(index, EventDetailType.LOCATION)
+
+    data class Info(
+        override val index: Int,
+        val title: String,
+        val date: String,
+        val startedAt: Date,
+        val endedAt: Date
+    ) : EventDetail(index, EventDetailType.INFO) {
+        val formattedTime = "${startedAt.getTimeFormat()} - ${endedAt.getTimeFormat()}"
     }
 }
-
-data class Body(
-    val contentId: String,
-    val title: String,
-    val content: String,
-    val startedAt: Date
-) {
-    fun getTimeStampStr(): String {
-        return try {
-            val timeLineFormat = SimpleDateFormat("a hh:mm", Locale.ENGLISH)
-            timeLineFormat.format(startedAt)
-        } catch (ignore: Exception) {
-            "??:??"
-        }
-    }
-}
-
-data class Location(
-    val detailAddress: String?,
-    val roadAddress: String?,
-    val latitude: Double?,
-    val longitude: Double?
-)
-
-data class Info(
-    val title: String,
-    val date: String,
-    val time: String
-)
