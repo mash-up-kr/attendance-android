@@ -5,7 +5,6 @@ import androidx.annotation.StringRes
 import com.example.moremenu.R
 import com.mashup.core.ui.R as CoreR
 
-
 sealed interface Menu {
     val menuName: String
     val type: MenuType
@@ -16,29 +15,28 @@ sealed interface Menu {
 
     data class BirthDay(
         override val menuName: String = MenuType.BIRTHDAY.name,
-        override val type: MenuType = MenuType.BIRTHDAY,
+        override val type: MenuType = MenuType.BIRTHDAY
     ) : Menu
 
     data class Mashong(
         override val menuName: String = MenuType.MASHONG.name,
-        override val type: MenuType = MenuType.MASHONG,
+        override val type: MenuType = MenuType.MASHONG
     ) : Menu
 
     data class Danggn(
         override val menuName: String = MenuType.DANGGN.name,
-        override val type: MenuType = MenuType.DANGGN,
+        override val type: MenuType = MenuType.DANGGN
     ) : Menu
 
     data class Noti(
         override val menuName: String = MenuType.NOTI.name,
-        override val type: MenuType = MenuType.NOTI,
+        override val type: MenuType = MenuType.NOTI
 
-
-        ) : Menu
+    ) : Menu
 
     data class Setting(
         override val menuName: String = MenuType.SETTING.name,
-        override val type: MenuType = MenuType.SETTING,
+        override val type: MenuType = MenuType.SETTING
     ) : Menu
 
     companion object {
@@ -58,24 +56,22 @@ enum class MenuType(
 ) {
     BIRTHDAY(
         title = R.string.menu_title_birthday,
-        icon = CoreR.drawable.ic_birthday,
+        icon = CoreR.drawable.ic_birthday
     ),
     MASHONG(
         title = R.string.menu_title_mashong,
-        icon = CoreR.drawable.ic_mashong,
+        icon = CoreR.drawable.ic_mashong
     ),
     DANGGN(
         title = R.string.menu_title_danggn,
-        icon = CoreR.drawable.ic_carrot,
+        icon = CoreR.drawable.ic_carrot
     ),
     NOTI(
         title = R.string.menu_title_notice,
-        icon = CoreR.drawable.ic_alarm,
+        icon = CoreR.drawable.ic_alarm
     ),
     SETTING(
         title = R.string.menu_title_setting,
-        icon = CoreR.drawable.ic_setting,
-    ),
+        icon = CoreR.drawable.ic_setting
+    )
 }
-
-

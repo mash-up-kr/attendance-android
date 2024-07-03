@@ -24,7 +24,7 @@ import com.mashup.core.ui.typography.SubTitle2
 fun MoreMenuItem(
     menu: Menu,
     modifier: Modifier = Modifier,
-    onClickMenu : (Menu) -> Unit = {},
+    onClickMenu: (Menu) -> Unit = {}
 ) {
     Row(
         modifier = modifier.fillMaxWidth().clickable {
@@ -42,7 +42,7 @@ fun MoreMenuItem(
             style = SubTitle2,
             color = Gray900
         )
-        if(menu.type == MenuType.NOTI && menu.isShowNewIcon){
+        if (menu.type == MenuType.NOTI && menu.isShowNewIcon) {
             Image(
                 painter = painterResource(id = menu.additionalIcon),
                 contentDescription = null
