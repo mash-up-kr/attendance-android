@@ -5,6 +5,7 @@ import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.mashup.BuildConfig.DEBUG_MODE
 import com.mashup.core.model.Platform
 import com.mashup.core.network.adapter.PlatformJsonAdapter
+import com.mashup.core.network.dao.MetaDao
 import com.mashup.core.network.dao.PopupDao
 import com.mashup.core.network.dao.StorageDao
 import com.mashup.data.network.API_HOST
@@ -143,6 +144,14 @@ class NetworkModule {
     fun provideMemberProfileDao(
         retrofit: Retrofit
     ): MemberProfileDao {
+        return retrofit.create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMetaDao(
+        retrofit: Retrofit
+    ): MetaDao {
         return retrofit.create()
     }
 }
