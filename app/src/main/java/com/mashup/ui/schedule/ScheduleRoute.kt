@@ -61,7 +61,8 @@ import com.mashup.core.common.R as CR
 fun ScheduleRoute(
     mainViewModel: MainViewModel,
     viewModel: ScheduleViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickMoreMenuIcon: () -> Unit = {},
 ) {
     val context = LocalContext.current
 
@@ -115,12 +116,15 @@ fun ScheduleRoute(
         ) {
             LazyColumn(modifier = modifier) {
                 item {
-                    ScheduleTopbar(title)
+                    ScheduleTopbar(
+                        title,
+                        onClickMoreMenuIcon = onClickMoreMenuIcon
+                    )
                     Spacer(
                         modifier = Modifier
                             .height(26.dp)
                             .fillMaxWidth()
-                            .background(Color.White)
+                            .background(Color.White),
                     )
                 }
 
@@ -198,7 +202,10 @@ fun Context.moveToAttendance(scheduleId: Int) {
 }
 
 @Composable
-fun ScheduleTopbar(title: String) {
+fun ScheduleTopbar(
+    title: String,
+    onClickMoreMenuIcon: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .background(White)
@@ -219,7 +226,7 @@ fun ScheduleTopbar(title: String) {
             modifier = Modifier
                 .size(20.dp)
                 .clickable {
-                    // TODO: 메뉴 화면으로 이동, 당근 Popup Disable 처리
+                    onClickMoreMenuIcon()
                 }
         )
     }
