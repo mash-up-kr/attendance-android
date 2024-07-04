@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface MetaDao {
     @GET("/api/v1/meta/rnb")
-    suspend fun getRnb() : Response<RnbResponse>
+    suspend fun getRnb(): Response<RnbResponse>
 }

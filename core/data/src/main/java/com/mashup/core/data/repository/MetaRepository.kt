@@ -9,6 +9,6 @@ import javax.inject.Singleton
 @Singleton
 class MetaRepository @Inject constructor(
     private val metaDao: MetaDao
-){
-    suspend fun getRnb() : Response<RnbResponse> = metaDao.getRnb()
+) {
+    suspend fun getRnb(): Response<RnbResponse> = metaDao.getRnb()
 }

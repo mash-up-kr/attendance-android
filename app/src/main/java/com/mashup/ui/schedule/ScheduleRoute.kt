@@ -62,7 +62,7 @@ fun ScheduleRoute(
     mainViewModel: MainViewModel,
     viewModel: ScheduleViewModel,
     modifier: Modifier = Modifier,
-    onClickMoreMenuIcon: () -> Unit = {},
+    onClickMoreMenuIcon: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
@@ -124,7 +124,7 @@ fun ScheduleRoute(
                         modifier = Modifier
                             .height(26.dp)
                             .fillMaxWidth()
-                            .background(Color.White),
+                            .background(Color.White)
                     )
                 }
 

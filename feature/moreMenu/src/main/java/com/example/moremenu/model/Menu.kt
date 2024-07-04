@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.mashup.core.network.dto.RnbResponse
 import com.mashup.feature.moreMenu.R
-
 import com.mashup.core.ui.R as CoreR
 
 sealed interface Menu {

@@ -40,7 +40,8 @@ fun MoreMenuRoute(
         }
     }
     MoreMenuScreen(
-        modifier = modifier, moreMenuState = moreMenuState,
+        modifier = modifier,
+        moreMenuState = moreMenuState,
         onClickMenu = { menu -> },
         onBackPressed = moreMenuViewModel::onClickBackButton
     )
