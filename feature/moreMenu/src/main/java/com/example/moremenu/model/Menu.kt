@@ -2,7 +2,9 @@ package com.example.moremenu.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.example.moremenu.R
+import com.mashup.core.network.dto.RnbResponse
+import com.mashup.feature.moreMenu.R
+
 import com.mashup.core.ui.R as CoreR
 
 sealed interface Menu {
@@ -47,6 +49,10 @@ sealed interface Menu {
             Noti(),
             Setting()
         )
+
+        fun RnbResponse.toMenu(): List<Menu> {
+            return menuList.filter { menu -> this.menus.contains(menu.type.name) }
+        }
     }
 }
 
