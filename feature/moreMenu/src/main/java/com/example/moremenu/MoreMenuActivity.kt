@@ -24,7 +24,8 @@ class MoreMenuActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding),
-                        moreMenuViewModel = moreMenuViewModel
+                        moreMenuViewModel = moreMenuViewModel,
+                        onNavigateBackStack = ::finish
                     )
                 }
             }
