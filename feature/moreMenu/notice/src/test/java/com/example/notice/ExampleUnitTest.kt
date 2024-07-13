@@ -1,4 +1,4 @@
-package com.example.alarm
+package com.example.notice
 
 import org.junit.Test
 
