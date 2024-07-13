@@ -1,5 +1,6 @@
 package com.example.moremenu.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,8 @@ import com.mashup.core.ui.typography.SubTitle2
 fun MoreMenuItem(
     menu: Menu,
     modifier: Modifier = Modifier,
+    isShowNewIcon: Boolean = false,
+    @DrawableRes additionalIcon: Int = 0,
     onClickMenu: (Menu) -> Unit = {}
 ) {
     Row(
@@ -42,9 +45,9 @@ fun MoreMenuItem(
             style = SubTitle2,
             color = Gray900
         )
-        if (menu.type == MenuType.NOTI && menu.isShowNewIcon) {
+        if (menu.type == MenuType.NOTI && isShowNewIcon) {
             Image(
-                painter = painterResource(id = menu.additionalIcon),
+                painter = painterResource(id = additionalIcon),
                 contentDescription = null
             )
         }

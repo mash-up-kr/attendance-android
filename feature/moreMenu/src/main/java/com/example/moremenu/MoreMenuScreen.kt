@@ -26,14 +26,14 @@ import com.mashup.core.ui.widget.MashUpToolbar
 fun MoreMenuRoute(
     moreMenuViewModel: MoreMenuViewModel,
     modifier: Modifier = Modifier,
-    onNavigateBackStack: () -> Unit = {}
+    onNavigateBackStack: () -> Unit = {},
+    onNavigateMenu: (Menu) -> Unit = {}
 ) {
     val moreMenuState by moreMenuViewModel.moreMenuState.collectAsState()
     LaunchedEffect(Unit) {
         moreMenuViewModel.moreMenuEvent.collect { sideEffect ->
             when (sideEffect) {
-                is MoreMenuSideEffect.NavigateMenu -> {
-                }
+                is MoreMenuSideEffect.NavigateMenu -> onNavigateMenu(sideEffect.menu)
 
                 is MoreMenuSideEffect.NavigateBackStack -> onNavigateBackStack()
             }
@@ -42,7 +42,7 @@ fun MoreMenuRoute(
     MoreMenuScreen(
         modifier = modifier,
         moreMenuState = moreMenuState,
-        onClickMenu = { menu -> },
+        onClickMenu = moreMenuViewModel::onClickMenuButton,
         onBackPressed = moreMenuViewModel::onClickBackButton
     )
 }
@@ -66,7 +66,9 @@ fun MoreMenuScreen(
         items(moreMenuState.menus) { menu ->
             MoreMenuItem(
                 menu = menu,
-                onClickMenu = onClickMenu
+                onClickMenu = onClickMenu,
+                isShowNewIcon = moreMenuState.isShowNewIcon,
+                additionalIcon = moreMenuState.additionalIcon
             )
             Divider(
                 modifier = Modifier.fillMaxWidth(),
