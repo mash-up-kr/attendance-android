@@ -205,7 +205,7 @@ fun NoticeScreen(
 private fun PreviewNoticeScreen() {
     MashUpTheme {
         NoticeScreen(
-            modifier = Modifier.fillMaxSize().background(color = Color(0xFFF8F7FC)),
+            modifier = Modifier.fillMaxSize().background(color = Color(0xFFF8F7FC))
         )
     }
 }
