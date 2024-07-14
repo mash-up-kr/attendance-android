@@ -1,5 +1,7 @@
 package com.example.notice
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,14 +19,21 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.notice.components.NoticeItem
 import com.example.notice.model.NoticeSideEffect
 import com.example.notice.model.NoticeState
+import com.example.notice.model.NoticeState.Companion.isNoticeEmpty
+import com.mashup.core.ui.R
+import com.mashup.core.ui.colors.Gray600
+import com.mashup.core.ui.theme.MashUpTheme
+import com.mashup.core.ui.typography.Body5
 import com.mashup.core.ui.typography.Title3
 import com.mashup.core.ui.widget.MashUpToolbar
 
@@ -85,6 +94,44 @@ fun NoticeScreen(
         LaunchedEffect(lastItemReached) {
             if (lastItemReached) {
                 onLoadNextNotice()
+            }
+        }
+
+        if (noticeState.isError) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.img_error),
+                    contentDescription = null
+                )
+                Text(
+                    text = "오류가 발생했어요...",
+                    color = Gray600,
+                    style = Body5
+                )
+                return
+            }
+        }
+
+        if (noticeState.isNoticeEmpty()) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.img_noalert),
+                    contentDescription = null
+                )
+                Text(
+                    text = "아직 도착한 알림이 없어요",
+                    color = Gray600,
+                    style = Body5
+                )
+                return
             }
         }
 
@@ -149,5 +196,28 @@ fun NoticeScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewNoticeScreen() {
+    MashUpTheme {
+        NoticeScreen(
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewNoticeScreenError() {
+    MashUpTheme {
+        NoticeScreen(
+            modifier = Modifier.fillMaxSize(),
+            noticeState = NoticeState().copy(
+                isError = true
+            )
+        )
     }
 }

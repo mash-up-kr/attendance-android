@@ -41,7 +41,12 @@ class NoticeViewModel @Inject constructor(
                 val pushHistoryResponse = noticeResponse.data
                 _noticeState.value = NoticeState(
                     oldNoticeList = pushHistoryResponse?.read ?: emptyList(),
-                    newNoticeList = pushHistoryResponse?.unread ?: emptyList()
+                    newNoticeList = pushHistoryResponse?.unread ?: emptyList(),
+                    isError = false
+                )
+            } else {
+                _noticeState.value = NoticeState(
+                    isError = true
                 )
             }
         }
@@ -61,7 +66,12 @@ class NoticeViewModel @Inject constructor(
                 val pushHistoryResponse = noticeResponse.data
                 _noticeState.value = NoticeState(
                     oldNoticeList = _noticeState.value.oldNoticeList + pushHistoryResponse?.read.orEmpty(),
-                    newNoticeList = _noticeState.value.newNoticeList + pushHistoryResponse?.unread.orEmpty()
+                    newNoticeList = _noticeState.value.newNoticeList + pushHistoryResponse?.unread.orEmpty(),
+                    isError = false
+                )
+            } else {
+                _noticeState.value = NoticeState(
+                    isError = true
                 )
             }
         }
