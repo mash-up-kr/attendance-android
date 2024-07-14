@@ -1,6 +1,7 @@
 package com.example.notice
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -204,7 +205,7 @@ fun NoticeScreen(
 private fun PreviewNoticeScreen() {
     MashUpTheme {
         NoticeScreen(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().background(color = Color(0xFFF8F7FC)),
         )
     }
 }
@@ -214,7 +215,7 @@ private fun PreviewNoticeScreen() {
 private fun PreviewNoticeScreenError() {
     MashUpTheme {
         NoticeScreen(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().background(color = Color(0xFFF8F7FC)),
             noticeState = NoticeState().copy(
                 isError = true
             )
