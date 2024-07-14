@@ -1,6 +1,5 @@
 package com.example.notice
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,11 +16,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -29,17 +25,14 @@ import androidx.compose.ui.unit.dp
 import com.example.notice.components.NoticeItem
 import com.example.notice.model.NoticeSideEffect
 import com.example.notice.model.NoticeState
-import com.mashup.core.network.dto.PushHistoryResponse
-import com.mashup.core.ui.typography.Caption1
 import com.mashup.core.ui.typography.Title3
 import com.mashup.core.ui.widget.MashUpToolbar
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun NoticeRoute(
     noticeViewModel: NoticeViewModel,
     modifier: Modifier = Modifier,
-    onBackPressed: () -> Unit = {},
+    onBackPressed: () -> Unit = {}
 ) {
     val noticeState by noticeViewModel.noticeState.collectAsState()
 
@@ -49,10 +42,10 @@ fun NoticeRoute(
                 is NoticeSideEffect.OnBackPressed -> onBackPressed()
             }
         }
-
     }
     NoticeScreen(
-        modifier = modifier, noticeState = noticeState,
+        modifier = modifier,
+        noticeState = noticeState,
         onBackPressed = noticeViewModel::onBackPressed,
         onLoadNextNotice = noticeViewModel::onLoadNextNotice,
         onReadNewNoticeList = noticeViewModel::onReadNewNoticeList
@@ -65,7 +58,7 @@ fun NoticeScreen(
     noticeState: NoticeState = NoticeState(),
     onBackPressed: () -> Unit = {},
     onLoadNextNotice: () -> Unit = {},
-    onReadNewNoticeList: () -> Unit = {},
+    onReadNewNoticeList: () -> Unit = {}
 ) {
     DisposableEffect(Unit) {
         onDispose {
@@ -101,7 +94,7 @@ fun NoticeScreen(
                 .padding(
                     horizontal = 20.dp
                 ),
-            state = scrollState,
+            state = scrollState
         ) {
             if (noticeState.newNoticeList.isNotEmpty()) {
                 item {
@@ -119,7 +112,7 @@ fun NoticeScreen(
                     NoticeItem(
                         notice = it,
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
                     )
                     Spacer(
                         modifier = Modifier.height(12.dp)
@@ -148,7 +141,7 @@ fun NoticeScreen(
                     NoticeItem(
                         notice = it,
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
                     )
                     Spacer(
                         modifier = Modifier.height(12.dp)

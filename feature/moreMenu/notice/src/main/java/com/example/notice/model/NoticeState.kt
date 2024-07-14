@@ -6,5 +6,3 @@ data class NoticeState(
     val newNoticeList: List<PushHistoryResponse.Notice> = emptyList(),
     val oldNoticeList: List<PushHistoryResponse.Notice> = emptyList()
 )
-
-

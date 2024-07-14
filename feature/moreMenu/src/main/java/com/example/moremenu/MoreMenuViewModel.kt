@@ -1,6 +1,5 @@
 package com.example.moremenu
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moremenu.model.Menu
@@ -13,15 +12,15 @@ import com.mashup.core.network.Response
 import com.mashup.core.network.dto.PushHistoryResponse
 import com.mashup.core.network.dto.RnbResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MoreMenuViewModel @Inject constructor(

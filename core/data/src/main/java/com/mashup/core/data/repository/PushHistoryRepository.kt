@@ -20,7 +20,7 @@ class PushHistoryRepository @Inject constructor(
     suspend fun getPushHistoryCheck(
         page: Int,
         size: Int,
-        sort : String?= null
-    ) : Response<PushHistoryResponse> =
+        sort: String? = null
+    ): Response<PushHistoryResponse> =
         pushHistoryDao.getPushHistoryCheck(page, size, sort)
 }

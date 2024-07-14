@@ -11,13 +11,13 @@ interface PushHistoryDao {
     suspend fun getPushHistory(
         @Query("page") page: Int,
         @Query("size") size: Int,
-        @Query("sort") sort: String?,
+        @Query("sort") sort: String?
     ): Response<PushHistoryResponse>
 
     @POST("/api/v1/push-histories/check")
     suspend fun getPushHistoryCheck(
         @Query("page") page: Int,
         @Query("size") size: Int,
-        @Query("sort") sort: String?,
+        @Query("sort") sort: String?
     ): Response<PushHistoryResponse>
 }

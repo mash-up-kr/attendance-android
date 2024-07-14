@@ -9,6 +9,6 @@ data class PushHistoryResponse(
         val title: String,
         val body: String,
         val linkType: String,
-        val sendTime: String,
+        val sendTime: String
     )
 }

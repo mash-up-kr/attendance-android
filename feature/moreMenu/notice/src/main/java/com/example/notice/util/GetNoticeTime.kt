@@ -5,7 +5,6 @@ import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-
 fun String.getNoticeTime(): String {
     val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
     val parsedTime = formatter.parse(this) ?: return ""
@@ -23,5 +22,4 @@ fun String.getNoticeTime(): String {
             monthDayFormatter.format(parsedTime)
         }
     }
-
 }

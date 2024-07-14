@@ -28,7 +28,6 @@ class NoticeViewModel @Inject constructor(
 
     private var _currentPage = MutableStateFlow(1)
 
-
     init {
         viewModelScope.launch {
             val noticeResponse: Response<PushHistoryResponse> =
@@ -75,7 +74,7 @@ class NoticeViewModel @Inject constructor(
     }
 
     fun onReadNewNoticeList() {
-        viewModelScope.launch{
+        viewModelScope.launch {
             val currentPage = _currentPage.value
             pushHistoryRepository.getPushHistoryCheck(
                 page = currentPage,
