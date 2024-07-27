@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.mashup.ui.moremenu.MoreMenuActivity
 import com.mashup.R
 import com.mashup.base.BaseFragment
 import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.databinding.FragmentScheduleBinding
 import com.mashup.ui.main.MainViewModel
+import com.mashup.ui.moremenu.MoreMenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import com.mashup.core.common.R as CR
 

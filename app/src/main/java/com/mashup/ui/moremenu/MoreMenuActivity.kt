@@ -20,12 +20,9 @@ import com.example.moremenu.model.MenuType
 import com.example.moremenu.model.MoreMenuSideEffect
 import com.example.notice.NoticeActivity
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.feature.danggn.ShakeDanggnScreen
-import com.mashup.ui.danggn.DanggnInfoActivity
 import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -55,7 +52,7 @@ class MoreMenuActivity : ComponentActivity() {
                             .padding(innerPadding),
                         moreMenuState = moreMenuState,
                         onBackPressed = moreMenuViewModel::onClickBackButton,
-                        onClickMenu = moreMenuViewModel::onClickMenuButton,
+                        onClickMenu = moreMenuViewModel::onClickMenuButton
                     )
                 }
             }
