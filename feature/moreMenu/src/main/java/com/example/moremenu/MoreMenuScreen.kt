@@ -24,26 +24,17 @@ import com.mashup.core.ui.widget.MashUpToolbar
 
 @Composable
 fun MoreMenuRoute(
-    moreMenuViewModel: MoreMenuViewModel,
+    moreMenuState: MoreMenuState,
     modifier: Modifier = Modifier,
-    onNavigateBackStack: () -> Unit = {},
-    onNavigateMenu: (Menu) -> Unit = {}
+    onBackPressed: () -> Unit = {},
+    onClickMenu: (Menu) -> Unit = {}
 ) {
-    val moreMenuState by moreMenuViewModel.moreMenuState.collectAsState()
-    LaunchedEffect(Unit) {
-        moreMenuViewModel.moreMenuEvent.collect { sideEffect ->
-            when (sideEffect) {
-                is MoreMenuSideEffect.NavigateMenu -> onNavigateMenu(sideEffect.menu)
 
-                is MoreMenuSideEffect.NavigateBackStack -> onNavigateBackStack()
-            }
-        }
-    }
     MoreMenuScreen(
         modifier = modifier,
         moreMenuState = moreMenuState,
-        onClickMenu = moreMenuViewModel::onClickMenuButton,
-        onBackPressed = moreMenuViewModel::onClickBackButton
+        onClickMenu = onClickMenu,
+        onBackPressed = onBackPressed,
     )
 }
 

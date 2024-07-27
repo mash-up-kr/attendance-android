@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.example.moremenu.MoreMenuActivity
+import com.mashup.ui.moremenu.MoreMenuActivity
 import com.mashup.R
 import com.mashup.base.BaseFragment
 import com.mashup.core.common.extensions.setStatusBarColorRes

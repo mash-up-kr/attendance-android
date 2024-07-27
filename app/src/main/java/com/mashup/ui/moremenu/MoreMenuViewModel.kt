@@ -1,4 +1,4 @@
-package com.example.moremenu
+package com.mashup.ui.moremenu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
