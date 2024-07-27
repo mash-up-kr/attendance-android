@@ -107,6 +107,7 @@ dependencies {
     implementation project(":feature:setting")
     implementation project(":feature:danggn")
     implementation project(":feature:myPage")
+    implementation project(":feature:moreMenu")
 
     // ml Kit
     implementation "com.google.mlkit:barcode-scanning:$barcodeSacnnerVersion"
