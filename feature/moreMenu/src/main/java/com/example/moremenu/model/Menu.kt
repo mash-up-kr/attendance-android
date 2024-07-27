@@ -9,10 +9,6 @@ import com.mashup.core.ui.R as CoreR
 sealed interface Menu {
     val menuName: String
     val type: MenuType
-    val isShowNewIcon: Boolean
-        get() = false
-    val additionalIcon: Int
-        get() = CoreR.drawable.ic_new
 
     data class BirthDay(
         override val menuName: String = MenuType.BIRTHDAY.name,

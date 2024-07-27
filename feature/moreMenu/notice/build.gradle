@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.mashup.feature.moreMenu'
+    namespace 'com.mashup.feature.moreMenu.notice'
     compileSdk compileVersion
 
     defaultConfig {
@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation project(":core:common")
     implementation project(':core:ui')
     implementation project(":core:datastore")
@@ -49,7 +48,6 @@ dependencies {
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
-    implementation project(':feature:moreMenu:notice')
     androidTestImplementation platform('androidx.compose:compose-bom:2023.08.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation project(':core:testing')

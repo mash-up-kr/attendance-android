@@ -7,6 +7,7 @@ import com.mashup.core.model.Platform
 import com.mashup.core.network.adapter.PlatformJsonAdapter
 import com.mashup.core.network.dao.MetaDao
 import com.mashup.core.network.dao.PopupDao
+import com.mashup.core.network.dao.PushHistoryDao
 import com.mashup.core.network.dao.StorageDao
 import com.mashup.data.network.API_HOST
 import com.mashup.network.CustomDateAdapter
@@ -152,6 +153,14 @@ class NetworkModule {
     fun provideMetaDao(
         retrofit: Retrofit
     ): MetaDao {
+        return retrofit.create()
+    }
+
+    @Provides
+    @Singleton
+    fun providePushHistoryDao(
+        retrofit: Retrofit
+    ): PushHistoryDao {
         return retrofit.create()
     }
 }
