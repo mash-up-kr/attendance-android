@@ -1,6 +1,5 @@
 package com.mashup.ui.webview.mashong
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -42,7 +41,7 @@ class MashongActivity : ComponentActivity() {
                         onBackPressed = ::finish,
                         onNavigateDanggn = {
                             startActivity(ShakeDanggnActivity.newIntent(this))
-                        },
+                        }
                     ),
                     isShowMashUpToolbar = false
                 )

@@ -7,7 +7,7 @@ import android.widget.Toast
 class MashupBridge(
     private val context: Context,
     private val onBackPressed: () -> Unit = {},
-    private val onNavigateDanggn: () -> Unit = {},
+    private val onNavigateDanggn: () -> Unit = {}
 ) : MashupBridgeInterface() {
     @JavascriptInterface
     override fun showToast(toast: String) {
@@ -15,13 +15,12 @@ class MashupBridge(
     }
 
     override fun step(type: String) {
-        when (Type.values().find { it.name == type.uppercase()}) {
+        when (Type.values().find { it.name == type.uppercase() }) {
             Type.BACK -> onBackPressed()
             Type.DANGGN -> onNavigateDanggn()
             else -> {}
         }
     }
-
 
     companion object {
         const val name = "MashupBridge"

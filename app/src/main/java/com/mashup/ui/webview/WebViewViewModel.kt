@@ -1,26 +1,23 @@
 package com.mashup.ui.webview
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.mashup.constant.EXTRA_TITLE_KEY
 import com.mashup.constant.EXTRA_URL_KEY
 import com.mashup.core.common.base.BaseViewModel
 import com.mashup.datastore.data.repository.UserPreferenceRepository
-import com.mashup.datastore.model.UserPreference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WebViewViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    userPreferenceRepository: UserPreferenceRepository,
+    userPreferenceRepository: UserPreferenceRepository
 ) : BaseViewModel() {
 
     private val showDividerFlow = MutableStateFlow(false)

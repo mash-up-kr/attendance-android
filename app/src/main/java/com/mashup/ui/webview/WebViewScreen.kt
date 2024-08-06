@@ -4,9 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewNavigator
 import com.google.accompanist.web.rememberWebViewState
@@ -20,10 +18,10 @@ fun WebViewScreen(
     webViewUiState: WebViewUiState,
     isScrollTop: (Boolean) -> Unit = {},
     onBackPressed: () -> Unit = {},
-    isShowMashUpToolbar : Boolean = true,
+    isShowMashUpToolbar: Boolean = true
 ) {
     Column(modifier = modifier) {
-        if(isShowMashUpToolbar){
+        if (isShowMashUpToolbar) {
             MashUpToolbar(
                 modifier = Modifier.fillMaxWidth(),
                 title = (webViewUiState as? WebViewUiState.Success)?.title.orEmpty(),

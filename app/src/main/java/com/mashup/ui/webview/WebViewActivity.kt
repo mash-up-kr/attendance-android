@@ -34,7 +34,7 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>() {
     private fun initCompose() {
         viewBinding.webView.setContent {
             val webViewUiState by viewModel.webViewUiState.collectAsState(WebViewUiState.Loading)
-            val context= LocalContext.current
+            val context = LocalContext.current
 
             WebViewScreen(
                 modifier = Modifier.fillMaxSize(),

@@ -66,7 +66,7 @@ class MoreMenuActivity : ComponentActivity() {
         val intent = when (menu.type) {
             MenuType.NOTI -> Intent(this, NoticeActivity::class.java)
             MenuType.DANGGN -> Intent(this, ShakeDanggnActivity::class.java)
-            MenuType.MASHONG -> Intent(this, MashongActivity::class.java).apply{
+            MenuType.MASHONG -> Intent(this, MashongActivity::class.java).apply {
                 putExtra(EXTRA_TITLE_KEY, "mashong")
                 putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/mashong/")
             }
