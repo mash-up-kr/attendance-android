@@ -56,7 +56,7 @@ fun NoticeRoute(
         modifier = modifier,
         noticeState = noticeState,
         onBackPressed = noticeViewModel::onBackPressed,
-        onLoadNextNotice = noticeViewModel::onLoadNextNotice,
+        onLoadNextNotice = noticeViewModel::onLoadNextNotice
     )
 }
 
@@ -65,7 +65,7 @@ fun NoticeScreen(
     modifier: Modifier = Modifier,
     noticeState: NoticeState = NoticeState(),
     onBackPressed: () -> Unit = {},
-    onLoadNextNotice: () -> Unit = {},
+    onLoadNextNotice: () -> Unit = {}
 ) {
     Column(modifier = modifier) {
         MashUpToolbar(
