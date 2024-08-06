@@ -168,7 +168,7 @@ fun NoticeScreen(
                 }
                 item {
                     Text(
-                        text = "오래된 알림",
+                        text = "지난 알림",
                         style = Title3,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF2C3037)
