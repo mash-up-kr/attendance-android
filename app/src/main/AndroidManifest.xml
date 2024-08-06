@@ -146,7 +146,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.example.moremenu.MoreMenuActivity"
+            android:name=".ui.moremenu.MoreMenuActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

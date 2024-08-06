@@ -7,8 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,7 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.moremenu.components.MoreMenuItem
 import com.example.moremenu.model.Menu
-import com.example.moremenu.model.MoreMenuSideEffect
 import com.example.moremenu.model.MoreMenuState
 import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.theme.MashUpTheme
@@ -24,26 +21,16 @@ import com.mashup.core.ui.widget.MashUpToolbar
 
 @Composable
 fun MoreMenuRoute(
-    moreMenuViewModel: MoreMenuViewModel,
+    moreMenuState: MoreMenuState,
     modifier: Modifier = Modifier,
-    onNavigateBackStack: () -> Unit = {},
-    onNavigateMenu: (Menu) -> Unit = {}
+    onBackPressed: () -> Unit = {},
+    onClickMenu: (Menu) -> Unit = {}
 ) {
-    val moreMenuState by moreMenuViewModel.moreMenuState.collectAsState()
-    LaunchedEffect(Unit) {
-        moreMenuViewModel.moreMenuEvent.collect { sideEffect ->
-            when (sideEffect) {
-                is MoreMenuSideEffect.NavigateMenu -> onNavigateMenu(sideEffect.menu)
-
-                is MoreMenuSideEffect.NavigateBackStack -> onNavigateBackStack()
-            }
-        }
-    }
     MoreMenuScreen(
         modifier = modifier,
         moreMenuState = moreMenuState,
-        onClickMenu = moreMenuViewModel::onClickMenuButton,
-        onBackPressed = moreMenuViewModel::onClickBackButton
+        onClickMenu = onClickMenu,
+        onBackPressed = onBackPressed
     )
 }
 
@@ -60,7 +47,7 @@ fun MoreMenuScreen(
                 modifier = Modifier.fillMaxWidth(),
                 title = "더 보기",
                 showBackButton = true,
-                onClickBackButton = { onBackPressed() }
+                onClickBackButton = onBackPressed
             )
         }
         items(moreMenuState.menus) { menu ->
