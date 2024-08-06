@@ -138,6 +138,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                                 )
                             )
                         }
+
+                        MainPopupType.BIRTHDAY_CELEBRATION -> {
+                            viewModel.disablePopup(popupType)
+                            // start Activity 추가
+                        }
                         else -> {
                         }
                     }
