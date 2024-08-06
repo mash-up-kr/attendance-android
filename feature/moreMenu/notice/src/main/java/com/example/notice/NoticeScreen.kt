@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -58,7 +57,6 @@ fun NoticeRoute(
         noticeState = noticeState,
         onBackPressed = noticeViewModel::onBackPressed,
         onLoadNextNotice = noticeViewModel::onLoadNextNotice,
-        onReadNewNoticeList = noticeViewModel::onReadNewNoticeList
     )
 }
 
@@ -68,13 +66,7 @@ fun NoticeScreen(
     noticeState: NoticeState = NoticeState(),
     onBackPressed: () -> Unit = {},
     onLoadNextNotice: () -> Unit = {},
-    onReadNewNoticeList: () -> Unit = {}
 ) {
-    DisposableEffect(Unit) {
-        onDispose {
-            onReadNewNoticeList()
-        }
-    }
     Column(modifier = modifier) {
         MashUpToolbar(
             modifier = Modifier.fillMaxWidth(),

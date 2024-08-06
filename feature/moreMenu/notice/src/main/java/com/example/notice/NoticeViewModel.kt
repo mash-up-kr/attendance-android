@@ -39,6 +39,7 @@ class NoticeViewModel @Inject constructor(
 
             if (noticeResponse.isSuccess()) {
                 val pushHistoryResponse = noticeResponse.data
+                onReadNewNoticeList()
                 _noticeState.value = NoticeState(
                     oldNoticeList = pushHistoryResponse?.read ?: emptyList(),
                     newNoticeList = pushHistoryResponse?.unread ?: emptyList(),
@@ -64,6 +65,7 @@ class NoticeViewModel @Inject constructor(
 
             if (noticeResponse.isSuccess()) {
                 val pushHistoryResponse = noticeResponse.data
+                onReadNewNoticeList()
                 _noticeState.value = NoticeState(
                     oldNoticeList = _noticeState.value.oldNoticeList + pushHistoryResponse?.read.orEmpty(),
                     newNoticeList = _noticeState.value.newNoticeList + pushHistoryResponse?.unread.orEmpty(),
@@ -83,10 +85,10 @@ class NoticeViewModel @Inject constructor(
         }
     }
 
-    fun onReadNewNoticeList() {
+    private fun onReadNewNoticeList() {
         viewModelScope.launch {
             val currentPage = _currentPage.value
-            pushHistoryRepository.getPushHistoryCheck(
+            pushHistoryRepository.postPushHistoryCheck(
                 page = currentPage,
                 size = PAGE_SIZE,
                 sort = DESC
