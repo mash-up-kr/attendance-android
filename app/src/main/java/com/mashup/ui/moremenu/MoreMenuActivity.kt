@@ -19,9 +19,12 @@ import com.example.moremenu.model.Menu
 import com.example.moremenu.model.MenuType
 import com.example.moremenu.model.MoreMenuSideEffect
 import com.example.notice.NoticeActivity
+import com.mashup.constant.EXTRA_TITLE_KEY
+import com.mashup.constant.EXTRA_URL_KEY
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.setting.SettingActivity
+import com.mashup.ui.webview.mashong.MashongActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -63,7 +66,10 @@ class MoreMenuActivity : ComponentActivity() {
         val intent = when (menu.type) {
             MenuType.NOTI -> Intent(this, NoticeActivity::class.java)
             MenuType.DANGGN -> Intent(this, ShakeDanggnActivity::class.java)
-            MenuType.MASHONG -> Intent(this, NoticeActivity::class.java)
+            MenuType.MASHONG -> Intent(this, MashongActivity::class.java).apply {
+                putExtra(EXTRA_TITLE_KEY, "mashong")
+                putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/mashong/")
+            }
             MenuType.SETTING -> Intent(this, SettingActivity::class.java)
             MenuType.BIRTHDAY -> Intent(this, NoticeActivity::class.java)
         }

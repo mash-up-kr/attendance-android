@@ -150,6 +150,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.webview.mashong.MashongActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
         <service
             android:name=".service.MashUpFirebaseMessagingService"
             android:exported="false">
