@@ -36,7 +36,8 @@ fun WebViewScreen(
                 webViewUrl = webViewUiState.webViewUrl,
                 isScrollTop = isScrollTop,
                 onBackPressed = onBackPressed,
-                mashupBridge = mashupBridge
+                mashupBridge = mashupBridge,
+                additionalHttpHeaders = webViewUiState.additionalHttpHeaders
             )
         }
     }

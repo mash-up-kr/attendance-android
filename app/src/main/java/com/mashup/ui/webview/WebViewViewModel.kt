@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -26,16 +25,17 @@ class WebViewViewModel @Inject constructor(
         savedStateHandle.getStateFlow(EXTRA_TITLE_KEY, ""),
         savedStateHandle.getStateFlow(EXTRA_URL_KEY, ""),
         showDividerFlow,
-        userPreferenceRepository.getUserPreference().map { it.platform }
-    ) { title, webViewUrl, showDivider, platform ->
+        userPreferenceRepository.getUserPreference()
+    ) { title, webViewUrl, showDivider, prefs ->
         var convertWebViewUrl = webViewUrl
         if (title == "mashong") {
-            convertWebViewUrl += platform
+            convertWebViewUrl += prefs.platform
         }
         WebViewUiState.Success(
             title = title,
             webViewUrl = convertWebViewUrl,
-            showToolbarDivider = showDivider
+            showToolbarDivider = showDivider,
+            additionalHttpHeaders = mapOf(Pair("authorization", prefs.token))
         )
     }.stateIn(
         viewModelScope,
@@ -57,6 +57,7 @@ sealed interface WebViewUiState {
     data class Success(
         val title: String,
         val webViewUrl: String,
-        val showToolbarDivider: Boolean
+        val showToolbarDivider: Boolean,
+        val additionalHttpHeaders: Map<String, String>
     ) : WebViewUiState
 }
