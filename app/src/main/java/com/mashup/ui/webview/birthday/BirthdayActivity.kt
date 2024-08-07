@@ -1,4 +1,4 @@
-package com.mashup.ui.webview.mashong
+package com.mashup.ui.webview.birthday
 
 import android.content.Context
 import android.content.Intent
@@ -16,7 +16,6 @@ import com.mashup.constant.EXTRA_TITLE_KEY
 import com.mashup.constant.EXTRA_URL_KEY
 import com.mashup.core.common.bridge.MashupBridge
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.webview.WebViewScreen
 import com.mashup.ui.webview.WebViewUiState
 import com.mashup.ui.webview.WebViewViewModel
@@ -24,7 +23,7 @@ import com.mashup.util.setFullScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MashongActivity : ComponentActivity() {
+class BirthdayActivity : ComponentActivity() {
 
     private val webViewViewModel by viewModels<WebViewViewModel>()
 
@@ -39,10 +38,7 @@ class MashongActivity : ComponentActivity() {
                     webViewUiState = webViewUiState,
                     mashupBridge = MashupBridge(
                         this,
-                        onBackPressed = ::finish,
-                        onNavigateDanggn = {
-                            startActivity(ShakeDanggnActivity.newIntent(this))
-                        }
+                        onBackPressed = ::finish
                     ),
                     isShowMashUpToolbar = false
                 )
@@ -56,10 +52,9 @@ class MashongActivity : ComponentActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context): Intent =
-            Intent(context, MashongActivity::class.java).apply {
-                putExtra(EXTRA_TITLE_KEY, "mashong")
-                putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/mashong/")
-            }
+        fun newIntent(context: Context): Intent = Intent(context, BirthdayActivity::class.java).apply {
+            putExtra(EXTRA_TITLE_KEY, "birthday")
+            putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/mashong/")
+        }
     }
 }

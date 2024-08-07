@@ -14,6 +14,7 @@ class MashupBridge(
         Toast.makeText(context, toast, Toast.LENGTH_SHORT).show()
     }
 
+    @JavascriptInterface
     override fun step(type: String) {
         when (Type.values().find { it.name == type.uppercase() }) {
             Type.BACK -> onBackPressed()
