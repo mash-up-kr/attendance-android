@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -57,8 +56,7 @@ fun NoticeRoute(
         modifier = modifier,
         noticeState = noticeState,
         onBackPressed = noticeViewModel::onBackPressed,
-        onLoadNextNotice = noticeViewModel::onLoadNextNotice,
-        onReadNewNoticeList = noticeViewModel::onReadNewNoticeList
+        onLoadNextNotice = noticeViewModel::onLoadNextNotice
     )
 }
 
@@ -67,14 +65,8 @@ fun NoticeScreen(
     modifier: Modifier = Modifier,
     noticeState: NoticeState = NoticeState(),
     onBackPressed: () -> Unit = {},
-    onLoadNextNotice: () -> Unit = {},
-    onReadNewNoticeList: () -> Unit = {}
+    onLoadNextNotice: () -> Unit = {}
 ) {
-    DisposableEffect(Unit) {
-        onDispose {
-            onReadNewNoticeList()
-        }
-    }
     Column(modifier = modifier) {
         MashUpToolbar(
             modifier = Modifier.fillMaxWidth(),
@@ -176,7 +168,7 @@ fun NoticeScreen(
                 }
                 item {
                     Text(
-                        text = "오래된 알림",
+                        text = "지난 알림",
                         style = Title3,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF2C3037)

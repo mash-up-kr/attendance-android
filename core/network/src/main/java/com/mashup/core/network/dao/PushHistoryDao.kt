@@ -14,8 +14,8 @@ interface PushHistoryDao {
         @Query("sort") sort: String?
     ): Response<PushHistoryResponse>
 
-    @POST("/api/v1/push-histories/check")
-    suspend fun getPushHistoryCheck(
+    @POST("/api/v1/push-histories")
+    suspend fun postPushHistoryCheck(
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String?
