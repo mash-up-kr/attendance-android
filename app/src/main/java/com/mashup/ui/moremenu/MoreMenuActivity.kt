@@ -17,7 +17,7 @@ import com.example.moremenu.MoreMenuRoute
 import com.example.moremenu.model.Menu
 import com.example.moremenu.model.MenuType
 import com.example.moremenu.model.MoreMenuSideEffect
-import com.example.notice.NoticeActivity
+import com.mashup.ui.notice.NoticeActivity
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.setting.SettingActivity
