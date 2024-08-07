@@ -3,8 +3,8 @@ package com.mashup.ui.webview.mashong
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -47,12 +47,17 @@ class MashongActivity : ComponentActivity() {
                     isShowMashUpToolbar = false
                 )
 
-                BackHandler {
-                    finish()
-                }
             }
         }
         setFullScreen()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     companion object {
