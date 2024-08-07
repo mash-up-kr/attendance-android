@@ -46,7 +46,6 @@ class MashongActivity : ComponentActivity() {
                     ),
                     isShowMashUpToolbar = false
                 )
-
             }
         }
         setFullScreen()

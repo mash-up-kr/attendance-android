@@ -3,7 +3,6 @@ package com.mashup.ui.notice
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import com.example.notice.NoticeRoute
 import com.example.notice.model.NoticeSideEffect
 import com.mashup.core.ui.theme.MashUpTheme
-import com.mashup.ui.danggn.DanggnInfoActivity
 import com.mashup.ui.danggn.ShakeDanggnActivity
 import com.mashup.ui.login.LoginType
 import com.mashup.ui.main.MainActivity
