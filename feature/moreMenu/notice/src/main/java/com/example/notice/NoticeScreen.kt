@@ -2,6 +2,7 @@ package com.example.notice
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,6 +31,7 @@ import com.example.notice.components.NoticeItem
 import com.example.notice.model.NoticeSideEffect
 import com.example.notice.model.NoticeState
 import com.example.notice.model.NoticeState.Companion.isNoticeEmpty
+import com.mashup.core.network.dto.PushHistoryResponse
 import com.mashup.core.ui.R
 import com.mashup.core.ui.colors.Gray600
 import com.mashup.core.ui.theme.MashUpTheme
@@ -39,24 +41,18 @@ import com.mashup.core.ui.widget.MashUpToolbar
 
 @Composable
 fun NoticeRoute(
-    noticeViewModel: NoticeViewModel,
     modifier: Modifier = Modifier,
-    onBackPressed: () -> Unit = {}
+    noticeState: NoticeState = NoticeState(),
+    onBackPressed: () -> Unit = {},
+    onLoadNextNotice: () -> Unit = {},
+    onClickNoticeItem: (PushHistoryResponse.Notice) -> Unit = {}
 ) {
-    val noticeState by noticeViewModel.noticeState.collectAsState()
-
-    LaunchedEffect(Unit) {
-        noticeViewModel.noticeEvent.collect {
-            when (it) {
-                is NoticeSideEffect.OnBackPressed -> onBackPressed()
-            }
-        }
-    }
     NoticeScreen(
         modifier = modifier,
         noticeState = noticeState,
-        onBackPressed = noticeViewModel::onBackPressed,
-        onLoadNextNotice = noticeViewModel::onLoadNextNotice
+        onBackPressed = onBackPressed,
+        onLoadNextNotice = onLoadNextNotice,
+        onClickNoticeItem = onClickNoticeItem
     )
 }
 
@@ -65,7 +61,8 @@ fun NoticeScreen(
     modifier: Modifier = Modifier,
     noticeState: NoticeState = NoticeState(),
     onBackPressed: () -> Unit = {},
-    onLoadNextNotice: () -> Unit = {}
+    onLoadNextNotice: () -> Unit = {},
+    onClickNoticeItem: (PushHistoryResponse.Notice) -> Unit = {}
 ) {
     Column(modifier = modifier) {
         MashUpToolbar(
@@ -152,7 +149,9 @@ fun NoticeScreen(
                     NoticeItem(
                         notice = it,
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth().clickable {
+                                onClickNoticeItem(it)
+                            }
                     )
                     Spacer(
                         modifier = Modifier.height(12.dp)
@@ -181,7 +180,9 @@ fun NoticeScreen(
                     NoticeItem(
                         notice = it,
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth().clickable {
+                                onClickNoticeItem(it)
+                            }
                     )
                     Spacer(
                         modifier = Modifier.height(12.dp)
@@ -197,7 +198,9 @@ fun NoticeScreen(
 private fun PreviewNoticeScreen() {
     MashUpTheme {
         NoticeScreen(
-            modifier = Modifier.fillMaxSize().background(color = Color(0xFFF8F7FC))
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color(0xFFF8F7FC))
         )
     }
 }
@@ -207,7 +210,9 @@ private fun PreviewNoticeScreen() {
 private fun PreviewNoticeScreenError() {
     MashUpTheme {
         NoticeScreen(
-            modifier = Modifier.fillMaxSize().background(color = Color(0xFFF8F7FC)),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color(0xFFF8F7FC)),
             noticeState = NoticeState().copy(
                 isError = true
             )
