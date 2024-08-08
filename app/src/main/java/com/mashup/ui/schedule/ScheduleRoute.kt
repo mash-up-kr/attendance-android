@@ -53,6 +53,7 @@ import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.schedule.component.ScheduleTabRow
 import com.mashup.ui.schedule.detail.ScheduleDetailActivity
 import com.mashup.ui.schedule.model.ScheduleType
+import com.mashup.ui.webview.mashong.MashongActivity
 import com.mashup.util.AnalyticsManager
 import com.mashup.core.common.R as CR
 
@@ -148,6 +149,7 @@ fun ScheduleRoute(
                                 scheduleState = scheduleState,
                                 onClickScheduleInformation = { context.moveToScheduleInformation(it) },
                                 onClickAttendance = { context.moveToAttendance(it) },
+                                onClickMashongButton = { context.moveToMashong() },
                                 refreshState = isRefreshing,
                                 scheduleType = ScheduleType.values()[selectedTabIndex]
                             )
@@ -198,6 +200,12 @@ fun Context.moveToAttendance(scheduleId: Int) {
     AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_STATUS_CONFIRM)
     startActivity(
         PlatformAttendanceActivity.newIntent(this, scheduleId)
+    )
+}
+
+fun Context.moveToMashong() {
+    startActivity(
+        MashongActivity.newIntent(this)
     )
 }
 

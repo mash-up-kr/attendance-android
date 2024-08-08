@@ -31,6 +31,7 @@ fun WeeklySchedule(
     modifier: Modifier = Modifier,
     onClickScheduleInformation: (Int) -> Unit = {},
     onClickAttendance: (Int) -> Unit = {},
+    onClickMashongButton: () -> Unit = {},
     refreshState: Boolean = false
 ) {
     var cacheScheduleState by remember {
@@ -60,7 +61,8 @@ fun WeeklySchedule(
 
             if (castingState.weeklySchedule.isEmpty()) {
                 EmptyScheduleItem(
-                    modifier = modifier
+                    modifier = modifier,
+                    onClickMashongButton = onClickMashongButton
                 )
             } else {
                 HorizontalPager(

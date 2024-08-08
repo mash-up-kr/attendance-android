@@ -13,6 +13,7 @@ fun ScheduleScreen(
     scheduleType: ScheduleType = ScheduleType.WEEK,
     onClickScheduleInformation: (Int) -> Unit = {},
     onClickAttendance: (Int) -> Unit = {},
+    onClickMashongButton: () -> Unit = {},
     refreshState: Boolean = false
 ) {
     when (scheduleType) {
@@ -22,6 +23,7 @@ fun ScheduleScreen(
                 modifier = modifier,
                 onClickScheduleInformation = onClickScheduleInformation,
                 onClickAttendance = onClickAttendance,
+                onClickMashongButton = onClickMashongButton,
                 refreshState = refreshState
             )
         }
