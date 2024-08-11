@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.mashup.R
 import com.mashup.base.BaseActivity
@@ -60,6 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 viewModel.confirmAttendance()
                 viewModel.successAttendance()
             }
+
             QRScanActivity.RESULT_CONFIRM_QR -> {
                 viewModel.confirmAttendance()
             }
@@ -143,6 +145,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                             viewModel.disablePopup(popupType)
                             // start Activity 추가
                         }
+
                         else -> {
                         }
                     }
@@ -152,18 +155,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun navigationTab(toDestination: MainTab) {
-        val currentNavigationId = navController.currentDestination?.id
         val newNavigationId = when (toDestination) {
             MainTab.EVENT -> {
                 R.id.eventFragment
             }
+
             MainTab.MY_PAGE -> {
                 R.id.myPageFragment
             }
         }
-        if (currentNavigationId != newNavigationId) {
-            navController.navigate(newNavigationId)
+        val navOptions = navOptions {
+            popUpTo(newNavigationId) {
+                saveState = true
+            }
+            launchSingleTop = true
         }
+        navController.navigate(newNavigationId, null, navOptions)
     }
 
     private fun setUIOfTab(tab: MainTab) = with(viewBinding.layoutMainTab) {
@@ -188,6 +195,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 tvMyPage.setTextColor(unSelectedColor)
                 imgMyPage.imageTintList = unSelectedColorList
             }
+
             MainTab.MY_PAGE -> {
                 tvEvent.setTextColor(unSelectedColor)
                 imgEvent.imageTintList = unSelectedColorList

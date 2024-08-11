@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.example.notice.NoticeActivity"
+            android:name="com.mashup.ui.notice.NoticeActivity"
             android:exported="false"
             android:label="@string/title_activity_notice"
             android:theme="@style/Theme.MashUp" />

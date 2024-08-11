@@ -1,4 +1,4 @@
-package com.example.notice
+package com.mashup.ui.notice
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -82,6 +82,12 @@ class NoticeViewModel @Inject constructor(
     fun onBackPressed() {
         viewModelScope.launch {
             _noticeEvent.emit(NoticeSideEffect.OnBackPressed)
+        }
+    }
+
+    fun onClickNoticeItem(notice: PushHistoryResponse.Notice) {
+        viewModelScope.launch {
+            _noticeEvent.emit(NoticeSideEffect.OnNavigateMenu(notice))
         }
     }
 
