@@ -1,6 +1,5 @@
 package com.mashup.ui.schedule
 
-import android.util.Log
 import com.mashup.core.common.base.BaseViewModel
 import com.mashup.core.common.extensions.month
 import com.mashup.core.common.extensions.year
@@ -111,7 +110,7 @@ class ScheduleViewModel @Inject constructor(
         val koreaZone = ZoneId.of("Asia/Seoul")
         val now = LocalDateTime.now(koreaZone)
         val startOfWeek = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-        val endOfWeek = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)).toLocalDate().atTime(23,59,59,999999999).atZone(koreaZone).toLocalDateTime()
+        val endOfWeek = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY)).toLocalDate().atTime(23, 59, 59, 999999999).atZone(koreaZone).toLocalDateTime()
         val result = this.filter {
             val scheduleStart = it.startedAt.toLocalDateTime(koreaZone)
             scheduleStart.isAfter(startOfWeek) && scheduleStart.isBefore(endOfWeek)
