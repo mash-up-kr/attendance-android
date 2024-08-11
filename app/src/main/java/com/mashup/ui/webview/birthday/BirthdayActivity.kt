@@ -57,7 +57,7 @@ class BirthdayActivity : ComponentActivity() {
     companion object {
         fun newIntent(context: Context): Intent = Intent(context, BirthdayActivity::class.java).apply {
             putExtra(EXTRA_TITLE_KEY, "birthday")
-            putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/mashong/")
+            putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/birthday/crew-list")
         }
     }
 }
