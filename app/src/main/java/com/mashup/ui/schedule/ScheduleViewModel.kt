@@ -1,6 +1,5 @@
 package com.mashup.ui.schedule
 
-import android.util.Log
 import com.mashup.core.common.base.BaseViewModel
 import com.mashup.core.common.extensions.month
 import com.mashup.core.common.extensions.year
