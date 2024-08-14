@@ -26,6 +26,8 @@ import com.mashup.ui.main.model.MainTab
 import com.mashup.ui.password.PasswordActivity
 import com.mashup.ui.qrscan.QRScanActivity
 import com.mashup.ui.signup.SignUpActivity
+import com.mashup.ui.webview.birthday.BirthdayActivity
+import com.mashup.ui.webview.mashong.MashongActivity
 import com.mashup.util.AnalyticsManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -158,6 +160,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         type = ActivityEnterType.ALARM
                     )
                 )
+            }
+
+            PushLinkType.BIRTHDAY -> {
+                buildTaskStack(baseIntent, BirthdayActivity.newIntent(this))
+            }
+
+            PushLinkType.MASHONG -> {
+                buildTaskStack(baseIntent, MashongActivity.newIntent(this))
             }
 
             PushLinkType.QR -> {
