@@ -80,7 +80,8 @@ fun ScheduleViewPagerSuccessItem(
     data: ScheduleCard.EndSchedule,
     modifier: Modifier = Modifier,
     onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
-    onClickAttendance: (Int) -> Unit = {}
+    onClickAttendance: (Int) -> Unit = {},
+    makeToast: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
     val listState = rememberLazyListState()
@@ -101,7 +102,14 @@ fun ScheduleViewPagerSuccessItem(
             )
             .clip(RoundedCornerShape(20.dp))
             .clickable {
-                onClickScheduleInformation(data.scheduleResponse.scheduleId, data.scheduleResponse.scheduleType)
+                if (data.scheduleResponse.notice.isNullOrEmpty() && data.scheduleResponse.eventList.isEmpty()) {
+                    makeToast("볼 수 있는 일정이 없어요..!")
+                } else {
+                    onClickScheduleInformation(
+                        data.scheduleResponse.scheduleId,
+                        data.scheduleResponse.scheduleType
+                    )
+                }
             }
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -269,21 +277,20 @@ fun ScheduleViewPagerSuccessItem(
                     }
                 }
             } else {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = data.scheduleResponse.notice,
-                        maxLines = 5,
-                        style = Body5.copy(
-                            lineHeight = 20.sp
-                        ),
-                        color = Gray700,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Left
-                    )
-                }
+                Text(
+                    text = data.scheduleResponse.notice,
+                    maxLines = 5,
+                    style = Body5.copy(
+                        lineHeight = 20.sp
+                    ),
+                    color = Gray700,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Left,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp),
+                )
+
                 AndroidView(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -308,9 +315,6 @@ fun ScheduleViewPagerSuccessItem(
                             }
                         }
                     }
-                )
-                Spacer(
-                    modifier = Modifier.height(40.dp)
                 )
             }
         }

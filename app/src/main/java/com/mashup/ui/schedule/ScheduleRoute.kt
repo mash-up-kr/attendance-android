@@ -1,6 +1,7 @@
 package com.mashup.ui.schedule
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
@@ -63,7 +64,8 @@ fun ScheduleRoute(
     mainViewModel: MainViewModel,
     viewModel: ScheduleViewModel,
     modifier: Modifier = Modifier,
-    onClickMoreMenuIcon: () -> Unit = {}
+    onClickMoreMenuIcon: () -> Unit = {},
+    makeToast: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
 
@@ -150,6 +152,7 @@ fun ScheduleRoute(
                                 onClickScheduleInformation = { id, type -> context.moveToScheduleInformation(id, type) },
                                 onClickAttendance = { context.moveToAttendance(it) },
                                 onClickMashongButton = { context.moveToMashong() },
+                                makeToast = makeToast,
                                 refreshState = isRefreshing,
                                 scheduleType = ScheduleType.values()[selectedTabIndex]
                             )
