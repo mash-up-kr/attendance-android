@@ -110,6 +110,10 @@ fun EventDetailList(eventDetailList: List<EventDetail>, copyToClipboard: (String
                         )
                     }
 
+                    is EventDetail.Notice -> {
+                        ScheduleDetailLocationItem(item.content)
+                    }
+
                     is EventDetail.Header -> {
                         ScheduleDetailHeaderItem(
                             isFirstEvent = item.eventId == 1,

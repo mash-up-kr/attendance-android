@@ -44,4 +44,9 @@ sealed class EventDetail(
     ) : EventDetail(index, EventDetailType.INFO) {
         val formattedTime = "${startedAt.getTimeFormat()} - ${endedAt.getTimeFormat()}"
     }
+
+    data class Notice(
+        override val index: Int,
+        val content: String
+    ) : EventDetail(index, EventDetailType.NOTICE)
 }
