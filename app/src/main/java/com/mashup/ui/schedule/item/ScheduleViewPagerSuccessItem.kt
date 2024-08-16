@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -80,7 +79,7 @@ import com.mashup.ui.schedule.util.onBindAttendanceTime
 fun ScheduleViewPagerSuccessItem(
     data: ScheduleCard.EndSchedule,
     modifier: Modifier = Modifier,
-    onClickScheduleInformation: (Int) -> Unit = {},
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
     onClickAttendance: (Int) -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -102,7 +101,7 @@ fun ScheduleViewPagerSuccessItem(
             )
             .clip(RoundedCornerShape(20.dp))
             .clickable {
-                onClickScheduleInformation(data.scheduleResponse.scheduleId)
+                onClickScheduleInformation(data.scheduleResponse.scheduleId, data.scheduleResponse.scheduleType)
             }
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally

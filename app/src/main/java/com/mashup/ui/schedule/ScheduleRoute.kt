@@ -147,7 +147,7 @@ fun ScheduleRoute(
                             ScheduleScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 scheduleState = scheduleState,
-                                onClickScheduleInformation = { context.moveToScheduleInformation(it) },
+                                onClickScheduleInformation = { id, type -> context.moveToScheduleInformation(id, type) },
                                 onClickAttendance = { context.moveToAttendance(it) },
                                 onClickMashongButton = { context.moveToMashong() },
                                 refreshState = isRefreshing,
@@ -189,10 +189,10 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
     }
 }
 
-fun Context.moveToScheduleInformation(scheduleId: Int) {
+fun Context.moveToScheduleInformation(scheduleId: Int, scheduleType: String) {
     AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
     startActivity(
-        ScheduleDetailActivity.newIntent(this, scheduleId)
+        ScheduleDetailActivity.newIntent(this, scheduleId, scheduleType)
     )
 }
 

@@ -29,7 +29,7 @@ import kotlin.math.absoluteValue
 fun WeeklySchedule(
     scheduleState: ScheduleState,
     modifier: Modifier = Modifier,
-    onClickScheduleInformation: (Int) -> Unit = {},
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
     onClickAttendance: (Int) -> Unit = {},
     onClickMashongButton: () -> Unit = {},
     refreshState: Boolean = false

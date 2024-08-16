@@ -32,6 +32,7 @@ import com.mashup.ui.schedule.model.EventDetail
 @Composable
 fun ScheduleDetailScreen(
     state: ScheduleState,
+    isPlatformSeminar: Boolean,
     copyToClipboard: (String) -> Unit,
     moveToPlatformAttendance: () -> Unit,
     onBackPressed: () -> Unit
@@ -66,15 +67,17 @@ fun ScheduleDetailScreen(
                 .align(Alignment.BottomCenter)
         )
 
-        MashUpButton(
-            text = "플랫폼 출석현황 보러가기",
-            onClick = moveToPlatformAttendance,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 20.dp, bottom = 28.dp, end = 20.dp)
-                .align(Alignment.BottomCenter),
-            buttonStyle = ButtonStyle.INVERSE
-        )
+        if (isPlatformSeminar.not()) {
+            MashUpButton(
+                text = "플랫폼 출석현황 보러가기",
+                onClick = moveToPlatformAttendance,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, bottom = 28.dp, end = 20.dp)
+                    .align(Alignment.BottomCenter),
+                buttonStyle = ButtonStyle.INVERSE
+            )
+        }
     }
 }
 
@@ -139,6 +142,7 @@ fun PreviewScheduleDetailScreen() {
     MashUpTheme {
         ScheduleDetailScreen(
             state = ScheduleState.Empty,
+            isPlatformSeminar = false,
             copyToClipboard = {},
             moveToPlatformAttendance = {},
             onBackPressed = {}

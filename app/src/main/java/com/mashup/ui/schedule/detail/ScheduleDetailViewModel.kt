@@ -2,6 +2,7 @@ package com.mashup.ui.schedule.detail
 
 import androidx.lifecycle.SavedStateHandle
 import com.mashup.constant.EXTRA_SCHEDULE_ID
+import com.mashup.constant.EXTRA_SCHEDULE_TYPE
 import com.mashup.core.common.base.BaseViewModel
 import com.mashup.data.repository.ScheduleRepository
 import com.mashup.ui.schedule.model.EventDetail
@@ -18,6 +19,7 @@ class ScheduleDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     val scheduleId = checkNotNull(savedStateHandle.get<Int>(EXTRA_SCHEDULE_ID))
+    val scheduleType = checkNotNull(savedStateHandle.get<String>(EXTRA_SCHEDULE_TYPE))
 
     private val _scheduleState = MutableStateFlow<ScheduleState>(ScheduleState.Empty)
     val scheduleState: StateFlow<ScheduleState> = _scheduleState
