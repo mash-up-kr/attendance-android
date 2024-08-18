@@ -1,13 +1,10 @@
 package com.mashup.ui.webview
 
-import android.util.Log
-import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.mashup.constant.EXTRA_TITLE_KEY
 import com.mashup.constant.EXTRA_URL_KEY
 import com.mashup.core.common.base.BaseViewModel
-import com.mashup.data.network.API_HOST
 import com.mashup.data.network.WEB_HOST
 import com.mashup.datastore.data.repository.UserPreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
