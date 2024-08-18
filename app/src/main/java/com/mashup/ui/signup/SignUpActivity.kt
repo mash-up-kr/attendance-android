@@ -9,8 +9,8 @@ import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_ANIMATION
 import com.mashup.constant.log.KEY_PLACE
-import com.mashup.constant.log.LOG_BACK
-import com.mashup.constant.log.LOG_CLOSE
+import com.mashup.constant.log.LOG_COMMON_BACK
+import com.mashup.constant.log.LOG_COMMON_CLOSE
 import com.mashup.constant.log.LOG_PLACE_SIGN_CODE
 import com.mashup.constant.log.LOG_PLACE_SIGN_MEMBER_INFO
 import com.mashup.constant.log.LOG_PLACE_SIGN_PLATFORM
@@ -48,7 +48,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         viewBinding.toolbar.setOnCloseButtonClickListener {
             getPlaceGALog()?.run {
                 AnalyticsManager.addEvent(
-                    LOG_CLOSE,
+                    LOG_COMMON_CLOSE,
                     bundleOf(KEY_PLACE to this)
                 )
             }
@@ -85,7 +85,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override fun onBackPressed() {
         getPlaceGALog()?.run {
             AnalyticsManager.addEvent(
-                LOG_BACK,
+                LOG_COMMON_BACK,
                 bundleOf(KEY_PLACE to this)
             )
         }

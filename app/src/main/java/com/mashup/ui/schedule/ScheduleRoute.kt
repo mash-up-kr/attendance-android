@@ -40,8 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.mashup.R
-import com.mashup.constant.log.LOG_SCHEDULE_EVENT_DETAIL
-import com.mashup.constant.log.LOG_SCHEDULE_STATUS_CONFIRM
+import com.mashup.constant.log.LOG_EVENT_LIST_EVENT_DETAIL
+import com.mashup.constant.log.LOG_EVENT_LIST_STATUS_CONFIRM
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
 import com.mashup.core.ui.colors.Gray50
@@ -190,14 +190,14 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
 }
 
 fun Context.moveToScheduleInformation(scheduleId: Int) {
-    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_EVENT_DETAIL)
+    AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_EVENT_DETAIL)
     startActivity(
         ScheduleDetailActivity.newIntent(this, scheduleId)
     )
 }
 
 fun Context.moveToAttendance(scheduleId: Int) {
-    AnalyticsManager.addEvent(eventName = LOG_SCHEDULE_STATUS_CONFIRM)
+    AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_STATUS_CONFIRM)
     startActivity(
         PlatformAttendanceActivity.newIntent(this, scheduleId)
     )
