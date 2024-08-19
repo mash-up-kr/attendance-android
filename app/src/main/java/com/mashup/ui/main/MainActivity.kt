@@ -33,6 +33,7 @@ import com.mashup.ui.main.model.MainTab
 import com.mashup.ui.main.popup.MainBottomPopup
 import com.mashup.ui.qrscan.CongratsAttendanceScreen
 import com.mashup.ui.qrscan.QRScanActivity
+import com.mashup.ui.webview.birthday.BirthdayActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -143,7 +144,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                         MainPopupType.BIRTHDAY_CELEBRATION -> {
                             viewModel.disablePopup(popupType)
-                            // start Activity 추가
+                            startActivity(
+                                BirthdayActivity.newIntent(
+                                    context = this@MainActivity,
+                                    urlKey = "birthday/event"
+                                )
+                            )
                         }
 
                         else -> {
