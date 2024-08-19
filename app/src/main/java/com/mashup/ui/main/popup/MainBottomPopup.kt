@@ -134,14 +134,14 @@ class MainBottomPopup : BottomSheetDialogFragment() {
 
     private fun addGlobalLayoutListener(view: View) {
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                if (this@MainBottomPopup.view?.height == 0) return
-                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                behavior?.state = BottomSheetBehavior.STATE_EXPANDED
-                behavior?.peekHeight = this@MainBottomPopup.view?.height ?: 0
-            }
-        })
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    if (this@MainBottomPopup.view?.height == 0) return
+                    view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    behavior?.state = BottomSheetBehavior.STATE_EXPANDED
+                    behavior?.peekHeight = this@MainBottomPopup.view?.height ?: 0
+                }
+            })
     }
 }
 
