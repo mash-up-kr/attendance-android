@@ -33,7 +33,6 @@ class MainBottomPopupViewModel @Inject constructor(
         if (popupKey.isNullOrBlank()) return@mashUpScope
         val result = storageRepository.getStorage(popupKey)
 
-
         val userName = userPreferenceRepository.getUserPreference().first().name
         val title = result.data?.valueMap?.get("title").orEmpty().replace("\${name}", userName)
 
@@ -44,7 +43,7 @@ class MainBottomPopupViewModel @Inject constructor(
                     description = result.data?.valueMap?.get("subtitle").orEmpty(),
                     imageResName = result.data?.valueMap?.get("imageName").orEmpty(),
                     leftButtonText = result.data?.valueMap?.get("leftButtonTitle").orEmpty(),
-                    rightButtonText = result.data?.valueMap?.get("rightButtonTitle").orEmpty(),
+                    rightButtonText = result.data?.valueMap?.get("rightButtonTitle").orEmpty()
                 )
             )
         }
