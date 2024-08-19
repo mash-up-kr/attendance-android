@@ -11,7 +11,6 @@ import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_SCHEDULE_ID
 import com.mashup.constant.EXTRA_SCHEDULE_TYPE
-import com.mashup.constant.log.LOG_EVENT_LIST_ALL
 import com.mashup.constant.log.LOG_EVENT_LIST_DETAIL_COPY
 import com.mashup.core.common.constant.SCHEDULE_NOT_FOUND
 import com.mashup.core.common.extensions.setStatusBarColorRes

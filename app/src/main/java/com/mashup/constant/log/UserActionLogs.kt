@@ -87,7 +87,6 @@ const val LOG_DELETE_USER_SUCCESS = "delete_user_success"
 const val LOG_DANGGN = "danggn"
 const val LOG_DANGGN_HELP = "danggn_help"
 
-
 /**
  * UnCategorization
  */
@@ -95,11 +94,3 @@ const val LOG_PLACE_SIGN_CODE = "signup_code"
 const val LOG_PLACE_SIGN_MEMBER_INFO = "signup_info"
 const val LOG_PLACE_SIGN_PLATFORM = "signup_platform"
 const val LOG_PLACE_ENTER_ID = "enter_id"
-
-
-
-
-
-
-
-

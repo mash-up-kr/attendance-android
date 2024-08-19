@@ -36,7 +36,7 @@ fun ScheduleScreen(
             WeeklySchedule(
                 scheduleState = scheduleState,
                 modifier = modifier,
-                onClickScheduleInformation = { scheduleId: Int, type: String->
+                onClickScheduleInformation = { scheduleId: Int, type: String ->
                     AnalyticsManager.addEvent(
                         eventName = LOG_EVENT_LIST_EVENT_DETAIL,
                         params = bundleOf("place" to "이번주일정")
@@ -54,13 +54,13 @@ fun ScheduleScreen(
             DailySchedule(
                 scheduleState = scheduleState,
                 modifier = modifier,
-                onClickScheduleInformation = { scheduleId: Int, type: String->
+                onClickScheduleInformation = { scheduleId: Int, type: String ->
                     AnalyticsManager.addEvent(
                         eventName = LOG_EVENT_LIST_EVENT_DETAIL,
                         params = bundleOf("place" to "전체일정")
                     )
                     onClickScheduleInformation(scheduleId, type)
-                },
+                }
             )
         }
     }

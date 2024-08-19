@@ -38,12 +38,10 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.mashup.R
 import com.mashup.constant.log.LOG_EVENT_LIST_ALL
-import com.mashup.constant.log.LOG_EVENT_LIST_EVENT_DETAIL
 import com.mashup.constant.log.LOG_EVENT_LIST_STATUS_CONFIRM
 import com.mashup.constant.log.LOG_EVENT_LIST_WEEK
 import com.mashup.constant.log.LOG_EVENT_LIST_WEEK_MASHONG

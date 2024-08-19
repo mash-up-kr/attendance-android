@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moremenu.model.Menu
 import com.example.moremenu.model.Menu.Companion.toMenu
-import com.example.moremenu.model.MenuType
 import com.example.moremenu.model.MoreMenuSideEffect
 import com.example.moremenu.model.MoreMenuState
 import com.mashup.constant.log.LOG_MORE_ALARM
