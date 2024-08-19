@@ -14,9 +14,10 @@ fun ScheduleScreen(
     dailyListState: LazyListState,
     modifier: Modifier = Modifier,
     scheduleType: ScheduleType = ScheduleType.WEEK,
-    onClickScheduleInformation: (Int) -> Unit = {},
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
     onClickAttendance: (Int) -> Unit = {},
     onClickMashongButton: () -> Unit = {},
+    makeToast: (String) -> Unit = {},
     refreshState: Boolean = false
 ) {
     LaunchedEffect(scheduleState) {
@@ -35,6 +36,7 @@ fun ScheduleScreen(
                 onClickScheduleInformation = onClickScheduleInformation,
                 onClickAttendance = onClickAttendance,
                 onClickMashongButton = onClickMashongButton,
+                makeToast = makeToast,
                 refreshState = refreshState
             )
         }
