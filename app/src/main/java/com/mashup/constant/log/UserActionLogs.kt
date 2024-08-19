@@ -31,7 +31,7 @@ const val LOG_EVENT_LIST_DETAIL_COPY = "detail_copy"
 /**
  * Category More
  */
-const val LOG_MORE_BRITH = "more_birth"
+const val LOG_MORE_BIRTH = "more_birth"
 const val LOG_MORE_MASHONG = "more_mashong"
 const val LOG_MORE_CARROT = "more_carrot"
 const val LOG_MORE_ALARM = "more_alarm"

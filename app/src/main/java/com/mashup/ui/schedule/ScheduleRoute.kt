@@ -38,6 +38,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.mashup.R
@@ -145,9 +146,9 @@ fun ScheduleRoute(
                         modifier = Modifier.background(White),
                         selectedTabIndex = selectedTabIndex,
                         updateSelectedTabIndex = { index ->
-                            if(index == 0){
+                            if (index == 0) {
                                 AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_WEEK)
-                            }else{
+                            } else {
                                 AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_ALL)
                             }
                             selectedTabIndex = index
@@ -211,7 +212,6 @@ fun Context.setUiOfScheduleTitle(scheduleTitleState: ScheduleTitleState): String
 }
 
 fun Context.moveToScheduleInformation(scheduleId: Int, scheduleType: String) {
-    AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_EVENT_DETAIL)
     startActivity(
         ScheduleDetailActivity.newIntent(this, scheduleId, scheduleType)
     )
