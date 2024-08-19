@@ -33,7 +33,7 @@ fun DailyScheduleByMonth(
     scheduleList: List<ScheduleResponse>,
     modifier: Modifier = Modifier,
     isWeeklySchedule: (Int) -> Boolean = { false },
-    onClickScheduleInformation: (Int) -> Unit = {}
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> }
 ) {
     Column(modifier = modifier) {
         Text(title, style = Title3)
@@ -50,7 +50,7 @@ fun DailyScheduleByMonth(
 fun DailyScheduleByDay(
     schedule: List<ScheduleResponse>,
     isWeeklySchedule: (Int) -> Boolean,
-    onClickScheduleInformation: (Int) -> Unit
+    onClickScheduleInformation: (Int, String) -> Unit
 ) {
     Row(modifier = Modifier.padding(bottom = 32.dp)) {
         Column(
@@ -70,7 +70,7 @@ fun DailyScheduleByDay(
                     place = it.location?.detailAddress ?: "-",
                     highlight = highlight,
                     modifier = Modifier.padding(bottom = 12.dp),
-                    onClickScheduleInformation = { onClickScheduleInformation.invoke(it.scheduleId) }
+                    onClickScheduleInformation = { onClickScheduleInformation.invoke(it.scheduleId, it.scheduleType) }
                 )
             }
         }

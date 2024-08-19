@@ -31,7 +31,7 @@ import com.mashup.core.common.R as CR
 fun DailySchedule(
     scheduleState: ScheduleState,
     modifier: Modifier = Modifier,
-    onClickScheduleInformation: (Int) -> Unit = {}
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> }
 ) {
     var cacheScheduleState by remember {
         mutableStateOf(scheduleState)

@@ -11,17 +11,29 @@ class EventDetailMapper @Inject constructor() {
         title: String,
         date: String,
         eventList: List<EventResponse>,
-        location: ScheduleResponse.Location?
+        location: ScheduleResponse.Location?,
+        notice: String?
     ): List<EventDetail> {
         val eventDetailList = mutableListOf<EventDetail>()
         var index = 0
 
-        val infoModel = mapToInfoModel(index++, title, date, eventList.first().startedAt, eventList.last().endedAt)
+        val infoModel = mapToInfoModel(
+            index++,
+            title,
+            date,
+            eventList.first().startedAt,
+            eventList.last().endedAt
+        )
         eventDetailList.add(infoModel)
 
         if (location?.detailAddress != null) { // 위치 정보가 있는 경우(온라인이면 placeName이 Zoom으로 내려옴)
             val locationModel = mapToLocationModel(index++, location)
             eventDetailList.add(locationModel)
+        }
+
+        if (!notice.isNullOrEmpty()) {
+            val noticeModel = mapToNoticeModel(index++, notice)
+            eventDetailList.add(noticeModel)
         }
 
         eventList.forEachIndexed { eventIndex, event ->
@@ -67,6 +79,13 @@ class EventDetailMapper @Inject constructor() {
             roadAddress = location.roadAddress.orEmpty(),
             latitude = location.latitude,
             longitude = location.longitude
+        )
+    }
+
+    private fun mapToNoticeModel(index: Int, content: String): EventDetail {
+        return EventDetail.Notice(
+            index = index,
+            content = content
         )
     }
 

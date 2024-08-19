@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_SCHEDULE_ID
+import com.mashup.constant.EXTRA_SCHEDULE_TYPE
 import com.mashup.core.common.constant.SCHEDULE_NOT_FOUND
 import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
@@ -35,6 +36,7 @@ class ScheduleDetailActivity : BaseActivity<ActivityScheduleDetailBinding>() {
             MashUpTheme {
                 ScheduleDetailScreen(
                     state = state,
+                    isPlatformSeminar = viewModel.scheduleType != "ALL",
                     copyToClipboard = ::copyToClipboard,
                     moveToPlatformAttendance = ::moveToPlatformAttendance,
                     onBackPressed = { finish() }
@@ -95,9 +97,10 @@ class ScheduleDetailActivity : BaseActivity<ActivityScheduleDetailBinding>() {
     }
 
     companion object {
-        fun newIntent(context: Context, scheduleId: Int) =
+        fun newIntent(context: Context, scheduleId: Int, scheduleType: String) =
             Intent(context, ScheduleDetailActivity::class.java).apply {
                 putExtra(EXTRA_SCHEDULE_ID, scheduleId)
+                putExtra(EXTRA_SCHEDULE_TYPE, scheduleType)
             }
     }
 }
