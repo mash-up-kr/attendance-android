@@ -244,7 +244,7 @@ fun ScheduleViewPagerSuccessItem(
                 modifier = Modifier.height(6.dp)
             )
 
-            if (data.scheduleResponse.notice == null) {
+            if (data.scheduleResponse.notice.isNullOrEmpty()) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()

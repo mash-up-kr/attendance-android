@@ -96,7 +96,7 @@ fun EventDetailList(eventDetailList: List<EventDetail>, copyToClipboard: (String
                         ScheduleDetailInfoItem(
                             title = item.title,
                             date = item.date,
-                            time = item.title
+                            time = item.formattedTime
                         )
                     }
 
