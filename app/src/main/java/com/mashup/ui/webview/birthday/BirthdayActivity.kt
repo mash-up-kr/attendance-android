@@ -56,10 +56,10 @@ class BirthdayActivity : ComponentActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context): Intent =
+        fun newIntent(context: Context, urlKey: String = "birthday/crew-list"): Intent =
             Intent(context, BirthdayActivity::class.java).apply {
                 putExtra(EXTRA_TITLE_KEY, "birthday")
-                putExtra(EXTRA_URL_KEY, "birthday/crew-list")
+                putExtra(EXTRA_URL_KEY, urlKey)
             }
     }
 }
