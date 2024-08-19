@@ -30,6 +30,12 @@ import kotlinx.coroutines.launch
 class MoreMenuActivity : ComponentActivity() {
 
     private val moreMenuViewModel: MoreMenuViewModel by viewModels()
+
+    override fun onResume() {
+        super.onResume()
+        moreMenuViewModel.getMoreMenuState()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
