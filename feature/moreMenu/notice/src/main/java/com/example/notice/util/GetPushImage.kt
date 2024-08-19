@@ -27,7 +27,7 @@ fun PushHistoryResponse.Notice.getPushImage(): Int {
         }
 
         else -> {
-            com.mashup.core.ui.R.drawable.ic_setting
+            com.mashup.core.ui.R.drawable.ic_etc
         }
     }
 }

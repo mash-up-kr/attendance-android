@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.mashup.R
 import com.mashup.base.BaseFragment
 import com.mashup.core.common.extensions.setStatusBarColorRes
+import com.mashup.core.common.utils.ToastUtil
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.databinding.FragmentScheduleBinding
 import com.mashup.ui.main.MainViewModel
@@ -41,6 +42,9 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>() {
                     onClickMoreMenuIcon = {
                         val intent = Intent(requireActivity(), MoreMenuActivity::class.java)
                         requireActivity().startActivity(intent)
+                    },
+                    makeToast = { message ->
+                        ToastUtil.showToast(requireContext(), message)
                     }
                 )
             }

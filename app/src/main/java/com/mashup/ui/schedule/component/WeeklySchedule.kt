@@ -29,9 +29,10 @@ import kotlin.math.absoluteValue
 fun WeeklySchedule(
     scheduleState: ScheduleState,
     modifier: Modifier = Modifier,
-    onClickScheduleInformation: (Int) -> Unit = {},
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
     onClickAttendance: (Int) -> Unit = {},
     onClickMashongButton: () -> Unit = {},
+    makeToast: (String) -> Unit = {},
     refreshState: Boolean = false
 ) {
     var cacheScheduleState by remember {
@@ -103,7 +104,8 @@ fun WeeklySchedule(
                                     },
                                     data = data,
                                     onClickScheduleInformation = onClickScheduleInformation,
-                                    onClickAttendance = onClickAttendance
+                                    onClickAttendance = onClickAttendance,
+                                    makeToast = makeToast
                                 )
                             }
                         }

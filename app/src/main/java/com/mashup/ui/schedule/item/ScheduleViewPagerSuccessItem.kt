@@ -15,13 +15,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -80,8 +78,9 @@ import com.mashup.ui.schedule.util.onBindAttendanceTime
 fun ScheduleViewPagerSuccessItem(
     data: ScheduleCard.EndSchedule,
     modifier: Modifier = Modifier,
-    onClickScheduleInformation: (Int) -> Unit = {},
-    onClickAttendance: (Int) -> Unit = {}
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
+    onClickAttendance: (Int) -> Unit = {},
+    makeToast: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
     val listState = rememberLazyListState()
@@ -102,7 +101,14 @@ fun ScheduleViewPagerSuccessItem(
             )
             .clip(RoundedCornerShape(20.dp))
             .clickable {
-                onClickScheduleInformation(data.scheduleResponse.scheduleId)
+                if (data.scheduleResponse.notice.isNullOrEmpty() && data.scheduleResponse.eventList.isEmpty()) {
+                    makeToast("볼 수 있는 일정이 없어요..!")
+                } else {
+                    onClickScheduleInformation(
+                        data.scheduleResponse.scheduleId,
+                        data.scheduleResponse.scheduleType
+                    )
+                }
             }
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -270,21 +276,20 @@ fun ScheduleViewPagerSuccessItem(
                     }
                 }
             } else {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = data.scheduleResponse.notice,
-                        maxLines = 5,
-                        style = Body5.copy(
-                            lineHeight = 20.sp
-                        ),
-                        color = Gray700,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Left
-                    )
-                }
+                Text(
+                    text = data.scheduleResponse.notice,
+                    maxLines = 5,
+                    style = Body5.copy(
+                        lineHeight = 20.sp
+                    ),
+                    color = Gray700,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Left,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp)
+                )
+
                 AndroidView(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -309,9 +314,6 @@ fun ScheduleViewPagerSuccessItem(
                             }
                         }
                     }
-                )
-                Spacer(
-                    modifier = Modifier.height(40.dp)
                 )
             }
         }

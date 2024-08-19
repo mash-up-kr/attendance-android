@@ -63,7 +63,7 @@ class MashongActivity : ComponentActivity() {
         fun newIntent(context: Context): Intent =
             Intent(context, MashongActivity::class.java).apply {
                 putExtra(EXTRA_TITLE_KEY, "mashong")
-                putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/mashong/")
+                putExtra(EXTRA_URL_KEY, "mashong/")
             }
     }
 }

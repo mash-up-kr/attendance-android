@@ -54,10 +54,12 @@ class BirthdayActivity : ComponentActivity() {
         }
         return super.onKeyDown(keyCode, event)
     }
+
     companion object {
-        fun newIntent(context: Context): Intent = Intent(context, BirthdayActivity::class.java).apply {
-            putExtra(EXTRA_TITLE_KEY, "birthday")
-            putExtra(EXTRA_URL_KEY, "https://dev-app.mash-up.kr/birthday/crew-list")
-        }
+        fun newIntent(context: Context): Intent =
+            Intent(context, BirthdayActivity::class.java).apply {
+                putExtra(EXTRA_TITLE_KEY, "birthday")
+                putExtra(EXTRA_URL_KEY, "birthday/crew-list")
+            }
     }
 }
