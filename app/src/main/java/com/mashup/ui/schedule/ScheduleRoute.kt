@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -107,6 +108,9 @@ fun ScheduleRoute(
         }
     }
 
+    val weeklyListState = rememberLazyListState()
+    val dailyListState = rememberLazyListState()
+
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     CompositionLocalProvider(
         LocalOverscrollConfiguration provides null
@@ -116,7 +120,10 @@ fun ScheduleRoute(
                 .pullRefresh(pullRefreshState)
                 .background(color = if (ScheduleType.values()[selectedTabIndex] == ScheduleType.WEEK) Color.White else Gray50)
         ) {
-            LazyColumn(modifier = modifier) {
+            LazyColumn(
+                modifier = modifier,
+                state = if (selectedTabIndex == 0) weeklyListState else dailyListState
+            ) {
                 item {
                     ScheduleTopbar(
                         title,
@@ -148,6 +155,7 @@ fun ScheduleRoute(
                             ScheduleScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 scheduleState = scheduleState,
+                                dailyListState = dailyListState,
                                 onClickScheduleInformation = { id, type -> context.moveToScheduleInformation(id, type) },
                                 onClickAttendance = { context.moveToAttendance(it) },
                                 onClickMashongButton = { context.moveToMashong() },
