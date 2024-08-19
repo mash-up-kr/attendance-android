@@ -10,7 +10,7 @@ import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_ANIMATION
 import com.mashup.constant.log.KEY_PLACE
-import com.mashup.constant.log.LOG_BACK
+import com.mashup.constant.log.LOG_COMMON_BACK
 import com.mashup.constant.log.LOG_PLACE_CHANGE_PASSWORD
 import com.mashup.constant.log.LOG_PLACE_ENTER_ID
 import com.mashup.core.common.model.NavigationAnimationType
@@ -41,7 +41,7 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding>() {
     override fun onBackPressed() {
         getPlaceGALog()?.run {
             AnalyticsManager.addEvent(
-                LOG_BACK,
+                LOG_COMMON_BACK,
                 bundleOf(KEY_PLACE to this)
             )
         }

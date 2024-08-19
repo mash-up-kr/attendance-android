@@ -8,7 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_ANIMATION
-import com.mashup.constant.log.LOG_DELETE_SUCCESS_USER
+import com.mashup.constant.log.LOG_DELETE_USER_SUCCESS
 import com.mashup.core.common.extensions.setEmptyUIOfTextField
 import com.mashup.core.common.extensions.setFailedUiOfTextField
 import com.mashup.core.common.extensions.setSuccessUiOfTextField
@@ -86,7 +86,7 @@ class WithdrawalActivity : BaseActivity<ActivityWithdrawalBinding>() {
                     }
                     is WithdrawalState.Success -> {
                         hideLoading()
-                        AnalyticsManager.addEvent(LOG_DELETE_SUCCESS_USER)
+                        AnalyticsManager.addEvent(LOG_DELETE_USER_SUCCESS)
                         finish()
                         startActivity(
                             LoginActivity.newIntent(

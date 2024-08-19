@@ -4,9 +4,12 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.core.os.bundleOf
+import com.mashup.constant.log.LOG_EVENT_LIST_EVENT_DETAIL
 import com.mashup.ui.schedule.component.DailySchedule
 import com.mashup.ui.schedule.component.WeeklySchedule
 import com.mashup.ui.schedule.model.ScheduleType
+import com.mashup.util.AnalyticsManager
 
 @Composable
 fun ScheduleScreen(
@@ -33,7 +36,13 @@ fun ScheduleScreen(
             WeeklySchedule(
                 scheduleState = scheduleState,
                 modifier = modifier,
-                onClickScheduleInformation = onClickScheduleInformation,
+                onClickScheduleInformation = { scheduleId: Int, type: String ->
+                    AnalyticsManager.addEvent(
+                        eventName = LOG_EVENT_LIST_EVENT_DETAIL,
+                        params = bundleOf("place" to "이번주일정")
+                    )
+                    onClickScheduleInformation(scheduleId, type)
+                },
                 onClickAttendance = onClickAttendance,
                 onClickMashongButton = onClickMashongButton,
                 makeToast = makeToast,
@@ -45,7 +54,13 @@ fun ScheduleScreen(
             DailySchedule(
                 scheduleState = scheduleState,
                 modifier = modifier,
-                onClickScheduleInformation = onClickScheduleInformation
+                onClickScheduleInformation = { scheduleId: Int, type: String ->
+                    AnalyticsManager.addEvent(
+                        eventName = LOG_EVENT_LIST_EVENT_DETAIL,
+                        params = bundleOf("place" to "전체일정")
+                    )
+                    onClickScheduleInformation(scheduleId, type)
+                }
             )
         }
     }
