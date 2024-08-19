@@ -41,8 +41,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.mashup.R
+import com.mashup.constant.log.LOG_EVENT_LIST_ALL
 import com.mashup.constant.log.LOG_EVENT_LIST_EVENT_DETAIL
 import com.mashup.constant.log.LOG_EVENT_LIST_STATUS_CONFIRM
+import com.mashup.constant.log.LOG_EVENT_LIST_WEEK
+import com.mashup.constant.log.LOG_EVENT_LIST_WEEK_MASHONG
 import com.mashup.core.common.extensions.fromHtml
 import com.mashup.core.ui.colors.Brand500
 import com.mashup.core.ui.colors.Gray50
@@ -142,6 +145,11 @@ fun ScheduleRoute(
                         modifier = Modifier.background(White),
                         selectedTabIndex = selectedTabIndex,
                         updateSelectedTabIndex = { index ->
+                            if(index == 0){
+                                AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_WEEK)
+                            }else{
+                                AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_ALL)
+                            }
                             selectedTabIndex = index
                         }
                     )
@@ -155,10 +163,13 @@ fun ScheduleRoute(
                             ScheduleScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 scheduleState = scheduleState,
-                                onClickScheduleInformation = { id, type -> context.moveToScheduleInformation(id, type) },
                                 dailyListState = dailyListState,
+                                onClickScheduleInformation = context::moveToScheduleInformation,
                                 onClickAttendance = { context.moveToAttendance(it) },
-                                onClickMashongButton = { context.moveToMashong() },
+                                onClickMashongButton = {
+                                    AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_WEEK_MASHONG)
+                                    context.moveToMashong()
+                                },
                                 makeToast = makeToast,
                                 refreshState = isRefreshing,
                                 scheduleType = ScheduleType.values()[selectedTabIndex]

@@ -26,7 +26,7 @@ const val LOG_EVENT_LIST_EVENT_DETAIL = "event_detail"
 const val LOG_EVENT_LIST_WEEK_MASHONG = "week_mashong"
 const val LOG_EVENT_LIST_WEEK = "week"
 const val LOG_EVENT_LIST_ALL = "all"
-const val LOG_EVENT_DETAIL_COPY = "detail_copy"
+const val LOG_EVENT_LIST_DETAIL_COPY = "detail_copy"
 
 /**
  * Category More

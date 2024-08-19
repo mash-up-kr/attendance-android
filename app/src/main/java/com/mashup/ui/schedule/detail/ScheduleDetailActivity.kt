@@ -11,11 +11,14 @@ import com.mashup.R
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_SCHEDULE_ID
 import com.mashup.constant.EXTRA_SCHEDULE_TYPE
+import com.mashup.constant.log.LOG_EVENT_LIST_ALL
+import com.mashup.constant.log.LOG_EVENT_LIST_DETAIL_COPY
 import com.mashup.core.common.constant.SCHEDULE_NOT_FOUND
 import com.mashup.core.common.extensions.setStatusBarColorRes
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.databinding.ActivityScheduleDetailBinding
 import com.mashup.ui.attendance.platform.PlatformAttendanceActivity
+import com.mashup.util.AnalyticsManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import com.mashup.core.common.R as CR
@@ -85,6 +88,7 @@ class ScheduleDetailActivity : BaseActivity<ActivityScheduleDetailBinding>() {
     }
 
     private fun copyToClipboard(text: String) {
+        AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_DETAIL_COPY)
         (getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager)?.let { clipboardManager ->
             val clip = ClipData.newPlainText("location", text)
             clipboardManager.setPrimaryClip(clip)
