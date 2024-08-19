@@ -14,14 +14,12 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.mashup.BuildConfig
 import com.mashup.R
 import com.mashup.constant.EXTRA_LINK
 import com.mashup.constant.log.LOG_ALARM_LIST
-import com.mashup.constant.log.LOG_SIGN_UP
 import com.mashup.ui.splash.SplashActivity
 import com.mashup.util.AnalyticsManager
 import dagger.hilt.android.AndroidEntryPoint
