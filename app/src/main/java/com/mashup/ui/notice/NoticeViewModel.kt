@@ -103,7 +103,7 @@ class NoticeViewModel @Inject constructor(
     }
 
     companion object {
-        const val PAGE_SIZE = 20
+        const val PAGE_SIZE = 100
         const val DESC = "createdAt,desc"
     }
 }

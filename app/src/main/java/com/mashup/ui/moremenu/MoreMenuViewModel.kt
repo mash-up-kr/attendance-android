@@ -34,7 +34,7 @@ class MoreMenuViewModel @Inject constructor(
     private val _moreMenuEvent = MutableSharedFlow<MoreMenuSideEffect>()
     val moreMenuEvent = _moreMenuEvent.asSharedFlow()
 
-    init {
+    fun getMoreMenuState() {
         viewModelScope.launch {
             val rnb: Flow<Response<RnbResponse>> = flow { emit(metaRepository.getRnb()) }
             val notice: Flow<Response<PushHistoryResponse>> =
