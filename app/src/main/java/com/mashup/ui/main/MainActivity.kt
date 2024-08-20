@@ -142,16 +142,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                             )
                         }
 
-                        MainPopupType.BIRTHDAY_CELEBRATION -> {
-                            viewModel.disablePopup(popupType)
-                            startActivity(
-                                BirthdayActivity.newIntent(
-                                    context = this@MainActivity,
-                                    urlKey = "birthday/event"
-                                )
-                            )
-                        }
-
                         else -> {
                         }
                     }

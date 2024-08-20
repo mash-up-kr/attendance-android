@@ -106,7 +106,7 @@ class MainViewModel @Inject constructor(
         if (result.isSuccess()) {
             val popupType =
                 MainPopupType.getMainPopupType(result.data?.firstOrNull() ?: return@mashUpScope)
-            if (popupType == MainPopupType.UNKNOWN) return@mashUpScope
+            if (popupType == MainPopupType.UNKNOWN || popupType == MainPopupType.BIRTHDAY_CELEBRATION) return@mashUpScope
             _showPopupType.emit(popupType)
         }
     }
