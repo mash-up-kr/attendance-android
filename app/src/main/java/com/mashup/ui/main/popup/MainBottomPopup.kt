@@ -51,6 +51,7 @@ import com.mashup.core.ui.widget.bottomsheet.BottomSheetHandler
 import com.mashup.ui.main.MainViewModel
 import com.mashup.ui.main.model.MainPopupEntity
 import com.mashup.ui.main.model.MainPopupType
+import com.mashup.ui.webview.WebViewViewModel
 import com.mashup.util.AnalyticsManager
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,6 +59,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainBottomPopup : BottomSheetDialogFragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
+    private val webViewViewModel : WebViewViewModel by activityViewModels()
 
     companion object {
         fun newInstance(popupType: MainPopupType) = MainBottomPopup().apply {
@@ -104,6 +106,7 @@ class MainBottomPopup : BottomSheetDialogFragment() {
                         },
                         onClickRightButton = {
                             mainViewModel.onClickPopup(viewModel.popupKey.orEmpty())
+                            webViewViewModel.onClickPopup(viewModel.popupKey.orEmpty())
                             AnalyticsManager.addEvent(
                                 LOG_COMMON_POPUP_CONFIRM,
                                 bundleOf("key" to viewModel.popupKey)
