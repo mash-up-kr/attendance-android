@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -34,7 +35,7 @@ class BirthdayActivity : ComponentActivity() {
             MashUpTheme {
                 val webViewUiState by webViewViewModel.webViewUiState.collectAsState(WebViewUiState.Loading)
                 WebViewScreen(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().imePadding(),
                     webViewUiState = webViewUiState,
                     mashupBridge = MashupBridge(
                         this,
