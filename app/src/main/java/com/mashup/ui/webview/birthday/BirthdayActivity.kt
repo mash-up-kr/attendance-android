@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -77,7 +78,7 @@ class BirthdayActivity : BaseActivity<ActivityBirthdayBinding>() {
             MashUpTheme {
                 val webViewUiState by webViewViewModel.webViewUiState.collectAsState(WebViewUiState.Loading)
                 WebViewScreen(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().imePadding(),
                     webViewUiState = webViewUiState,
                     mashupBridge = MashupBridge(
                         this@BirthdayActivity,
