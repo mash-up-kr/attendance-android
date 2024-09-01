@@ -23,7 +23,7 @@ import javax.inject.Inject
 class WebViewViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     userPreferenceRepository: UserPreferenceRepository,
-    private val popUpRepository: PopUpRepository,
+    private val popUpRepository: PopUpRepository
 ) : BaseViewModel() {
 
     private val showDividerFlow = MutableStateFlow(false)
@@ -70,12 +70,11 @@ class WebViewViewModel @Inject constructor(
         val result = popUpRepository.getPopupKeyList()
         val url = savedStateHandle.getStateFlow(EXTRA_URL_KEY, "").value
 
-        if(url == "birthday/event") {
-           return@mashUpScope
+        if (url == "birthday/event") {
+            return@mashUpScope
         }
 
-
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             val popupType =
                 MainPopupType.getMainPopupType(result.data?.firstOrNull() ?: MainPopupType.BIRTHDAY_CELEBRATION.name)
             if (popupType != MainPopupType.BIRTHDAY_CELEBRATION) return@mashUpScope
@@ -87,7 +86,6 @@ class WebViewViewModel @Inject constructor(
         if (popupKey == MainPopupType.UNKNOWN) return@mashUpScope
         popUpRepository.patchPopupDisabled(popupKey.name)
     }
-
 
     fun onClickPopup(popupKey: String) = mashUpScope {
         val popupType =

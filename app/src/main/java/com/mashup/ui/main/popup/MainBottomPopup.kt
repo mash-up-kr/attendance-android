@@ -59,7 +59,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainBottomPopup : BottomSheetDialogFragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val webViewViewModel : WebViewViewModel by activityViewModels()
+    private val webViewViewModel: WebViewViewModel by activityViewModels()
 
     companion object {
         fun newInstance(popupType: MainPopupType) = MainBottomPopup().apply {
