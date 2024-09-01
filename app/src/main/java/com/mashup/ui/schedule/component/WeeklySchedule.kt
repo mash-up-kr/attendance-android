@@ -15,9 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.ui.schedule.ScheduleState
 import com.mashup.ui.schedule.item.EmptyScheduleItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerEmptyItem
@@ -121,7 +119,7 @@ fun WeeklySchedule(
                                         scaleY = 1 - 0.1f * abs(pageOffset)
                                     },
                                     data = data,
-                                    onClickScheduleInformation = onClickScheduleInformation,
+                                    onClickScheduleInformation = onClickScheduleInformation
                                 )
                             }
                         }
