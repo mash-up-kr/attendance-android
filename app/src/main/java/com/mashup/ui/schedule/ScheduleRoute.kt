@@ -164,7 +164,6 @@ fun ScheduleRoute(
                                 scheduleState = scheduleState,
                                 dailyListState = dailyListState,
                                 onClickScheduleInformation = { id, type -> context.moveToScheduleInformation(id, type) },
-                                onClickAttendance = { context.moveToAttendance(it) },
                                 onClickMashongButton = {
                                     AnalyticsManager.addEvent(eventName = LOG_EVENT_LIST_WEEK_MASHONG)
                                     context.moveToMashong()

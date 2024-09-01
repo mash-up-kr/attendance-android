@@ -15,7 +15,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.ui.schedule.ScheduleState
 import com.mashup.ui.schedule.item.EmptyScheduleItem
 import com.mashup.ui.schedule.item.ScheduleViewPagerEmptyItem
@@ -30,7 +32,6 @@ fun WeeklySchedule(
     scheduleState: ScheduleState,
     modifier: Modifier = Modifier,
     onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
-    onClickAttendance: (Int) -> Unit = {},
     onClickMashongButton: () -> Unit = {},
     makeToast: (String) -> Unit = {},
     refreshState: Boolean = false
@@ -104,7 +105,6 @@ fun WeeklySchedule(
                                     },
                                     data = data,
                                     onClickScheduleInformation = onClickScheduleInformation,
-                                    onClickAttendance = onClickAttendance,
                                     makeToast = makeToast
                                 )
                             }
@@ -122,7 +122,6 @@ fun WeeklySchedule(
                                     },
                                     data = data,
                                     onClickScheduleInformation = onClickScheduleInformation,
-                                    onClickAttendance = onClickAttendance
                                 )
                             }
                         }

@@ -79,7 +79,6 @@ fun ScheduleViewPagerSuccessItem(
     data: ScheduleCard.EndSchedule,
     modifier: Modifier = Modifier,
     onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
-    onClickAttendance: (Int) -> Unit = {},
     makeToast: (String) -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -217,7 +216,10 @@ fun ScheduleViewPagerSuccessItem(
                         )
                         setPadding(12, 0, 0, 0)
                         setOnClickListener {
-                            onClickAttendance(data.scheduleResponse.scheduleId)
+                            onClickScheduleInformation(
+                                data.scheduleResponse.scheduleId,
+                                data.scheduleResponse.scheduleType
+                            )
                         }
                     }
                 }
@@ -310,7 +312,10 @@ fun ScheduleViewPagerSuccessItem(
                             )
                             setPadding(12, 0, 0, 0)
                             setOnClickListener {
-                                onClickAttendance(data.scheduleResponse.scheduleId)
+                                onClickScheduleInformation(
+                                    data.scheduleResponse.scheduleId,
+                                    data.scheduleResponse.scheduleType
+                                )
                             }
                         }
                     }
