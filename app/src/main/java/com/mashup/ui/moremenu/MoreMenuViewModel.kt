@@ -45,7 +45,7 @@ class MoreMenuViewModel @Inject constructor(
         viewModelScope.launch {
             val rnb: Flow<Response<RnbResponse>> = flow { emit(metaRepository.getRnb()) }
             val notice: Flow<Response<PushHistoryResponse>> =
-                flow { emit(pushHistoryRepository.getPushHistory(page = 1, size = 1)) }
+                flow { emit(pushHistoryRepository.getPushHistory(page = 0, size = 1)) }
 
             combine(rnb, notice) { rnbFlow, noticeFlow ->
                 rnbFlow to noticeFlow

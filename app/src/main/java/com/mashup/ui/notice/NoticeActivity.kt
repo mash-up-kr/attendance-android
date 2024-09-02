@@ -77,7 +77,8 @@ class NoticeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     noticeState = noticeState,
                     onBackPressed = noticeViewModel::onBackPressed,
-                    onClickNoticeItem = noticeViewModel::onClickNoticeItem
+                    onClickNoticeItem = noticeViewModel::onClickNoticeItem,
+                    onLoadNextNotice = noticeViewModel::onLoadNextNotice
                 )
             }
         }

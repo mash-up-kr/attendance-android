@@ -26,7 +26,7 @@ class NoticeViewModel @Inject constructor(
     private val _noticeEvent = MutableSharedFlow<NoticeSideEffect>()
     val noticeEvent = _noticeEvent.asSharedFlow()
 
-    private var _currentPage = MutableStateFlow(1)
+    private var _currentPage = MutableStateFlow(0)
 
     init {
         viewModelScope.launch {
