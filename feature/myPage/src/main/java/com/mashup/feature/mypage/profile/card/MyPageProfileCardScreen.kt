@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray200
 import com.mashup.core.ui.colors.Gray800
 import com.mashup.core.ui.typography.SubTitle1
@@ -53,11 +51,11 @@ fun MyPageProfileCardScreen(
             currentPage = pagerState.currentPage
         )
 
-        Divider(
-            modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp, bottom = 24.dp),
-            color = Gray100,
-            thickness = 1.dp
-        )
+//        Divider(
+//            modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp, bottom = 24.dp),
+//            color = Gray100,
+//            thickness = 1.dp
+//        )
 
         MyPageSubTitle("활동 히스토리")
     }

@@ -5,6 +5,8 @@ enum class PushLinkType {
     QR, // QR 페이지
     DANGGN, // 당근 페이지
     DANGGN_REWARD,
+    BIRTHDAY, // 생일 축하
+    MASHONG, // 매숑이 키우기
     MYPAGE,
     UNKNOWN
     ;

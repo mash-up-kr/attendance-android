@@ -10,14 +10,14 @@ import com.mashup.R
 import com.mashup.URL
 import com.mashup.base.BaseActivity
 import com.mashup.constant.EXTRA_ANIMATION
-import com.mashup.constant.log.LOG_DELETE_USER
-import com.mashup.constant.log.LOG_LOGOUT
-import com.mashup.constant.log.LOG_SNS_FACEBOOK
-import com.mashup.constant.log.LOG_SNS_INSTAGRAM
-import com.mashup.constant.log.LOG_SNS_MASHUP_HOME
-import com.mashup.constant.log.LOG_SNS_MASHUP_RECRUIT
-import com.mashup.constant.log.LOG_SNS_TISTORY
-import com.mashup.constant.log.LOG_SNS_YOUTUBE
+import com.mashup.constant.log.LOG_SETTING_DELETE_USER
+import com.mashup.constant.log.LOG_SETTING_LOGOUT
+import com.mashup.constant.log.LOG_SETTING_SNS_FACEBOOK
+import com.mashup.constant.log.LOG_SETTING_SNS_INSTAGRAM
+import com.mashup.constant.log.LOG_SETTING_SNS_MASHUP_HOME
+import com.mashup.constant.log.LOG_SETTING_SNS_MASHUP_RECRUIT
+import com.mashup.constant.log.LOG_SETTING_SNS_TISTORY
+import com.mashup.constant.log.LOG_SETTING_SNS_YOUTUBE
 import com.mashup.core.common.model.NavigationAnimationType
 import com.mashup.core.common.widget.CommonDialog
 import com.mashup.core.ui.theme.MashUpTheme
@@ -61,7 +61,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     }
 
     private fun onClickLogoutButton() {
-        AnalyticsManager.addEvent(LOG_LOGOUT)
+        AnalyticsManager.addEvent(LOG_SETTING_LOGOUT)
         showLogoutDialog()
     }
 
@@ -95,7 +95,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     }
 
     private fun moveToDeleteAccount() {
-        AnalyticsManager.addEvent(LOG_DELETE_USER)
+        AnalyticsManager.addEvent(LOG_SETTING_DELETE_USER)
         startActivity(
             WithdrawalActivity.newInstance(this)
         )
@@ -103,12 +103,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
 
     private fun onClickSNS(link: String) {
         val eventLog = when (link) {
-            URL.FACEBOOK -> LOG_SNS_FACEBOOK
-            URL.INSTAGRAM -> LOG_SNS_INSTAGRAM
-            URL.TISTORY -> LOG_SNS_TISTORY
-            URL.YOUTUBE -> LOG_SNS_YOUTUBE
-            URL.MASHUP_UP_HOME -> LOG_SNS_MASHUP_HOME
-            URL.MASHUP_UP_RECRUIT -> LOG_SNS_MASHUP_RECRUIT
+            URL.FACEBOOK -> LOG_SETTING_SNS_FACEBOOK
+            URL.INSTAGRAM -> LOG_SETTING_SNS_INSTAGRAM
+            URL.TISTORY -> LOG_SETTING_SNS_TISTORY
+            URL.YOUTUBE -> LOG_SETTING_SNS_YOUTUBE
+            URL.MASHUP_UP_HOME -> LOG_SETTING_SNS_MASHUP_HOME
+            URL.MASHUP_UP_RECRUIT -> LOG_SETTING_SNS_MASHUP_RECRUIT
             else -> null
         }
         eventLog?.run { AnalyticsManager.addEvent(this) }

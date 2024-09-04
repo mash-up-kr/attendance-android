@@ -22,12 +22,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mashup.R
-import com.mashup.core.ui.colors.Gray100
 import com.mashup.core.ui.colors.Gray400
-import com.mashup.core.ui.colors.Gray50
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.typography.Body1
 import com.mashup.ui.schedule.model.ScheduleCard
+import com.mashup.ui.schedule.util.getBackgroundColor
+import com.mashup.ui.schedule.util.getBorderColor
 
 @Composable
 fun ScheduleViewPagerEmptyItem(
@@ -36,28 +36,29 @@ fun ScheduleViewPagerEmptyItem(
 ) {
     Column(
         modifier = modifier.fillMaxWidth().wrapContentHeight().background(
-            color = Color.White,
+            color = data.scheduleResponse?.scheduleType?.getBackgroundColor() ?: Color(0xFFECF9FF),
             shape = RoundedCornerShape(20.dp)
-        ).border(
-            width = 1.dp,
-            color = Gray100,
-            shape = RoundedCornerShape(20.dp)
-        ).padding(20.dp),
+        )
+            .border(
+                width = 1.dp,
+                color = data.scheduleResponse?.scheduleType?.getBorderColor() ?: Color(0xFFE1F2FA),
+                shape = RoundedCornerShape(20.dp)
+            ).padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CardInfoItem(
             modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-            dDay = data.scheduleResponse?.getDDay() ?: "?",
+            platform = data.scheduleResponse?.scheduleType ?: "ALL",
             title = data.scheduleResponse?.name ?: "",
             calendar = data.scheduleResponse?.getDate() ?: "-",
             timeLine = data.scheduleResponse?.getTimeLine() ?: "-",
-            location = ""
+            location = "-"
         )
         Spacer(modifier = Modifier.height(16.dp))
 
         Box(
             modifier = Modifier.fillMaxWidth().background(
-                color = Gray50,
+                color = Color(0xFFE1F2FA),
                 shape = RoundedCornerShape(16.dp)
             ).padding(
                 vertical = 22.dp,

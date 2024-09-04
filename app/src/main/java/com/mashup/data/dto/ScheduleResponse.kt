@@ -9,6 +9,10 @@ import java.util.Locale
 
 @JsonClass(generateAdapter = true)
 data class ScheduleResponse(
+    @field:Json(name = "scheduleType")
+    val scheduleType: String,
+    @field:Json(name = "notice")
+    val notice: String?,
     @field:Json(name = "scheduleId")
     val scheduleId: Int,
     @field:Json(name = "dateCount")
@@ -54,9 +58,11 @@ data class ScheduleResponse(
             dateCount == 0 -> {
                 "D-Day"
             }
+
             dateCount > 0 -> {
                 "D-$dateCount"
             }
+
             else -> {
                 "D+${-dateCount}"
             }

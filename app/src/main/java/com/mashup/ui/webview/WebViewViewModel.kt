@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.mashup.constant.EXTRA_TITLE_KEY
 import com.mashup.constant.EXTRA_URL_KEY
 import com.mashup.core.common.base.BaseViewModel
+import com.mashup.data.network.WEB_HOST
+import com.mashup.datastore.data.repository.UserPreferenceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WebViewViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    userPreferenceRepository: UserPreferenceRepository
 ) : BaseViewModel() {
 
     private val showDividerFlow = MutableStateFlow(false)
@@ -22,12 +25,18 @@ class WebViewViewModel @Inject constructor(
     val webViewUiState = combine(
         savedStateHandle.getStateFlow(EXTRA_TITLE_KEY, ""),
         savedStateHandle.getStateFlow(EXTRA_URL_KEY, ""),
-        showDividerFlow
-    ) { title, webViewUrl, showDivider ->
+        showDividerFlow,
+        userPreferenceRepository.getUserPreference()
+    ) { title, webViewUrl, showDivider, prefs ->
+        var convertWebViewUrl = WEB_HOST + webViewUrl
+        if (title == "mashong") {
+            convertWebViewUrl += prefs.platform
+        }
         WebViewUiState.Success(
             title = title,
-            webViewUrl = webViewUrl,
-            showToolbarDivider = showDivider
+            webViewUrl = convertWebViewUrl,
+            showToolbarDivider = showDivider,
+            additionalHttpHeaders = mapOf(Pair("authorization", prefs.token))
         )
     }.stateIn(
         viewModelScope,
@@ -49,6 +58,7 @@ sealed interface WebViewUiState {
     data class Success(
         val title: String,
         val webViewUrl: String,
-        val showToolbarDivider: Boolean
+        val showToolbarDivider: Boolean,
+        val additionalHttpHeaders: Map<String, String>
     ) : WebViewUiState
 }

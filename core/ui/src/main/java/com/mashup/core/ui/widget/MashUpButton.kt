@@ -46,7 +46,10 @@ import com.mashup.core.ui.colors.White
 import com.mashup.core.ui.theme.MashUpTheme
 import com.mashup.core.ui.typography.Body1
 
-enum class ButtonStyle(val backgroundColor: Color, val textColor: Color) {
+enum class ButtonStyle(
+    val backgroundColor: Color,
+    val textColor: Color
+) {
     PRIMARY(backgroundColor = Brand500, textColor = White),
     INVERSE(backgroundColor = Brand100, textColor = Brand500),
     DISABLE(backgroundColor = Brand300, textColor = White),
@@ -116,7 +119,8 @@ fun ButtonCircularProgressbar(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
-            animation = keyframes {
+            animation =
+            keyframes {
                 durationMillis = progressDuration
             }
         )

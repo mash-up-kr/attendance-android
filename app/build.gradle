@@ -29,8 +29,8 @@ android {
         applicationId "com.mashup"
         minSdkVersion minVersion
         targetSdkVersion targetVersion
-        versionCode 31
-        versionName "1.6.2"
+        versionCode 34
+        versionName "1.7.2"
 
         testInstrumentationRunner "com.mashup.core.testing.MashUpTestRunner"
         vectorDrawables {
@@ -107,6 +107,8 @@ dependencies {
     implementation project(":feature:setting")
     implementation project(":feature:danggn")
     implementation project(":feature:myPage")
+    implementation project(":feature:moreMenu")
+    implementation project(':feature:moreMenu:notice')
 
     // ml Kit
     implementation "com.google.mlkit:barcode-scanning:$barcodeSacnnerVersion"
@@ -164,4 +166,7 @@ dependencies {
 
     // Naver Map
     implementation "io.github.fornewid:naver-map-compose:1.4.0"
+
+    // Date Time
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.3.1'
 }

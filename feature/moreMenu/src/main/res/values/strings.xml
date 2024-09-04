@@ -1,0 +1,9 @@
+<resources>
+    <string name="title_activity_more_menu">MoreMenuActivity</string>
+
+    <string name="menu_title_birthday">생일 축하</string>
+    <string name="menu_title_mashong">매숑이 키우기</string>
+    <string name="menu_title_danggn">당근 흔들기</string>
+    <string name="menu_title_notice">알림</string>
+    <string name="menu_title_setting">설정</string>
+</resources>

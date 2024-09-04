@@ -19,6 +19,8 @@ enum class AttendanceType(@DrawableRes val resourceId: Int) {
     MASHUP_SUBLEADER(R.drawable.img_mashupsubleader),
     TECH_BLOG_WRITE(R.drawable.img_techblogwrite),
     MASHUP_CONTENTS_WRITE(R.drawable.img_mashupcontentswrite),
+    ADD_SCORE_DURING_SEMINAR_ACTIVITY_0_5(R.drawable.img_presentation),
+    ADD_SCORE_DURING_SEMINAR_ACTIVITY_1(R.drawable.img_presentation),
     DEFAULT(R.drawable.img_default_score);
 
     companion object {
