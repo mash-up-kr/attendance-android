@@ -52,8 +52,7 @@ import java.util.Date
 fun ScheduleViewPagerInProgressItem(
     data: ScheduleCard.InProgressSchedule,
     modifier: Modifier = Modifier,
-    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
-    onClickAttendance: (Int) -> Unit = {}
+    onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> }
 ) {
     val textColor by remember { mutableStateOf(data.scheduleResponse.scheduleType.getButtonTextColor()) }
     Column(
@@ -169,7 +168,7 @@ fun ScheduleViewPagerInProgressItem(
                         )
                         setPadding(12, 0, 0, 0)
                         setOnClickListener {
-                            onClickAttendance(data.scheduleResponse.scheduleId)
+                            onClickScheduleInformation(data.scheduleResponse.scheduleId, data.scheduleResponse.scheduleType)
                         }
                     }
                 }

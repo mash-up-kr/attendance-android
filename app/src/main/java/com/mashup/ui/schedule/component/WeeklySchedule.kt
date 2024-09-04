@@ -30,7 +30,6 @@ fun WeeklySchedule(
     scheduleState: ScheduleState,
     modifier: Modifier = Modifier,
     onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
-    onClickAttendance: (Int) -> Unit = {},
     onClickMashongButton: () -> Unit = {},
     makeToast: (String) -> Unit = {},
     refreshState: Boolean = false
@@ -104,7 +103,6 @@ fun WeeklySchedule(
                                     },
                                     data = data,
                                     onClickScheduleInformation = onClickScheduleInformation,
-                                    onClickAttendance = onClickAttendance,
                                     makeToast = makeToast
                                 )
                             }
@@ -121,8 +119,7 @@ fun WeeklySchedule(
                                         scaleY = 1 - 0.1f * abs(pageOffset)
                                     },
                                     data = data,
-                                    onClickScheduleInformation = onClickScheduleInformation,
-                                    onClickAttendance = onClickAttendance
+                                    onClickScheduleInformation = onClickScheduleInformation
                                 )
                             }
                         }

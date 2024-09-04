@@ -18,7 +18,6 @@ fun ScheduleScreen(
     modifier: Modifier = Modifier,
     scheduleType: ScheduleType = ScheduleType.WEEK,
     onClickScheduleInformation: (Int, String) -> Unit = { _, _ -> },
-    onClickAttendance: (Int) -> Unit = {},
     onClickMashongButton: () -> Unit = {},
     makeToast: (String) -> Unit = {},
     refreshState: Boolean = false
@@ -43,7 +42,6 @@ fun ScheduleScreen(
                     )
                     onClickScheduleInformation(scheduleId, type)
                 },
-                onClickAttendance = onClickAttendance,
                 onClickMashongButton = onClickMashongButton,
                 makeToast = makeToast,
                 refreshState = refreshState
